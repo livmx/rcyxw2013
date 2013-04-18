@@ -1,0 +1,23 @@
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+#RewriteBase /
+# flowing line is my project dir position under the www root dir
+#RewriteBase /my/yiiSpace/
+#RewriteBase /my/MyGithubProjects/yiiSpace/
+
+#Admin
+# Rewriterule ^admin$ admin.php
+RewriteRule ^admin admin.php
+
+#Install
+#Rewriterule ^install$ install.php?r=Install/default
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# comment the following line means we can use php script to render assets file(images,css ,javascript files!)
+# RewriteCond %{REQUEST_URI} !\.(js|ico|gif|jpg|png|css)$
+
+# otherwise forward it to index.php
+RewriteRule . index.php
