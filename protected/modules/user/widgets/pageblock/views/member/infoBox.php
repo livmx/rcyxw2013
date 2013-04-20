@@ -5,7 +5,10 @@ $userPhotoUrl = (empty($profile)|| empty($profile->photo)) ? PublicAssets::insta
 
 ?>
 <div class="thumbnail">
-    <img src="<?Php echo $userPhotoUrl; ?>" width="120px" height="120px" alt=""/>
+    <a href="<?php echo UserHelper::getUserSpaceUrl($model->primaryKey); ?>" target="_blank">
+        <img src="<?Php echo $userPhotoUrl; ?>" width="120px" height="120px" alt=""/>
+    </a>
+
 
     <h5><?php echo CHtml::encode($model->username); ?></h5>
 

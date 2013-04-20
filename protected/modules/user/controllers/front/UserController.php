@@ -117,6 +117,15 @@ class UserController extends BaseUserController
     public function actionSpace(){
        // $this->forward('/status/status/index');
         //
+        $spaceOwnerId = Yii::app()->request->getParam('u',0);
+        $spaceOwnerModel = User::model()->with('profile')->findByPk($spaceOwnerId);
+        if(empty($spaceOwnerModel)){
+            throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        UserHelper::setSpaceOwnerId($spaceOwnerId);
+        UserHelper::setSpaceOwnerModel($spaceOwnerModel);
+
+
         $this->layout = "userSpace";
         $this->render('space');
     }

@@ -2,7 +2,33 @@
     <div class="container site-body">
         <div class="cell">
             <div class="col size1of4">
+                <?php $spaceOwnerModel = UserHelper::getSpaceOwnerModel(); ?>
+                <div class="cell">
+                    <?php YsPageBox::beginPanel() ;?>
+                     <div class="col">
+                            <div class="cell " >
+                                <figure class="nuremberg">
+                                    <img src="<?php echo $spaceOwnerModel->getIconUrl(); ?>" alt="" width="100px" height="100px">
+                                    <figcaption>Efteling</figcaption>
+                                </figure>
+                            </div>
+                         <div class="cell">
+                               <ul class="nav">
+                                   <li>
+                                       <?php echo $spaceOwnerModel->getAttributeLabel('usernam') ?>:
+                                       <?php echo CHtml::encode($spaceOwnerModel->username); ?>
+                                   </li>
+                                   <li>
+                                       注册时间：<?php echo Yii::app()->dateFormatter->format('y-m-d',$spaceOwnerModel->create_at); ?>
+                                   </li>
 
+                               </ul>
+                         </div>
+
+                     </div>
+                    <?php YsPageBox::endPanel() ; ?>
+
+                </div>
             </div>
             <div class="col sizefill">
                 <?php echo $content; ?>

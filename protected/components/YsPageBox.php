@@ -30,8 +30,9 @@ class YsPageBox extends YsSectionWidget{
 
     /**
      * @var string
+     * {header}{body}{footer}
      */
-    public $template = '{header}{body}{footer}';
+    public $template = '{header}{body}';
 
     /**
      * @var bool if true you can give any body structure
@@ -81,4 +82,23 @@ class YsPageBox extends YsSectionWidget{
         $this->footer,
         '</div>';
     }
+
+    //-------------------------------------------------\\
+    /**
+     * this is quick method for creating a panel
+     * should be used together with the endPanel method !
+     * @param array $options
+     */
+    static  public function beginPanel($options=array()){
+        $defaults = array(
+            'template'=>'{body}',
+        );
+        $options = empty($options)?$defaults:CMap::mergeArray($defaults,$options);
+        Yii::app()->controller->beginWidget(__CLASS__,$options);
+    }
+
+    static public function endPanel(){
+        Yii::app()->controller->endWidget();
+    }
+    //-------------------------------------------------\\
 }

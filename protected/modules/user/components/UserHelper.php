@@ -64,26 +64,6 @@ class UserHelper
 
     /**
      * @static
-     * @return mixed
-     * @throws CException
-     * 获取当前被访问空间的用户id
-     */
-    static public function getSpaceOwnerId()
-    {
-        if (!isset($_GET['u'])) {
-            if (user()->getIsGuest()) {
-                throw new CException('must pass the u  param in  $_GET variable ');
-            } else {
-                return $_GET['u'] = user()->getId();
-            }
-
-        } else {
-            return $_GET['u'];
-        }
-    }
-
-    /**
-     * @static
      * @return bool
      */
     static public function getIsLoginUser()
@@ -217,4 +197,63 @@ U_FACE;
         $cmd = Yii::app()->db->createCommand($sql);
         return $cmd->queryScalar(array(':userA'=>$userA,':userB'=>$userB)) !== false;
     }
+
+    //----------------------------------------------------------------\\
+
+    /**
+     * @var int
+     */
+    static  protected $spaceOwnerId ;
+
+    /**
+     * @static
+     * @return mixed
+     * @throws CException
+     * 获取当前被访问空间的用户id
+     */
+    static public function getSpaceOwnerId()
+    {
+        return self::$spaceOwnerId ;
+        /*
+        if (!isset($_GET['u'])) {
+            if (user()->getIsGuest()) {
+                throw new CException('must pass the u  param in  $_GET variable ');
+            } else {
+                return $_GET['u'] = user()->getId();
+            }
+
+        } else {
+            return $_GET['u'];
+        }*/
+    }
+
+    /**
+     * @param int $userId
+     */
+    static public function setSpaceOwnerId($userId = 0){
+        self::$spaceOwnerId = $userId ;
+    }
+
+    /**
+     * @var User
+     */
+    static protected $spaceOwnerModel ;
+
+    /**
+     * @param User $userModel
+     */
+    static public function setSpaceOwnerModel(User $userModel){
+            self::$spaceOwnerModel = $userModel ;
+    }
+
+    /**
+     * @return User
+     */
+    static public function getSpaceOwnerModel(){
+        return self::$spaceOwnerModel ;
+    }
+
+//----------------------------------------------------------------\\
+
+
 }
