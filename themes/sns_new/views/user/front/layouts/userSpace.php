@@ -28,7 +28,17 @@
                      </div>
                     <?php YsPageBox::endPanel() ; ?>
 
+                    <?php  YsPageBox::beginPanel(array('template'=>'{header}{body}','header'=>'最近访客') ); ?>
+                    <div class="cell">
+                        <?php  $this->widget('user.widgets.4cascadeFr.latestVisitors.LatestVisitors', array(
+                            'spaceId' => $spaceOwnerModel->primaryKey,
+                            'maxCount' => 9,
+                        ));  ?>
+
+                    </div>
+                    <?php  YsPageBox::endPanel() ;?>
                 </div>
+
             </div>
             <div class="col sizefill">
                 <?php echo $content; ?>
