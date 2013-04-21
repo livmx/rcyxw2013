@@ -126,6 +126,36 @@ class UserController extends BaseUserController
         UserHelper::setSpaceOwnerModel($spaceOwnerModel);
 
 
+        //.............................................................\\
+        if (!user()->getIsGuest()) {
+            $visitorId = user()->getId();
+            if ($visitorId != $spaceOwnerId) {
+                //访客记录
+                $currentTime = time();
+                $sql = "
+                    INSERT INTO user_space_visitor
+                    (space_id,
+                     visitor_id,
+                     vtime)
+                    VALUES (:space_id,
+                      :visitor_id,
+                         :vtime)
+                         ON DUPLICATE KEY UPDATE vtime = :vtime;
+                    ";
+                $dbCommand = db()->createCommand($sql);
+                $dbCommand->bindParam(':space_id',$spaceOwnerId);
+                $dbCommand->bindParam(':visitor_id',$visitorId);
+                $dbCommand->bindParam(':vtime',$currentTime);
+
+                $dbCommand->execute();
+                /**
+                 * 貌似用
+                 * $dbCommand->execute(array(':key1'=>val1,':key2'=>v2,...));
+                 * 更简洁？
+                 */
+            }
+        }
+        //.............................................................//
         $this->layout = "userSpace";
         $this->render('space');
     }
