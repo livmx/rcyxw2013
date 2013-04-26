@@ -11,6 +11,8 @@
  */
 class SysController extends YsController
 {
+
+
     public function actionStarRatingAjax()
     {
 

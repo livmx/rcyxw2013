@@ -8,7 +8,15 @@
  */
 class UserHelper
 {
+   //---------------------------------------------------------------\\
+    static public function spaceVisitorRecord($uid){
+        echo CHtml::image(Yii::app()->createUrl('/user/user/doSpaceVisitorRecord',array('u'=>$uid)),'invisible',array(
+            'style'=>'display:none'
+        ));
+    }
 
+
+  //----------------------------------------------------------------//
     /**
      * @static
      * @param int $uid

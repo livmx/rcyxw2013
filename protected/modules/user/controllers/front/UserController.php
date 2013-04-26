@@ -26,11 +26,11 @@ class UserController extends BaseUserController
     {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view','space'),
+                'actions' => array('index', 'view', 'space'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform
-                'actions' => array('home', ),
+                'actions' => array('home',),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -114,12 +114,13 @@ class UserController extends BaseUserController
         return $this->_model;
     }
 
-    public function actionSpace(){
-       // $this->forward('/status/status/index');
+    public function actionSpace()
+    {
+        // $this->forward('/status/status/index');
         //
-        $spaceOwnerId = Yii::app()->request->getParam('u',0);
+        $spaceOwnerId = Yii::app()->request->getParam('u', 0);
         $spaceOwnerModel = User::model()->with('profile')->findByPk($spaceOwnerId);
-        if(empty($spaceOwnerModel)){
+        if (empty($spaceOwnerModel)) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
         UserHelper::setSpaceOwnerId($spaceOwnerId);
@@ -127,6 +128,7 @@ class UserController extends BaseUserController
 
 
         //.............................................................\\
+        // 有人说用一个看不见的图片做统计 但不知道怎么搞的？
         if (!user()->getIsGuest()) {
             $visitorId = user()->getId();
             if ($visitorId != $spaceOwnerId) {
@@ -143,9 +145,9 @@ class UserController extends BaseUserController
                          ON DUPLICATE KEY UPDATE vtime = :vtime;
                     ";
                 $dbCommand = db()->createCommand($sql);
-                $dbCommand->bindParam(':space_id',$spaceOwnerId);
-                $dbCommand->bindParam(':visitor_id',$visitorId);
-                $dbCommand->bindParam(':vtime',$currentTime);
+                $dbCommand->bindParam(':space_id', $spaceOwnerId);
+                $dbCommand->bindParam(':visitor_id', $visitorId);
+                $dbCommand->bindParam(':vtime', $currentTime);
 
                 $dbCommand->execute();
                 /**
@@ -156,6 +158,41 @@ class UserController extends BaseUserController
             }
         }
         //.............................................................//
+        //------------------------------------------------------------\\
+        // about cookie manage :http://www.yiiframework.com/wiki/152/cookie-management-in-yii
+        // 访问统计不记录访客信息 ip user_id
+        //$visitorId = user()->getIsGuest()?0 :user()->getId();
+        $visitedSpacesKey = 'visitedSpaces';
+
+        if (isset(Yii::app()->request->cookies[$visitedSpacesKey])) {
+            $visitedSpacesCookie = Yii::app()->request->cookies[$visitedSpacesKey];
+            $visitedSpaces = $visitedSpacesCookie->value;
+            $visitedSpacesArr = CJSON::decode($visitedSpaces);
+            if (!in_array($spaceOwnerId, $visitedSpacesArr)) {
+                // 不在访问历史中 那么推人cookie 并统计入库
+                $visitedSpacesArr[] = $spaceOwnerId;
+                $visitedSpacesCookie->value = CJSON::encode($visitedSpacesArr);
+                Yii::app()->request->cookies[$visitedSpacesKey] = $visitedSpacesCookie;
+
+                SpaceVisitHelper::recordAccess(date('Y-m-d'), $spaceOwnerId);
+            } else {
+                // 已在访问历史中了 do nothing here
+            }
+
+        } else {
+            //cookie 中并没有记录这个 表示是本次初次访问某个空间：
+            $visitedSpacesArr = array($spaceOwnerId);
+            $visitedSpacesCookie = new CHttpCookie($visitedSpacesKey, CJSON::encode($visitedSpacesArr));
+            $visitedSpacesCookie->expire = time() + 60 * 60 * 24 * 180;
+
+            Yii::app()->request->cookies[$visitedSpacesKey] = $visitedSpacesCookie;
+
+            SpaceVisitHelper::recordAccess(date('Y-m-d'), $spaceOwnerId);
+
+        }
+
+        //------------------------------------------------------------//
+
         $this->layout = "userSpace";
         $this->render('space');
     }
@@ -163,7 +200,8 @@ class UserController extends BaseUserController
     /**
      * dashboard for the current login user
      */
-    public function actionHome(){
+    public function actionHome()
+    {
 
         $this->forward('/status/status/create');
 
@@ -171,9 +209,9 @@ class UserController extends BaseUserController
         $this->layout = "//layouts/user/user_center";
         $model = User::model()->findByPk(Yii::app()->user->id);
 
-        $this->render('home',array(
-            'model'=>$model,
-            'profile'=>$model->profile,
+        $this->render('home', array(
+            'model' => $model,
+            'profile' => $model->profile,
         ));
     }
 }

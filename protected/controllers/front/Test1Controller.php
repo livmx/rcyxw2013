@@ -5,6 +5,12 @@
  */
 class Test1Controller extends Controller
 {
+    public function actionCurlTest()
+    {
+        echo "<pre>";
+        var_dump(curl_version());
+        echo "</pre>";
+    }
 
     public function actionYsPageBox(){
         $this->render('ysPageBox');
