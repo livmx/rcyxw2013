@@ -46,7 +46,7 @@ class AdminWebUser extends CWebUser {
      * @param int $duration
      * @return bool|void
      */
-    public function login(AdminUserIdentity $identity, $duration = 0) {
+    public function login( $identity, $duration = 0) {
 		parent::login($identity, $duration);
 		$this->userModel = $identity->getUser();
 		$this->updateUserInfo();

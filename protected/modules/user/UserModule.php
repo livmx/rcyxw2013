@@ -195,7 +195,7 @@ class UserModule extends CWebModule implements IUrlRewriteModule
 			return false;
 		else {
 			if (!isset(self::$_admin)) {
-				if(self::user()->superuser)
+				if(self::user() && self::user()->superuser)
 					self::$_admin = true;
 				else
 					self::$_admin = false;	

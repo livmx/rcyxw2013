@@ -38,6 +38,15 @@
 
                     </div>
                     <?php  YsPageBox::endPanel() ;?>
+
+                    <?php  YsPageBox::beginPanel(array('template'=>'{header}{body}','header'=>'最近空间访问统计') ); ?>
+                    <div class="cell">
+                        <?php  $this->widget('user.widgets.4cascadeFr.SpaceVisitStatBox', array(
+                            'spaceOwnerId' => $spaceOwnerModel->primaryKey,
+                        ));  ?>
+
+                    </div>
+                    <?php  YsPageBox::endPanel() ;?>
                 </div>
 
             </div>

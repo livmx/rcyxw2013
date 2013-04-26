@@ -45,48 +45,53 @@ class SpaceVisitHelper
     /**
      * 获取最近N天的访问统计数据
      * 数据格式为结果集形式  date => amount  即 日期=>访问量 的形式
-     * @param PDO $pdo PDO实例
-     * @param string $type 类型  ，这里目前取 space 空间统计
      * @param int $target 目标ID  这里可以是 空间id ，照片id等
      * @param string $endDate 良格式日期字符串 只要能作为strtotime的参数就行
      *                         一般取 date('Y-m-d',strtotime('20010-1-1'));
      * @param  int $days 指定日期的前 N 天
      * @param string $orders 排序规则 默认是 id desc 即时间降序
      *                        也就是数组中越靠前的数据越是最近的
+     * @throws Exception|PDOException
      * @return array 返回两列的 二维数组 ，存放的是 那一天 => 访问量
      */
-    static public function getLatestVisitStatistic(PDO $pdo, $type, $target, $endDate, $days, $orders = ' id desc')
+    static public function getLatestVisitStatistic(  $target, $endDate, $days, $orders = ' id desc')
     {
+         $pdo = Yii::app()->db->getPdoInstance() ;
         //N天前的日期：
         $startDate = self::offsetDateFor($endDate, -$days);
+
+        $tableName = UserSpaceVisitStat::model()->tableName();
         $selectStr = "
-              SELECT  day, quantity
-              FROM access_stat
-              WHERE type = :type AND target = :target AND
+              SELECT  day, times
+              FROM {$tableName}
+              WHERE  target = :target AND
               (day BETWEEN :startDate AND :endDate)
               ORDER BY $orders
             ";
         try {
 
             $stmt = $pdo->prepare($selectStr);
-            $stmt->execute(array(':type' => $type, ':target' => $target, ":startDate" => $startDate, ":endDate" => $endDate));
+            $stmt->execute(array(':target' => $target, ":startDate" => $startDate, ":endDate" => $endDate));
             //$rsltList = $stmt->fetchAll(PDO::FETCH_BOTH);
             $rsltList = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $stmt->closeCursor();
             $stmt = null;
             return $rsltList;
         } catch (PDOException $e) {
-
-            error_log('Error reading the session data table in the session writing method.');
-            error_log(' Query with error: ' . $selectStr);
-            error_log(' Reason given:' . $e->getMessage() . "\n");
             throw $e;
-            //return false;
         }
     }
 
-    static public function getMax4LatestVisit(PDO $pdo, $type, $target, $endDate, $days)
+    /**
+     * @param $target
+     * @param $endDate
+     * @param $days
+     * @return string
+     * @throws Exception|PDOException
+     */
+    static public function getMax4LatestVisit( $target, $endDate, $days)
     {
+        $pdo = Yii::app()->db->getPdoInstance();
         //N天前的日期：
         $startDate = self::offsetDateFor($endDate, -$days);
         $selectStr = "
@@ -98,13 +103,12 @@ class SpaceVisitHelper
         try {
 
             $stmt = $pdo->prepare($selectStr);
-            $stmt->execute(array(':type' => $type, ':target' => $target, ":startDate" => $startDate, ":endDate" => $endDate));
+            $stmt->execute(array( ':target' => $target, ":startDate" => $startDate, ":endDate" => $endDate));
             $rslt = $stmt->fetchColumn(0);
             $stmt->closeCursor();
             $stmt = null;
             return $rslt;
         } catch (PDOException $e) {
-
             error_log('Error reading the session data table in the session writing method.');
             error_log(' Query with error: ' . $selectStr);
             error_log(' Reason given:' . $e->getMessage() . "\n");
@@ -126,5 +130,19 @@ class SpaceVisitHelper
         } else {
             return date('Y-m-d', strtotime("$date $offsetDay day"));
         }
+    }
+
+    /**
+     * @param int $n
+     * @return array
+     */
+    static public  function  getLatestNDayNames($n=7){
+        $names = array();
+        //$today = date("Y-m-d",  strtotime("+1 day"));
+        $today = date("Y-m-d");
+        for($i=0;$i>-$n;$i--){
+            $names[] = (int)date("w ", strtotime(self::offsetDateFor($today, $i)));
+        }
+        return $names;
     }
 }
