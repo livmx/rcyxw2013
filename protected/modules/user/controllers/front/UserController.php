@@ -183,7 +183,7 @@ class UserController extends BaseUserController
             //cookie 中并没有记录这个 表示是本次初次访问某个空间：
             $visitedSpacesArr = array($spaceOwnerId);
             $visitedSpacesCookie = new CHttpCookie($visitedSpacesKey, CJSON::encode($visitedSpacesArr));
-            $visitedSpacesCookie->expire = time() + 60 * 60 * 24 * 180;
+            $visitedSpacesCookie->expire = time() + 60 * 60 * 24 ;  //* 180;
 
             Yii::app()->request->cookies[$visitedSpacesKey] = $visitedSpacesCookie;
 
