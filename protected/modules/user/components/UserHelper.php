@@ -28,6 +28,27 @@ class UserHelper
     }
 
     /**
+     * @return string
+     * 返回用户中心的URL地址！
+     */
+    static public function getUserCenterUrl(){
+        return Yii::app()->createUrl('/user/home');
+    }
+
+    static public function getUserCenterLayout(){
+        return  YiiUtil::getAliasOfPath(Yii::app()->getTheme()->getViewPath(),'webroot').'.user.front.layouts.userCenter';
+        //return 'user.layouts.userCenter';
+        /*
+        if(isset(Yii::app()->endName)){
+             $endName = Yii::app()->endName ;
+            return "user.{$endName}.layouts.userCenter";
+        }else{
+            return 'user.layouts.userCenter';
+        }*/
+
+    }
+
+    /**
      * @static
      * @return string
      */

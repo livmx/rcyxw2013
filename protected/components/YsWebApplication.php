@@ -47,7 +47,7 @@ class YsWebApplication extends CWebApplication
         }
 GRAY_PAGE;
 
-        $this->clientScript->registerCss('for_yaAn',$forYaAn);
+        // $this->clientScript->registerCss('for_yaAn',$forYaAn);
 
         if (!empty($this->user->loginRequiredAjaxResponse)){
             Yii::app()->clientScript->registerScript('ajaxLoginRequired', '
