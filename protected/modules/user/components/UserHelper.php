@@ -35,8 +35,22 @@ class UserHelper
         return Yii::app()->createUrl('/user/home');
     }
 
+    /**
+     * @return string
+     * 共享布局的路径引用 跟url的创建 都需要从项目根部算起！
+     * 因为布局是跨模块的所以单纯使用布局名称 会导致在不同的模块下
+     * 从不同的模块path算起的！
+     * 多module共享的布局 一定要用别名或者用“//” 算起
+     * 还有一种情况干脆避免模块共享布局 每个module的布局最多继承main布局但是不要使用其他
+     * module下的布局 本打算让内容module共享user模块下的userCenter跟userSpace布局
+     * 但布局路径解析由于使用了WebApplicationEndBehavior扩展所以布局解析可能出错！
+     *  YiiUtil::getAliasOfPath(Yii::app()->getTheme()->getViewPath(),'webroot').'.user.front.layouts.userCenter';
+     * 上面的方式是可行的 但感觉有点丑陋！
+     */
     static public function getUserCenterLayout(){
-        return  YiiUtil::getAliasOfPath(Yii::app()->getTheme()->getViewPath(),'webroot').'.user.front.layouts.userCenter';
+        return 'userCenter';
+        //return  YiiUtil::getAliasOfPath(Yii::app()->getTheme()->getViewPath(),'webroot').'.user.front.layouts.userCenter';
+
         //return 'user.layouts.userCenter';
         /*
         if(isset(Yii::app()->endName)){
