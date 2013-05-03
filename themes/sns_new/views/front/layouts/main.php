@@ -43,7 +43,7 @@
             <div class="cell">
                 <div class="col">
                     <div class="col size6of9">
-                        <a href="<?php echo $this->createUrl('site/index'); ?>" class="logo">
+                        <a href="<?php echo $this->createUrl('/site/index'); ?>" class="logo">
                             <?php echo Yii::app()->name; ?>
                         </a>
                     </div>
@@ -54,7 +54,7 @@
                                 <?php
                                 if(UserHelper::getIsLoginUser()) {
                                     $items = array(
-                                        array('label' => 'Home', 'url' => array('/site/index')),
+                                        array('label' => '个人空间', 'url' =>UserHelper::getUserSpaceUrl(Yii::app()->user->getId())),
                                         array('label' => '个人中心', 'url' =>UserHelper::getUserCenterUrl()),
                                         array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'))
                                     );

@@ -1,7 +1,6 @@
 <?php
-$profile = $model->profile ;
-$picId = rand(1, 5);
-$userPhotoUrl = (empty($profile)|| empty($profile->photo)) ? PublicAssets::instance()->url("images/user/avatars/{$picId}.jpg") : bu($profile->photo);
+
+$userPhotoUrl = $model->getIconUrl();
 
 ?>
 <div class="thumbnail">

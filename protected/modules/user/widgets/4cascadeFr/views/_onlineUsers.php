@@ -7,7 +7,7 @@
         <div class="cell">
             <div class="span3 thumbnail">
                 <a href="<?php echo UserHelper::getUserSpaceUrl($user->id); ?>" target="_blank">
-                    <img src="<?Php echo bu($user->profile->photo); ?>"
+                    <img src="<?Php echo $user->getIconUrl(); ?>"
                          width="90px" height="90px"
                          alt=""/>
                 </a>

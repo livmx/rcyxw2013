@@ -51,8 +51,12 @@ class CascadeFr extends CWidget
         <![endif]-->
 JS_SCRIPT;
         echo $jsFiles;
-        $siteJsFile = $this->baseUrl . '/assets/js/app.js';
-       // Yii::app()->getClientScript()->registerScriptFile($siteJsFile, CClientScript::POS_END);
+        $siteJsFile = $this->baseUrl . '/assets/js/lib/jquery/jquery.cascade.js';
+        Yii::app()->getClientScript()->registerScriptFile($siteJsFile, CClientScript::POS_END)
+            ->registerScriptFile($this->baseUrl.'/assets/js/lib/app/loader.js')
+            ->registerScriptFile($this->baseUrl.'/assets/js/lib/app/detector.js')
+            ->registerScriptFile($this->baseUrl.'/assets/js/lib/jquery/jquery.easing.js')
+        ;
     }
 
     public function getCssFiles($debug = false)

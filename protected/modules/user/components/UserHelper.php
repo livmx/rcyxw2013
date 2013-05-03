@@ -299,4 +299,11 @@ U_FACE;
 //----------------------------------------------------------------\\
 
 
+    /**
+     * @return User
+     */
+    static public function getLoginUserModel(){
+        return UserModule::user(user()->getId());
+    }
+
 }

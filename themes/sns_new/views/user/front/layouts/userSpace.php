@@ -3,9 +3,12 @@
 
         <div class="cell">
             <div class="col size1of4">
-                <?php $spaceOwnerModel = UserHelper::getSpaceOwnerModel(); ?>
+                <?php $spaceOwnerModel = UserHelper::getSpaceOwnerModel();
+
+                ?>
+
                 <div class="cell">
-                    <?php YsPageBox::beginPanel() ;?>
+                    <?php YsPageBox::beginPanel() ; ?>
                      <div class="col">
                             <div class="cell " >
                                 <figure class="nuremberg">

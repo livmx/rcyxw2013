@@ -9,7 +9,7 @@ return array(
     //................{yii standard components}....................................................................
     'session' => array(
         'class' => 'application.my.components.YsDbHttpSession',
-        'sessionName' => 'yiiSpace',
+        'sessionName' => 'yiiSpace2',
         'connectionID'=>'db',  // important !! if not set will use sqliteDb as storage .
        // 'gCProbability'=>4  , // every 4 request will invoke the Session  GC 测试打开之
        // 'timeout'=>120 ,

@@ -148,7 +148,7 @@ class User extends CActiveRecord
     {
         return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope, array(
             'alias' => 'user',
-            'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.superuser, user.status',
+            'select' => 'user.*',
         ));
     }
 
@@ -232,7 +232,7 @@ class User extends CActiveRecord
             return Yii::app()->getModule('user')->getAssetsUrl() ."/defaultAvatars/{$picId}.jpg";
 
         } else {
-            return WebUtil::getRelativeUrl($this->icon_uri);
+            return bu($this->icon_uri);
         }
 
     }
