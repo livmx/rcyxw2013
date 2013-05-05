@@ -113,7 +113,9 @@
 
             </div>
             <div class="col sizefill">
+                <?php  YsPageBox::beginPanel(); ?>
                 <?php echo $content; ?>
+                <?php  YsPageBox::endPanel();?>
             </div>
         </div>
 

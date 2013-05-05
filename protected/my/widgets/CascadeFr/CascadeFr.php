@@ -76,6 +76,21 @@ JS_SCRIPT;
             );
         }
     }
+   //*-----------------------------------------------------------*\
+    /**
+     * this is quick method for creating a collapsible
+     * should be used together with the endPanel method !
+     * @param array $options
+     */
+    static  public function beginCollapsible($options=array()){
 
+        Yii::app()->controller->beginWidget('CascadeCollapsible',$options);
+    }
+
+    static public function endCollapsible(){
+        Yii::app()->controller->endWidget();
+    }
+
+    //*----------------------------------------------------------*/
 
 }

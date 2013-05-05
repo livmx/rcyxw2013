@@ -71,4 +71,14 @@ class AppComponent extends CComponent
         ));
     }
 
+
+    /**
+     * @return CmsMessageStack
+     */
+    static public function messageStack(){
+        return self::getComp('messageStack', array(
+            'class' => 'ext.messageStack.CmsMessageStack',
+            'options' => array()
+        ));
+    }
 }

@@ -33,4 +33,7 @@ return array(
 
     // EventInterceptor is required by EventBridgeBehavior
     'ext.event-interceptor.*',
+
+    // 导入Cascade框架目录：
+    'application.my.widgets.CascadeFr.*',
 );
