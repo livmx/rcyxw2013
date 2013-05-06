@@ -33,3 +33,23 @@
 </div>
     <div class="divider"></div>
 </div>
+
+<div class="col">
+    <div class="cell panel">
+        <div class="body">
+            <div class="cell">
+                <div class="col sizefit">
+                    <div class="cell">
+                        <img src="<?php UserHelper::getLoginUserModel() ?>" alt="">
+                    </div>
+                </div>
+                <div class="col sizefill">
+                    <div class="cell">
+                        <a href="#">Chen</a> says:<br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis adipiscing est. Curabitur vel dui dolor. Vestibulum molestie fermentum diam, nec interdum ante molestie ut. Integer consequat iaculis auctor. Duis vitae felis ligula, ultrices blandit dolor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

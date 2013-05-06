@@ -1,19 +1,52 @@
-<?php
-/*
-$this->widget('zii.widgets.CMenu', array(
-    'items'=>array(
-        array('label'=>'朋友'),
-        array('label'=>'Profile', 'icon'=>'user', 'url'=>'#'),
-        array('label'=>'我的基友', 'icon'=>'home', 'url'=>array('/friend/relationship/myRelationships'), 'active'=>true),
-        array('label'=>'好友请求', 'icon'=>'book', 'url'=>array('/friend/relationship/pendingRelationships')),
-        array('label'=>'Application', 'icon'=>'pencil', 'url'=>'#'),
-        array('label'=>'消息'),
-        array('label'=>'收件箱', 'icon'=>'cog', 'url'=>array('/msg/inbox')),
-        array('label'=>'创建消息', 'icon'=>'flag', 'url'=>array('/msg/create')),
-        array('label'=>'应用'),
-        array('label'=>'相册', 'icon'=>'photo', 'url'=>array('/album/my')),
-        array('label'=>'日志', 'icon'=>'flag', 'url'=>array('/blog/my')),
+<div class=" panel cell">
+    <?php if(Layout::hasRegion('accountMenu.top')): ?>
+                <?php Layout::renderRegion('accountMenu.top'); ?>
+    <?php endif; ?>
 
-    ),
-)); */
- ?>
+    <?php CascadeFr::beginCollapsible();    ?>
+    <div class="cell">
+        <div class="menu ">
+            <ul class="right links nav">
+                <li class="disabled">设置
+                    <ul class="right links nav">
+                        <li class="">
+                            <a href="<?php echo Yii::app()->createUrl( '/user/settings/photo'); ?>" class="">
+                                图像
+                            </a>
+                        </li>
+                        <li class="">
+                            <!-- 用class=active来高亮当前菜单-->
+                            <a href="#" class="">昵称</a>
+                        </li>
+                        <li class="">
+                            <a href="#" class="">邮箱</a>
+                        </li>
+                        <li class="">
+                            <a href="#" class="">密码</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="#" class="">Normal item</a>
+                </li>
+                <li class="">
+                    <!-- 用class=active来高亮当前菜单-->
+                    <a href="#" class="">Active item</a>
+                </li>
+
+                <li class="">
+                    <a href="#" class="">Another normal item</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <?php CascadeFr::endCollapsible() ;?>
+
+    <?php if(Layout::hasRegion('accountMenu.bottom')): ?>
+        <?php Layout::renderRegion('accountMenu.bottom'); ?>
+    <?php endif; ?>
+
+
+</div>
+

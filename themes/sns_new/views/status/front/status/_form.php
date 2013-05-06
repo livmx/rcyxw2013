@@ -1,3 +1,9 @@
+<?php
+/**
+ * 本不提倡在视图中修改布局
+ */
+?>
+
 <script type="text/javascript">
     $(function () {
         $('.extra_field').hide();
@@ -22,7 +28,7 @@
 
 
 <div class="form well ">
-    <?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+    <?php $form = $this->beginWidget('CActiveForm', array(
     'id' => 'status-form',
     'enableAjaxValidation' => false,
     'enableClientValidation'=>true,
@@ -34,16 +40,15 @@
     ),
     'clientOptions' => array(
         'validateOnSubmit' => true,
-       // 'validateOnChange' => true,
-        'validateOnType' => false,
+
     ),
 )); ?>
     <div class="row-fluid">
         <div class="span11">
-            <?php //echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error row')); ?>
+            <?php echo $form->errorSummary($model); ?>
 
 
-            <?php echo $form->textAreaRow($model, 'update', array('rows' => 6, 'cols' => 50, 'class' => 'span11 row')); ?>
+            <?php echo $form->textArea($model, 'update', array('rows' => 6, 'cols' => 50, 'class' => 'span11 row')); ?>
             <div class="row-fluid">
                 <div class="span8">
 
@@ -89,12 +94,6 @@
             </div>
         </div>
     </div>
-
-
-    <div class="form-actions">
-
-    </div>
-
     <?php $this->endWidget(); ?>
 
 </div>

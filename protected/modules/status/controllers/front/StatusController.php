@@ -61,6 +61,7 @@ class StatusController extends BaseStatusController
      */
     public function actionCreate()
     {
+
         $model = new Status;
 
         // Uncomment the following line if AJAX validation is needed
@@ -95,12 +96,14 @@ class StatusController extends BaseStatusController
 
         }
 
+
+
         $loggedInUser = Yii::app()->user->id;
         $user = isset($_GET['u']) ? $_GET['u'] : $loggedInUser;
         if(isset($_GET['u'])){
-           $this->layout = '//layouts/user/user_space';
+           $this->layout = 'userSpace';
         }else{
-            $this->layout = '//layouts/user/user_center';
+            $this->layout = 'userCenter';
         }
 
         if ($loggedInUser == $user) {
@@ -297,7 +300,7 @@ class StatusController extends BaseStatusController
             'id'=>'status-list',
             'template'=>'{pager}{items}{pager}',
             'dataProvider'=>$dp,
-            'itemView'=>'_statusView',
+            'itemView'=>'_myStatusView',
         ));
 
 

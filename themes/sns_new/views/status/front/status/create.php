@@ -16,13 +16,15 @@ $this->menu=array(
     #ccc;}
     .status-item .span1 a {color:red;}
 </style>
+<div class="cell">
 
-<h1>Create Status ddd</h1>
+    <h1>Create Status ddd</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
-<div id="recent_statuses">
-    <p class="divider"></p>
-    <?php
-    Yii::app()->runController('/status/status/listRecentStatus');
-    ?>
+    <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+    <div id="recent_statuses">
+        <p class="divider"></p>
+        <?php
+        Yii::app()->runController('/status/status/listRecentStatus');
+        ?>
+    </div>
 </div>

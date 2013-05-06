@@ -30,7 +30,7 @@ class AccountControlBox extends YsSectionWidget
     public function renderProfile(){
         $model = $this->user ;
         $this->render('accountControl/_profileBox',array(
-                'model'=>$model,
+                'user'=>$model,
                 'profile'=>$model->profile,
             )
         );

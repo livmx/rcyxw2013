@@ -72,7 +72,7 @@ class Status extends BaseStatus
             ->leftJoin('status_link l','s.id = l.id')
             ->where(" t.id = s.type AND p.user_id = s.profile AND pa.user_id = s.creator ".(empty($user)? '': " AND p.user_id={$user}"));
         if(empty($user)){
-             $cmd->select("t.type_reference, t.type_name, s.*, pa.first_name as poster_name, i.image, v.video_id, l.url, l.description,u.username,pa.photo as avatar");
+             $cmd->select("u.username , u.icon_url, t.type_reference, t.type_name, s.*, pa.first_name as poster_name, i.image, v.video_id, l.url, l.description,u.username,pa.photo as avatar");
             $cmd->join('user u','s.creator = u.id ');
         }
         $sql = $cmd->text;

@@ -203,7 +203,8 @@ class UserController extends BaseUserController
     public function actionHome()
     {
 
-       // $this->forward('/status/status/create');
+        $this->forward('/status/status/create');
+
 
         // 下面的暂时不用了
         $this->layout = UserHelper::getUserCenterLayout();
