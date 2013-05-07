@@ -21,10 +21,39 @@ $this->menu=array(
     <h1>Create Status ddd</h1>
 
     <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
-    <div id="recent_statuses">
-        <p class="divider"></p>
+    <p class="divider"></p>
+
         <?php
+        Yii::app()->controller->beginClip('myStatus');
         Yii::app()->runController('/status/status/listRecentStatus');
+        Yii::app()->controller->endClip();
         ?>
-    </div>
+<?php
+
+    $this->widget('my.widgets.CascadeFr.CascadeTabView',array(
+        'activeTab'=>'tab1',
+        'tabs'=>array(
+            'tab1'=>array(
+                'title'=>'我的状态',
+                'content'=>  $this->clips['myStatus'],
+                'active'=>true,
+            ),
+
+            'tab2'=>array(
+                'title'=>'tab 2 title',
+                'content'=>'http://www.yiiframework.com/',
+            ),
+            'tab4'=>array(
+                'title'=>'tab 2 title',
+                'url'=>'',
+                'ajax'=>true ,
+            ),
+        ),
+        'htmlOptions'=>array(
+
+        )
+    ));
+    ?>
+
+
 </div>
