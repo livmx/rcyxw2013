@@ -33,19 +33,20 @@ $this->menu=array(
     $this->widget('my.widgets.CascadeFr.CascadeTabView',array(
         'activeTab'=>'tab1',
         'tabs'=>array(
-            'tab1'=>array(
-                'title'=>'我的状态',
+            'myStatus'=>array(
+                'title'=>'我的动态',
                 'content'=>  $this->clips['myStatus'],
                 'active'=>true,
             ),
 
-            'tab2'=>array(
-                'title'=>'tab 2 title',
-                'content'=>'http://www.yiiframework.com/',
+            'statusForFriends'=>array(
+                'title'=>'好友动态',
+                'ajax'=>true,
+                'url'=>$this->createUrl('statusForFriends'),
             ),
-            'tab4'=>array(
-                'title'=>'tab 2 title',
-                'url'=>'',
+            'statusForAll'=>array(
+                'title'=>'大家的动态',
+                'url'=>$this->createUrl('statusForAll'),
                 'ajax'=>true ,
             ),
         ),

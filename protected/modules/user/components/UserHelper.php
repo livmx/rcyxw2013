@@ -296,6 +296,7 @@ U_FACE;
         return self::$spaceOwnerModel ;
     }
 
+
 //----------------------------------------------------------------\\
 
 
@@ -304,6 +305,17 @@ U_FACE;
      */
     static public function getLoginUserModel(){
         return UserModule::user(user()->getId());
+    }
+
+    static public function getUserIconUrl($data){
+        $iconUri = $data['icon_uri'];
+        if (empty($iconUri)) {
+            $picId = rand(1, 5);
+            return Yii::app()->getModule('user')->getAssetsUrl() ."/defaultAvatars/{$picId}.jpg";
+
+        } else {
+            return bu($iconUri);
+        }
     }
 
 }

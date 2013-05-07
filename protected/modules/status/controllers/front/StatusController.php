@@ -291,6 +291,44 @@ class StatusController extends BaseStatusController
         }
     }
 
+    public function actionStatusForAll(){
+       // die(print_r($_REQUEST,true));
+        //die(print_r($_REQUEST,true));
+        $this->layout = false;
+        $user =  user()->getId() ;
+        $dp = Status::listAllStatus($user);
+        $this->beginClip('allStatus');
+        // My::listView4sqlDataProvider($dp);
+        $this->widget('zii.widgets.CListView',array(
+            'id'=>'all-status-list',
+            'template'=>'{pager}{items}{pager}',
+            'dataProvider'=>$dp,
+            'itemView'=>'_statusView',
+        ));
+        $this->endClip();
+
+        $this->renderText($this->clips['allStatus']);
+    }
+
+    public function actionStatusForFriends(){
+       //die(print_r($_REQUEST,true));
+        $this->layout = false;
+        $user =  user()->getId() ;
+        $dp = Status::listFriendsStatuses($user);
+        $this->beginClip('friendsStatus');
+        // My::listView4sqlDataProvider($dp);
+        $this->widget('zii.widgets.CListView',array(
+            'id'=>'friends-status-list',
+            'template'=>'{pager}{items}{pager}',
+            'dataProvider'=>$dp,
+            'itemView'=>'_statusView',
+        ));
+        $this->endClip();
+
+        $this->renderText($this->clips['friendsStatus']);
+
+    }
+
     public function actionListRecentStatus($u=null){
         $this->layout = false;
    $user = ($u == null) ? user()->getId() : $u ;
