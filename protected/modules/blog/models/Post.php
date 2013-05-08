@@ -1,22 +1,24 @@
 <?php
+Yii::import('blog.models.Comment');
+/**
+ * This is the model class for table "dlf_post".
+ *
+ * The followings are the available columns in table 'dlf_post':
+ * @property string $id
+ * @property string $title
+ * @property string $content
+ * @property string $summary
+ * @property string $tags
+ * @property string $status
+ * @property string $created
+ * @property string $updated
+ * @property string $author_id
+ * @property string $category_id
+ */
 class Post extends CActiveRecord
 {
 	
-	/**
-	 * This is the model class for table "dlf_post".
-	 *
-	 * The followings are the available columns in table 'dlf_post':
-	 * @property string $id
-	 * @property string $title
-	 * @property string $content
-	 * @property string $summary
-	 * @property string $tags
-	 * @property string $status
-	 * @property string $created
-	 * @property string $updated
-	 * @property string $author_id
-	 * @property string $category_id
-	 */
+
 	
 	const STATUS_DRAFT=1;
 	const STATUS_PUBLISHED=2;

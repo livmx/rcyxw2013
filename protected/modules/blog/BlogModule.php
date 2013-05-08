@@ -11,7 +11,7 @@ class BlogModule extends CWebModule implements IUrlRewriteModule
 
     public $controllerMap=array(
         'my'=>array(
-            'class'=>'BlogModule.controllers.MyPostController'),
+            'class'=>'BlogModule.controllers.front.MyPostController'),
     );
 
 
@@ -41,7 +41,7 @@ class BlogModule extends CWebModule implements IUrlRewriteModule
 
       //  Yii::app()->theme = 'dlfBlog';
         // Raise onModuleCreate event.
-       // Yii::app()->onModuleCreate(new CEvent($this));
+       Yii::app()->onModuleCreate(new CEvent($this));
 	}
 
 	public function beforeControllerAction($controller, $action)

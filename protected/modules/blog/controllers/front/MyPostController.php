@@ -6,7 +6,7 @@ class MyPostController extends BaseBlogController
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='userCenter';
 
 	/**
 	 * @return array action filters
@@ -42,9 +42,6 @@ class MyPostController extends BaseBlogController
 
 
     protected  function beforeAction( $action){
-
-
-         $this->layout =  'column2';//YsHelper::getUserCenterLayout();
         return parent::beforeAction($action);
     }
 
@@ -77,6 +74,8 @@ class MyPostController extends BaseBlogController
 		if(isset($_POST['Post']))
 		{
 			$model->attributes=$_POST['Post'];
+            $model->author_id = Yii::app()->user->getId();
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

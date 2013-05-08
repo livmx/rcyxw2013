@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends BaseBlogController
+class CategoryController extends BaseBlogController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -28,7 +28,7 @@ class UserController extends BaseBlogController
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
@@ -61,15 +61,14 @@ class UserController extends BaseBlogController
 	 */
 	public function actionCreate()
 	{
-		$model=new User;
+		$model=new Category;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['Category']))
 		{
-			$model->attributes=$_POST['User'];
-			
+			$model->attributes=$_POST['Category'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -91,9 +90,9 @@ class UserController extends BaseBlogController
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['Category']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes=$_POST['Category'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -128,7 +127,7 @@ class UserController extends BaseBlogController
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('User');
+		$dataProvider=new CActiveDataProvider('Category');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -139,10 +138,10 @@ class UserController extends BaseBlogController
 	 */
 	public function actionAdmin()
 	{
-		$model=new User('search');
+		$model=new Category('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
+		if(isset($_GET['Category']))
+			$model->attributes=$_GET['Category'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -156,7 +155,7 @@ class UserController extends BaseBlogController
 	 */
 	public function loadModel($id)
 	{
-		$model=User::model()->findByPk($id);
+		$model=Category::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -168,7 +167,7 @@ class UserController extends BaseBlogController
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='category-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

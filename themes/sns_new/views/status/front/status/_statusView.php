@@ -21,7 +21,6 @@
                         </div>
                         <?php // print_r($data);?>
                     </div>
-
                 </div>
             </div>
             <div class="divider"></div>

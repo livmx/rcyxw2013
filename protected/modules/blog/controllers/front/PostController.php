@@ -50,8 +50,13 @@ class PostController extends BaseBlogController
 	 */
 	public function actionView($id)
 	{
-		$post=$this->loadModel($id);
-		$comment=$this->newComment($post);
+        $this->layout = 'userSpace';
+		$post=$this->loadModel($id,'author');
+
+        UserHelper::setSpaceOwnerId($post->author_id);
+        UserHelper::setSpaceOwnerModel($post->author);
+
+        $comment=$this->newComment($post);
 
 		$this->render('view',array(
 			'model'=>$post,
@@ -189,15 +194,24 @@ class PostController extends BaseBlogController
 				echo implode("\n",$tags);
 		}
 	}
-	
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
-	 */
-	public function loadModel($id)
+
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param $id
+     * @param array|string $with  array('author', 'category'=>array('order'=>'id DESC'))
+     * @throws CHttpException
+     * @internal param \the $integer ID of the model to be loaded
+     * @return Post
+     */
+	public function loadModel($id,$with=array())
 	{
-		$model=Post::model()->findByPk($id);
+        if(!empty($with)){
+            $model=Post::model()->with($with)->findByPk($id);
+        }else{
+            $model=Post::model()->findByPk($id);
+        }
+
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
