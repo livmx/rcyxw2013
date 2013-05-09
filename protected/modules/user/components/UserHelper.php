@@ -308,7 +308,12 @@ U_FACE;
     }
 
     static public function getUserIconUrl($data){
-        $iconUri = $data['icon_uri'];
+        if($data instanceof CActiveRecord){
+            $iconUri = $data->icon_uri;
+        }else{
+            $iconUri = $data['icon_uri'];
+        }
+
         if (empty($iconUri)) {
             $picId = rand(1, 5);
             return Yii::app()->getModule('user')->getAssetsUrl() ."/defaultAvatars/{$picId}.jpg";
@@ -316,6 +321,41 @@ U_FACE;
         } else {
             return bu($iconUri);
         }
+    }
+
+    /**
+     * @param User $userModel
+     */
+    static public function renderSimpleProfile(  $userModel){
+        $spaceOwner = $userModel;
+        $iconUrl = $userModel->getIconUrl();
+        $userNameLabel = $userModel->getAttributeLabel('username');
+        $regTime = Yii::app()->dateFormatter->format('y-m-d',$userModel->create_at);
+        $simpleProfile = <<<SP
+                     <div class="col">
+                            <div class="cell " >
+                                <figure class="nuremberg">
+                                    <img src="{$iconUrl}" alt="" width="100px" height="100px">
+                                    <figcaption>Efteling</figcaption>
+                                </figure>
+                            </div>
+                         <div class="cell">
+                               <ul class="nav">
+                                   <li>
+                                       {$userNameLabel}:
+                                       {$userModel->username}
+                                   </li>
+                                   <li>
+                                       注册时间：{$regTime}
+                                   </li>
+
+                               </ul>
+                         </div>
+
+                     </div>
+SP;
+
+        echo $simpleProfile;
     }
 
 }

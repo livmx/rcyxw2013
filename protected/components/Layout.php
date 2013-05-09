@@ -290,4 +290,53 @@ class Layout
             $instance->regions->remove($regionId);
         }
     }
+    //-------------------------------------------------------------------------\\
+
+    /**
+     * @var array
+     * the current blockConfig
+     */
+    static protected $blockConfig = array();
+    /**
+     * @var integer a counter used to generate IDs for blocks.
+     */
+    private static $_counter = 0;
+
+    /**
+     * @param $regionId
+     * @param array $blockConfig
+     * @throws CException
+     */
+    static public function beginBlock($regionId, $blockConfig=array()){
+        if(!empty(self::$blockConfig)){
+            throw new CException('you may not call the endBlock method of class '.__CLASS__.' properly !');
+        }
+        $blockConfig['regionId'] = $regionId ;
+        self::$blockConfig = $blockConfig ;
+
+        ob_start();
+        ob_implicit_flush(false);
+    }
+
+    /**
+     * must be used together with Layout::beginBlock method
+     */
+    static public function endBlock(){
+        $blockContent = ob_get_clean();
+        if(empty($blockContent)){
+           $blockContent = '';
+        }
+        $currentBlockConfig = self::$blockConfig;
+        $regionId = $currentBlockConfig['regionId'];
+        // unset(self::$blockConfig);
+        self::$blockConfig = array() ;// reset it for next usage !
+        unset($currentBlockConfig['regionId']);
+
+        if(!isset($currentBlockConfig['id'])){
+            $currentBlockConfig['id'] = 'block' . self::$_counter++;
+        }
+        $currentBlockConfig['content'] = $blockContent ;
+        self::addBlock($regionId,$currentBlockConfig);
+    }
+    //-------------------------------------------------------------------------//
 }
