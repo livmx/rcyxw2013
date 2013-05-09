@@ -93,9 +93,20 @@
         </div>
     </div>
 </div>
-<div class="site-nav col sizefill background-black">
-    <div class="cell">
+<div class="site-nav col sizefill background-green">
+    <div class="" style="margin-left: 80px">
+        <ul class="nav">
+            <li class="">
+                <a href="#" class="">Normal item</a>
+            </li>
+            <li class="">
+                <a href="<?php echo $this->createUrl('/blog');?>">博文</a>
+            </li>
 
+            <li>
+                <a href="#">Another normal item</a>
+            </li>
+        </ul>
     </div>
 
 </div>

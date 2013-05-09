@@ -1,4 +1,7 @@
 <?php
+/* @var $this CategoryController */
+/* @var $dataProvider CActiveDataProvider */
+
 $this->breadcrumbs=array(
 	'Categories',
 );
@@ -14,4 +17,5 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
+    'itemsCssClass'=>'items',
 )); ?>

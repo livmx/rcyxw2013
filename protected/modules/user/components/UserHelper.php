@@ -331,11 +331,14 @@ U_FACE;
         $iconUrl = $userModel->getIconUrl();
         $userNameLabel = $userModel->getAttributeLabel('username');
         $regTime = Yii::app()->dateFormatter->format('y-m-d',$userModel->create_at);
+        $spaceUrl = self::getUserSpaceUrl($userModel->primaryKey);
         $simpleProfile = <<<SP
                      <div class="col">
                             <div class="cell " >
                                 <figure class="nuremberg">
+                                <a href="{$spaceUrl}">
                                     <img src="{$iconUrl}" alt="" width="100px" height="100px">
+                                </a>
                                     <figcaption>Efteling</figcaption>
                                 </figure>
                             </div>

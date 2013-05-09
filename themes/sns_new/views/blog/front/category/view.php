@@ -1,4 +1,7 @@
 <?php
+/* @var $this CategoryController */
+/* @var $model Category */
+
 $this->breadcrumbs=array(
 	'Categories'=>array('index'),
 	$model->name,
@@ -16,9 +19,11 @@ $this->menu=array(
 <h1>View Category #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
+    'htmlOptions'=>array(),
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
+		'uid',
 		'pid',
 		'name',
 		'alias',

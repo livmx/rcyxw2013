@@ -1,42 +1,139 @@
-<div class="form">
+<?php
+/* @var $this CategoryController */
+/* @var $model Category */
+/* @var $form CActiveForm */
+?>
+
+<?php YsPageBox::beginPanel(); ?>
+
+<div class="col cell">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'category-form',
 	'enableAjaxValidation'=>false,
+	 'htmlOptions'=>array(
+                                'class'=>'cell'
+                            ),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+                        <div class="col">
+                            <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+                            <?php echo $form->errorSummary($model); ?>
+                        </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'pid'); ?>
-		<?php echo $form->textField($model,'pid',array('size'=>11,'maxlength'=>11)); ?>
-		<?php echo $form->error($model,'pid'); ?>
-	</div>
+                        
+                            <div class="col">
+                                <div class="col size1of4">
+                                    <div class="cell">
+                                        <?php echo $form->labelEx($model,'uid'); ?>
+                                    </div>
+                                </div>
+                                <div class="col size2of4">
+                                    <div class="cell">
+                                        <?php echo $form->textField($model,'uid'); ?>
+                                    </div>
+                                </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'name'); ?>
-	</div>
+                                <div class="col sizefill">
+                                    <div class="cell">
+                                        <?php echo $form->error($model,'uid'); ?>
+                                    </div>
+                                </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'alias'); ?>
-		<?php echo $form->textField($model,'alias',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'alias'); ?>
-	</div>
+                            </div>
+                        
+                            <div class="col">
+                                <div class="col size1of4">
+                                    <div class="cell">
+                                        <?php echo $form->labelEx($model,'pid'); ?>
+                                    </div>
+                                </div>
+                                <div class="col size2of4">
+                                    <div class="cell">
+                                        <?php echo $form->textField($model,'pid',array('size'=>11,'maxlength'=>11)); ?>
+                                    </div>
+                                </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'position'); ?>
-		<?php echo $form->textField($model,'position',array('size'=>11,'maxlength'=>11)); ?>
-		<?php echo $form->error($model,'position'); ?>
-	</div>
+                                <div class="col sizefill">
+                                    <div class="cell">
+                                        <?php echo $form->error($model,'pid'); ?>
+                                    </div>
+                                </div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+                            </div>
+                        
+                            <div class="col">
+                                <div class="col size1of4">
+                                    <div class="cell">
+                                        <?php echo $form->labelEx($model,'name'); ?>
+                                    </div>
+                                </div>
+                                <div class="col size2of4">
+                                    <div class="cell">
+                                        <?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
+                                    </div>
+                                </div>
 
-<?php $this->endWidget(); ?>
+                                <div class="col sizefill">
+                                    <div class="cell">
+                                        <?php echo $form->error($model,'name'); ?>
+                                    </div>
+                                </div>
 
-</div><!-- form -->
+                            </div>
+                        
+                            <div class="col">
+                                <div class="col size1of4">
+                                    <div class="cell">
+                                        <?php echo $form->labelEx($model,'alias'); ?>
+                                    </div>
+                                </div>
+                                <div class="col size2of4">
+                                    <div class="cell">
+                                        <?php echo $form->textField($model,'alias',array('size'=>60,'maxlength'=>255)); ?>
+                                    </div>
+                                </div>
+
+                                <div class="col sizefill">
+                                    <div class="cell">
+                                        <?php echo $form->error($model,'alias'); ?>
+                                    </div>
+                                </div>
+
+                            </div>
+                        
+                            <div class="col">
+                                <div class="col size1of4">
+                                    <div class="cell">
+                                        <?php echo $form->labelEx($model,'position'); ?>
+                                    </div>
+                                </div>
+                                <div class="col size2of4">
+                                    <div class="cell">
+                                        <?php echo $form->textField($model,'position',array('size'=>11,'maxlength'=>11)); ?>
+                                    </div>
+                                </div>
+
+                                <div class="col sizefill">
+                                    <div class="cell">
+                                        <?php echo $form->error($model,'position'); ?>
+                                    </div>
+                                </div>
+
+                            </div>
+                                                <div class="col">
+                            <div class="col size1of4">
+                            </div>
+                            <div class="col sizefill">
+                                <div class="cell">
+                                    <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'button')); ?>
+                                </div>
+                            </div>
+                        </div>
+                            <?php $this->endWidget(); ?>
+
+</div>
+
+<?php  YsPageBox::endPanel(); ?>
+

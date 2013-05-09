@@ -10,17 +10,16 @@
 /* @var $form CActiveForm */
 ?>
 
+<?php echo "<?php"; ?> YsPageBox::beginPanel(); ?>
 
-<div class="col">
-    <div class="cell panel">
-        <div class="body">
-            <div class="cell">
-                <div class="col">
-                    <div class="cell">
+<div class="col cell">
 
 <?php echo "<?php \$form=\$this->beginWidget('CActiveForm', array(
 	'id'=>'".$this->class2id($this->modelClass)."-form',
 	'enableAjaxValidation'=>false,
+	 'htmlOptions'=>array(
+                                'class'=>'cell'
+                            ),
 )); ?>\n"; ?>
 
                         <div class="col">
@@ -68,10 +67,8 @@
                             </div>
                         </div>
                             <?php echo "<?php \$this->endWidget(); ?>\n"; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
+
+<?php echo "<?php"; ?>  YsPageBox::endPanel(); ?>
 

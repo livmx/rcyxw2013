@@ -96,6 +96,23 @@ class YsPageBox extends YsSectionWidget{
         $options = empty($options)?$defaults:CMap::mergeArray($defaults,$options);
         Yii::app()->controller->beginWidget(__CLASS__,$options);
     }
+    /**
+     * this is quick method for creating a panel
+     * should be used together with the endPanel method !
+     * @param array $options|string
+     */
+    static  public function beginPanelWithHeader($options=array()){
+        $defaults = array(
+            'template'=>'{header}{body}',
+        );
+        if(is_string($options)){
+            $defaults['header'] = $options ;
+
+        }
+            $options = is_string($options)? $defaults:CMap::mergeArray($defaults,$options);
+
+        Yii::app()->controller->beginWidget(__CLASS__,$options);
+    }
 
     static public function endPanel(){
         Yii::app()->controller->endWidget();

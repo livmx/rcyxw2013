@@ -9,6 +9,7 @@
  * @property string $name
  * @property string $alias
  * @property string $position
+ * @property string $uid
  */
 class Category extends CActiveRecord
 {

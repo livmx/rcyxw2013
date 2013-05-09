@@ -136,6 +136,8 @@ class PostController extends BaseBlogController
 	 */
 	public function actionIndex()
 	{
+        $this->layout = 'column2';
+
 		$year = Yii::app()->request->getParam('year');
 		$month = Yii::app()->request->getParam('month');
 		$tag = Yii::app()->request->getParam('tag');
