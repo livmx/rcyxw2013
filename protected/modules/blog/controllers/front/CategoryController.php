@@ -66,15 +66,17 @@ class CategoryController extends BaseBlogController
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+        $model->uid = user()->getId();
 
 		if(isset($_POST['Category']))
 		{
 			$model->attributes=$_POST['Category'];
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
-        $model->uid = user()->getId();
+
 
 		$this->render('create',array(
 			'model'=>$model,
@@ -130,7 +132,11 @@ class CategoryController extends BaseBlogController
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Category');
+		$dataProvider=new CActiveDataProvider('Category'
+
+        );
+        $dataProvider->criteria->addColumnCondition(array('uid'=>user()->getId()));
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -180,4 +186,29 @@ class CategoryController extends BaseBlogController
 			Yii::app()->end();
 		}
 	}
+
+    /**
+     * ajax 加载博客分类
+     */
+    public function actionAjaxMyCategories(){
+        $userId = user()->getId();
+
+        $categories = Category::model()->findAllByAttributes(array(
+            'uid'=>$userId,
+        ));
+
+        $categoryHtmlTpl = '<li class=""><a href="{cateUrl}" class=""><span class="data">{memberCount}</span>{cateName}</a></li> '.PHP_EOL;
+
+        $response = '';
+
+        foreach($categories as $category){
+            $response .= strtr($categoryHtmlTpl,array(
+               '{cateUrl}'=>$this->createUrl('my/index',array('category'=>$category->primaryKey)),
+                '{memberCount}'=>$category->mbr_count,
+                '{cateName}'=>$category->name ,
+            ));
+        }
+
+        echo $response ;
+    }
 }

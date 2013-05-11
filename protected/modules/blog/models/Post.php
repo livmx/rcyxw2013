@@ -217,6 +217,8 @@ class Post extends CActiveRecord
 	{
 		parent::afterSave();
 		Tag::model()->updateFrequency($this->_oldTags, $this->tags);
+
+        Category::model()->updateCounters(array('mbr_count'=>1),'id=:cate',array(':cate'=>$this->category_id));
 	}
 	
 	/**
@@ -227,6 +229,7 @@ class Post extends CActiveRecord
 		parent::afterDelete();
 		Comment::model()->deleteAll('post_id='.$this->id);
 		Tag::model()->updateFrequency($this->tags, '');
+        Category::model()->updateCounters(array('mbr_count'=>-1),'id=:cate',array(':cate'=>$this->category_id));
 	}
 
 	/**

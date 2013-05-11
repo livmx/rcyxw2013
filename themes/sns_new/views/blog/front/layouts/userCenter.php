@@ -52,34 +52,28 @@
 
         <div class="cell">
 
-            <div class="col size7of9">
-                <?php  YsPageBox::beginPanel(); ?>
-                <?php echo $content; ?>
-                <?php  YsPageBox::endPanel();?>
-            </div>
+            <?php if(Layout::hasRegion('rightSideBar')): ?>
 
-            <div class="col sizefill">
-                <?php YsPageBox::beginPanelWithHeader(array('header'=>'博客分类')) ?>
-                <div class="cell">
-                    <div class="col">
-                        <div class="menu cell">
-                            <ul class="left links nav">
-                                <li class="">
-                                    <a href="<?php echo $this->createUrl('/blog/category/admin'); ?>" class="">日志管理</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="cell menu">
-                            <ul class="stat left nav">
-                                <li class=""><a href="#" class=""><span class="data">1,234</span>donuts</a></li>
-                                <li class=""><a href="#" class=""><span class="data">567</span>kayaks</a></li>
-                                <li><a href="#"><span class="data">23,456</span>kittens</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="col size7of9">
+                    <?php  YsPageBox::beginPanel(); ?>
+                    <?php echo $content; ?>
+                    <?php  YsPageBox::endPanel();?>
                 </div>
-                <?php YsPageBox::endPanel(); ?>
-            </div>
+
+                <div class="col sizefill">
+                  <?php Layout::renderRegion('rightSideBar'); ?>
+                </div>
+                
+            <?php else:?>
+
+                <div class="col">
+                    <?php  YsPageBox::beginPanel(); ?>
+                    <?php echo $content; ?>
+                    <?php  YsPageBox::endPanel();?>
+                </div>
+
+            <?php  endif; ?>
+
         </div>
 
     </div>

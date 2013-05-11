@@ -33,11 +33,59 @@
     '
 </head>
 <body class="narrow">
-<div class="site-center">
-    <div class="col sizefill background-orange">
-        dododoodo
 
+<?php
+
+$this->widget('my.widgets.jqsimplemenu.JqSimpleMenu', array(
+    //'selector'=>'.top-menu',
+));
+?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.top-menu').jqsimplemenu();
+    });
+</script>
+
+<div class="site-center">
+    <div class="col  background-orange">
+        <div >
+            <ul class="top-menu">
+                <li><a href="http://www.egrappler.com">Home</a></li>
+                <li><a href="http://www.egrappler.com/about">About</a></li>
+                <li><a href="#">Services </a>
+                    <ul>
+                        <li><a href="#">Sofware Development</a>
+                            <ul>
+                                <li><a href="#">Web Apps</a></li>
+                                <li><a href="#">Widgets</a>
+                                    <ul>
+                                        <li><a href="#">jQuery Plugins</a></li>
+                                        <li><a href="#">Asp.NET Controls</a></li>
+                                        <li><a href="#">Salesforce Integration</a> </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Interface Design</a></li>
+                        <li><a href="#">Technical Writing</a></li>
+                        <li><a href="#">Resume Writing</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Portfolio</a>
+                    <ul>
+                        <li><a href="#">Web Appliations</a></li>
+                        <li><a href="#">SaaS</a></li>
+                        <li><a href="#">Windows Applications</a></li>
+                        <li><a href="#">Mobile Applications</a></li>
+                        <li><a href="#">Server Applications</a> </li>
+                    </ul>
+                </li>
+                <li><a href="http://www.egrappler.com">Blog</a></li>
+                <li><a href="http://www.egrappler.com">Contact</a></li>
+            </ul>
+        </div>
     </div>
+
     <div class="col">
         <div class="col sizefit mobile-sizefit">
             <div class="cell">

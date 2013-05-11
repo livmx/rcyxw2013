@@ -60,8 +60,27 @@ $this->widget('ext.ueditor.Ueditor',
     </div>
     <div class="col size2of5">
         <div class="cell">
-            <?php echo $form->dropDownList($model, 'category_id', Category::CategoryList()); ?>
+            <?php echo $form->dropDownList($model, 'category_id', Category::CategoryList(user()->getId())); ?>
         </div>
+        <a href="<?php echo $this->createUrl('category/create'); ?>" class="create">创建分类</a>
+        <?php
+        $this->widget('application.extensions.formDialog2.FormDialog2', array(
+                'link' => 'a.create',
+                'options' => array(
+                    'onSuccess' => 'js:function(data, e){alert(data.message);
+                       refreshAlbumList();
+                }',
+                ),
+                'dialogOptions' => array(
+                    'title'=>'创建相册',
+                    'width' => 600,
+                    'height' => 470,
+
+                )
+            )
+        );
+        ?>
+
     </div>
 
     <div class="col sizefill">
@@ -176,3 +195,19 @@ $this->widget('ext.ueditor.Ueditor',
 </div>
 </div>
 </div>
+
+
+<?php
+$this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
+    'id'=>'calldialog',
+    'options'=>array(
+        'title'=>'test',
+        'autoOpen'=>false,
+        'modal'=>true,
+        'width'=>700,
+        'height'=>500,
+    ),
+));?>
+<div class="calldialog"></div>
+
+<?php $this->endWidget();?>

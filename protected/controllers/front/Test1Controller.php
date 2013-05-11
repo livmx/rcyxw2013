@@ -5,6 +5,26 @@
  */
 class Test1Controller extends Controller
 {
+
+    public function actionPopover(){
+        $this->render('popover');
+    }
+
+
+    public function actionBubblePopup(){
+        $this->render('bubblePopup');
+    }
+
+    public function actionResponsiveMenu1(){
+        $this->render('responsiveMenu');
+    }
+    public function actionPop(){
+        $this->render('pop');
+    }
+
+    public function actionArtDialog(){
+        $this->render('artDialog');
+    }
     public function actionCurlTest()
     {
         echo "<pre>";
