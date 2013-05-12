@@ -179,7 +179,13 @@ class Post extends CActiveRecord
 		$comment->post_id=$this->id;
 		return $comment->save();
 	}
-	
+
+    /**
+     * @var array
+     * old attributes for current model
+     */
+    protected $old = array();
+
 	/**
 	 * This is invoked when a record is populated with data from a find() call.
 	 */
@@ -187,6 +193,8 @@ class Post extends CActiveRecord
 	{
 		parent::afterFind();
 		$this->_oldTags=$this->tags;
+
+        $this->old = $this->attributes;
 	}
 	
 	/**
@@ -218,8 +226,16 @@ class Post extends CActiveRecord
 		parent::afterSave();
 		Tag::model()->updateFrequency($this->_oldTags, $this->tags);
 
-        Category::model()->updateCounters(array('mbr_count'=>1),'id=:cate',array(':cate'=>$this->category_id));
-	}
+        if($this->getIsNewRecord()){
+            Category::model()->updateCounters(array('mbr_count'=>1),'id=:cate',array(':cate'=>$this->category_id));
+        }else{
+            if($this->category_id != $this->old['category_id']){
+                Category::model()->updateCounters(array('mbr_count'=>1),'id=:cate',array(':cate'=>$this->category_id));
+                Category::model()->updateCounters(array('mbr_count'=>-1),'id=:cate',array(':cate'=>$this->old['category_id']));
+            }
+
+        }
+       }
 	
 	/**
 	 * This is invoked after the record is deleted.

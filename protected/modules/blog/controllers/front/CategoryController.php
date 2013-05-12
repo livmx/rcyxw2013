@@ -27,8 +27,8 @@ class CategoryController extends BaseBlogController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('@'),
+				'actions'=>array('index','view','ajaxMyCategories'),
+				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update' , $this->action->getId()),
@@ -202,9 +202,17 @@ class CategoryController extends BaseBlogController
 
     /**
      * ajax 加载博客分类
+     * 同时服务于 用户中心 和用户profile两种场景
      */
     public function actionAjaxMyCategories(){
-        $userId = user()->getId();
+       $request = Yii::app()->request ;
+        $forUserCenter = false  ;
+        //如果未传递userId参数那么认为是在用户中心布局下
+        if(($userId = $request->getParam('userId',false))===false){
+            $forUserCenter = true ;
+            $userId = user()->getId();
+        }
+
 
         $categories = Category::model()->findAllByAttributes(array(
             'uid'=>$userId,
@@ -215,8 +223,14 @@ class CategoryController extends BaseBlogController
         $response = '';
 
         foreach($categories as $category){
+            if($forUserCenter){
+                $createUrl = $this->createUrl('my/index',array('category'=>$category->primaryKey));
+            }else{
+                $createUrl = $this->createUrl('post/index',array('u'=>$userId,'category'=>$category->primaryKey));
+            }
+
             $response .= strtr($categoryHtmlTpl,array(
-               '{cateUrl}'=>$this->createUrl('my/index',array('category'=>$category->primaryKey)),
+               '{cateUrl}'=> $createUrl,
                 '{memberCount}'=>$category->mbr_count,
                 '{cateName}'=>$category->name ,
             ));

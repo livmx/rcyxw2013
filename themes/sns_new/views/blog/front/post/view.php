@@ -61,6 +61,50 @@ $this->pageTitle=$model->title;
                 <div class="cell">
                     <?php UserHelper::renderSimpleProfile(UserHelper::getSpaceOwnerModel()) ;?>
                 </div>
+                <?php if(UserHelper::getIsOwnSpace()): ?>
+                    <div class="menu cell">
+                        <ul class="right nav">
+                            <li class="">
+                                <a href="<?php echo $this->createUrl('my/update',array('id'=>$model->primaryKey)); ?>" class="">
+                                修改
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                <?php endif;?>
+
+                <div class="cell">
+                    <div class="col">
+
+                        <?php if(UserHelper::getIsOwnSpace()): ?>
+                        <div class="menu cell">
+                            <ul class="left links nav">
+                                <li class="">
+                                    <a href="<?php echo $this->createUrl('/blog/category/admin'); ?>" class="">分类管理</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
+
+                        <div class="cell menu">
+                            <script type="text/javascript">
+                                $(function(){
+                                    var url = "<?php echo $this->createUrl('category/ajaxMyCategories',array('userId'=>$model->author_id)); ?>";
+                                    $("#myBlogCategories").load(url);
+                                });
+                            </script>
+                            <ul class="stat left nav" id="allBlogOfMember">
+                                <li class="">
+                                    <a href="<?php echo $this->createUrl('/blog/member',array('u'=>UserHelper::getSpaceOwnerId()) ); ?>" class="">所有日志</a>
+                                </li>
+                            </ul>
+                            <ul class="stat left nav" id="myBlogCategories">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
