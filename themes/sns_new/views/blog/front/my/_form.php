@@ -64,17 +64,27 @@ $this->widget('ext.ueditor.Ueditor',
         </div>
         <a href="<?php echo $this->createUrl('category/create'); ?>" class="create">创建分类</a>
         <?php
-        $this->widget('application.extensions.formDialog2.FormDialog2', array(
+         $categoryListId = CHtml::activeId($model,'category_id');
+         $onCategoryCreateSuccess = <<<CB
+                function(data, e){
+                    var category = data.category;
+                    var newOption = "<option value='"+category.id+"'>"+category.name+"</option>";
+
+                    $("#{$categoryListId}").prepend(newOption).val(category.id);
+                     //alert(data.message);
+                     $.alert(data.message);
+                }
+CB;
+
+        $this->widget('my.widgets.artDialog.ArtFormDialog', array(
                 'link' => 'a.create',
                 'options' => array(
-                    'onSuccess' => 'js:function(data, e){alert(data.message);
-                       refreshAlbumList();
-                }',
+                    'onSuccess' => 'js:'.$onCategoryCreateSuccess,
                 ),
                 'dialogOptions' => array(
                     'title'=>'创建相册',
-                    'width' => 600,
-                    'height' => 470,
+                    'width' => 500,
+                    'height' => 370,
 
                 )
             )
@@ -196,18 +206,3 @@ $this->widget('ext.ueditor.Ueditor',
 </div>
 </div>
 
-
-<?php
-$this->beginWidget('zii.widgets.jui.CJuiDialog', array( // the dialog
-    'id'=>'calldialog',
-    'options'=>array(
-        'title'=>'test',
-        'autoOpen'=>false,
-        'modal'=>true,
-        'width'=>700,
-        'height'=>500,
-    ),
-));?>
-<div class="calldialog"></div>
-
-<?php $this->endWidget();?>

@@ -55,35 +55,48 @@ class CategoryController extends BaseBlogController
 		));
 	}
 
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
-	public function actionCreate()
-	{
-		$model=new Category;
+    /**
+     * Creates a new model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     */
+    public function actionCreate()
+    {
+        $model=new Category;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
 
         $model->uid = user()->getId();
 
-		if(isset($_POST['Category']))
-		{
-			$model->attributes=$_POST['Category'];
+        if(isset($_POST['Category']))
+        {
+            $model->attributes=$_POST['Category'];
+            if($model->save()){
+                if (Yii::app()->request->isAjaxRequest) {
+                    $this->ajaxSuccess(
+                        array(
+                            'message' => "Category successfully added",
+                            'category'=>$model->attributes,
+                        )
+                    );
+                    return ;
+                } else
+                    $this->redirect(array('view','id'=>$model->id));
+            }
+        }
+        if (Yii::app()->request->isAjaxRequest) {
+            $this->ajaxFailure(
+                array(
+                    'form' => $this->renderPartial('_form', array('model' => $model), true)
+                )
+            );
+        } else
+            $this->render('create',array(
+                'model'=>$model,
+            ));
+    }
 
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
-	}
-
-	/**
+    /**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
