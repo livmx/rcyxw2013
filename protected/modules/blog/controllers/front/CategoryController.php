@@ -214,9 +214,27 @@ class CategoryController extends BaseBlogController
         }
 
 
+
         $categories = Category::model()->findAllByAttributes(array(
             'uid'=>$userId,
         ));
+
+        //.............................................\\
+        // 还要查下 未分类的日志统计:
+        $unCategorizedCount = Post::model()->countByAttributes(array(
+           'author_id'=>$userId ,
+            'category_id'=>0
+        ));
+
+        // 推人数组头部
+        $unCategorizeItem = new Category();
+        $unCategorizeItem->mbr_count = $unCategorizedCount;
+        $unCategorizeItem->setPrimaryKey(0);
+        $unCategorizeItem->name = '未归类日志';
+
+        array_unshift($categories,$unCategorizeItem);
+
+        //.............................................//
 
         $categoryHtmlTpl = '<li class=""><a href="{cateUrl}" class=""><span class="data">{memberCount}</span>{cateName}</a></li> '.PHP_EOL;
 
@@ -226,7 +244,7 @@ class CategoryController extends BaseBlogController
             if($forUserCenter){
                 $createUrl = $this->createUrl('my/index',array('category'=>$category->primaryKey));
             }else{
-                $createUrl = $this->createUrl('post/index',array('u'=>$userId,'category'=>$category->primaryKey));
+                $createUrl = $this->createUrl('member/list',array('u'=>$userId,'category'=>$category->primaryKey));
             }
 
             $response .= strtr($categoryHtmlTpl,array(

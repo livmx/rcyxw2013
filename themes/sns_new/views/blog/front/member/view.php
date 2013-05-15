@@ -95,7 +95,7 @@ $this->pageTitle=$model->title;
                             </script>
                             <ul class="stat left nav" id="allBlogOfMember">
                                 <li class="">
-                                    <a href="<?php echo $this->createUrl('/blog/member/list',array('u'=>UserHelper::getSpaceOwnerId()) ); ?>" class="">所有日志</a>
+                                    <a href="<?php echo $this->createUrl('/blog/member',array('u'=>UserHelper::getSpaceOwnerId()) ); ?>" class="">所有日志</a>
                                 </li>
                             </ul>
                             <ul class="stat left nav" id="myBlogCategories">

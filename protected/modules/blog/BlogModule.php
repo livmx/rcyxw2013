@@ -12,6 +12,8 @@ class BlogModule extends CWebModule implements IUrlRewriteModule
     public $controllerMap=array(
         'my'=>array(
             'class'=>'BlogModule.controllers.front.MyPostController'),
+        'member'=>array(
+            'class'=>'BlogModule.controllers.front.MemberPostController'),
     );
 
 
@@ -78,6 +80,7 @@ class BlogModule extends CWebModule implements IUrlRewriteModule
             'category/<alias:.*?>-<category:.*?>'=>'blog/post/index',
             'date/<year:\d+>-<month:\d+>'=>'blog/post/index',
            // '/'=>'blog/post/index', //使用home
+            'blog/member/u-<u:\d+>'=>'blog/member/list'
         );
     }
 }
