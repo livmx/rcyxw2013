@@ -1,4 +1,48 @@
 <?php $this->beginContent('//layouts/main'); ?>
+
+    <div class="container site-body ">
+
+        <div class="col">
+            <div class="cell">
+                <div class="col">
+                    <div class="col size1of5 cell">
+                        <img src="<?php echo UserHelper::getSpaceOwnerIconUrl(); ?>" width="64px" height="64px">
+                    </div>
+                    <div class="col size3of5">
+                        <div class="cell">
+                            <div class="menu cell page-sub-menu  ">
+                                <ul class="bottom nav">
+                                    <li class="">
+                                        <a href="#" class="">相册</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo $this->createUrl('/blog/member/list',array('u'=> UserHelper::getSpaceOwnerId() )); ?> ">博文</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col sizefill">
+                        <div class="cell">
+                            <div class="cell menu">
+                                <ul class="links nav">
+                                    <?php if(!user()->getIsGuest()): ?>
+                                        <li class="">
+                                            <a href="<?php echo UserHelper::getUserSpaceUrl(Yii::app()->user->getId()); ?> ">我的空间</a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <div class="container site-body">
 
         <div class="cell">

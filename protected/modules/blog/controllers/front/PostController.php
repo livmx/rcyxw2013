@@ -50,7 +50,7 @@ class PostController extends BaseBlogController
 	 */
 	public function actionView($id)
 	{
-        $this->layout = 'main';
+        $this->layout = 'userSpace';
 		$post=$this->loadModel($id,'author');
 
         UserHelper::setSpaceOwnerId($post->author_id);

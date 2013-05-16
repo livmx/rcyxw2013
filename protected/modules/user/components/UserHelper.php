@@ -307,6 +307,14 @@ U_FACE;
         return UserModule::user(user()->getId());
     }
 
+    /**
+     * @return string
+     * 返回当前用户空间主人的图标
+     */
+    static public function getSpaceOwnerIconUrl(){
+        return self::getUserIconUrl(self::getSpaceOwnerModel());
+    }
+
     static public function getUserIconUrl($data){
         if($data instanceof CActiveRecord){
             $iconUri = $data->icon_uri;
