@@ -47,21 +47,17 @@ class BlogInstallMigration extends CDbMigration
 
         $this->insert('status_type', array(
             'type_name' => 'post a blog ',
-            'type_reference' => 'blog_create',
+            'id' => 'blog_create',
             'active' => 1,
             'handler' => 'blog.statusWall.BlogStatusHandler',
             'is_core' => 0,
         ));
-        //......................................................................\\
-        $statusTypeId = $this->getDbConnection()->getLastInsertID();
-        $saveToData = array('type_id' => $statusTypeId);
-        ArrayUtil::saveArray2file($saveToData,Yii::getPathOfAlias('blog.data.statusWall'),'statusType');
-        //......................................................................//
+
     }
 
     public function safeDown()
     {
-        $this->delete('status_type', 'type_reference=:type_ref', array(':type_ref' => 'blog_create'));
+        $this->delete('status_type', 'id=:type_ref', array(':type_ref' => 'blog_create'));
     }
 }
 

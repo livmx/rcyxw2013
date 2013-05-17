@@ -172,13 +172,18 @@ class StatusController extends BaseStatusController
      */
     public function actionIndex()
     {
-        $dataProvider = new CActiveDataProvider('Status');
+
 
         $user = isset($_GET['u']) ?$_GET['u']: Yii::app()->user->id ;
 
+        /*
+         *
+        $dataProvider = new CActiveDataProvider('Status');
         $dataProvider->criteria = array(
             'condition'=>"profile={$user}" ,
         );
+        */
+        $dataProvider =         Status::listRecentStatuses($user);
 
 
         if(Yii::app()->request->getIsAjaxRequest()){
@@ -348,6 +353,7 @@ class StatusController extends BaseStatusController
      */
     public function actionStream($u=null){
        // $this->layout = false;
+        die(__METHOD__);
         $user = ($u == null) ? user()->getId() : $u ;
         $dataProvider = Status::buildStream($user);
         //My::listView4sqlDataProvider($dataProvider); die(__METHOD__);

@@ -10,12 +10,11 @@ class StatusManager
 {
 
 
-
     /**
      * @param $data
      * @param $actor
      */
-    public static function processTypeStatus($data,$actor=array())
+    public static function processTypeStatus($data, $actor = array())
     {
         $controller = Yii::app()->getController();
 
@@ -31,12 +30,14 @@ class StatusManager
             $controller->renderPartial('status.plugins.link.linkView', array('data' => $data));
         } else {
             // above is core status
-
-            //echo __METHOD__;
+            // 注意第三方插入的类型可能找不到渲染处理器！！
+            // echo __METHOD__;
             $statusTypeHandler = self::getStatusHandler($type);
-            $statusTypeHandler->actor =  $actor;
-            $statusTypeHandler->data = $data ;
-            $statusTypeHandler->renderBody() ;
+            if ($statusTypeHandler !== null) {
+                $statusTypeHandler->actor = $actor;
+                $statusTypeHandler->data = $data;
+                $statusTypeHandler->renderBody();
+            }
         }
 
     }
@@ -46,18 +47,19 @@ class StatusManager
      * @param string $typeReference
      * @return string
      */
-    static public function getStatusTypeName($typeReference=''){
+    static public function getStatusTypeName($typeReference = '')
+    {
         $statusLabels = array(
-            'image'=>'发布图片',
-            'video'=>'分享视频',
-            'link'=>'分享链接',
-            'status'=>'发布状态',
-            'update'=>'发布状态',
+            'image' => '发布图片',
+            'video' => '分享视频',
+            'link' => '分享链接',
+            'status' => '发布状态',
+            'update' => '发布状态',
         );
-        if(isset($statusLabels[$typeReference])){
+        if (isset($statusLabels[$typeReference])) {
             return $statusLabels[$typeReference];
-        }else{
-            return '未知类型:'.$typeReference;
+        } else {
+            return '未知类型:' . $typeReference;
         }
     }
 
@@ -71,15 +73,19 @@ class StatusManager
      * @param string $statusTypeReference
      * @return AbstractStatusHandler|null
      */
-    static public function getStatusHandler($statusTypeReference=''){
+    static public function getStatusHandler($statusTypeReference = '')
+    {
 
-        if(!isset(self::$typeHandlers[$statusTypeReference])){
+        if (!isset(self::$typeHandlers[$statusTypeReference])) {
             // 取db  仍旧可以使用缓存
             $eq = EasyQuery::instance('status_type');
-            $statusTypeRow = $eq->queryRow('id=:type_ref',array(':type_ref'=>$statusTypeReference));
+            $statusTypeRow = $eq->queryRow('id=:type', array(':type' => $statusTypeReference));
 
             $statusTypeHandlerClass = $statusTypeRow['handler'];
-            $statusTypeHandlerObj = Yii::createComponent(array('class'=>$statusTypeHandlerClass));
+            if (empty($statusTypeHandlerClass)) {
+                return null;
+            }
+            $statusTypeHandlerObj = Yii::createComponent(array('class' => $statusTypeHandlerClass));
 
             self::$typeHandlers[$statusTypeReference] = $statusTypeHandlerObj;
         }

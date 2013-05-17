@@ -46,15 +46,16 @@ class Status extends BaseStatus
         */
 
         $cmd = Yii::app()->db->createCommand();
-        $cmd->select("   s.*, pa.first_name as poster_name,
+        $cmd->select(" up.username ,up.icon_uri,
+                    s.*,ua.username as poster_name,
                        i.image,
                         v.video_id,
                          l.url, l.description")
-            ->from(" user_profile p, user_profile pa, status s")
+            ->from(" user ua , user up, status s")
             ->leftJoin('status_image i', 's.id = i.id')
             ->leftJoin('status_video v', 's.id = v.id')
             ->leftJoin('status_link l', 's.id = l.id')
-            ->where("  p.user_id = s.profile AND pa.user_id = s.creator " . (empty($user) ? '' : " AND p.user_id={$user}"));
+            ->where("  ua.id = s.creator " . (empty($user) ? '' : " AND up.id={$user}"));
         if (empty($user)) {
             $cmd->select("u.username , u.icon_uri,
              s.*, pa.first_name as poster_name,

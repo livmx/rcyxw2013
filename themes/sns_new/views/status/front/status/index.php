@@ -9,11 +9,20 @@ $this->menu=array(
 );
 ?>
 
-<h1>Statuses</h1>
+<h1>Statusessf </h1>
 
 <?php $this->widget('zii.widgets.CListView',array(
      'id'=>'status-list',
     'template'=>'{pager}{items}{pager}',
 	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
+	'itemView'=>'_statusView',
+    /*
+    'pager' => array(
+        'class' => 'ext.infiniteScroll.IasPager',
+        'rowSelector'=>'.view',
+        'listViewId' => 'status-list',
+        'header' => '',
+        'loaderText'=>'Loading...',
+        'options' => array('history' => false, 'triggerPageTreshold' => 2, 'trigger'=>'Load more'),
+    ) */
 )); ?>

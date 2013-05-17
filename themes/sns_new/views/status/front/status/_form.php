@@ -12,7 +12,6 @@
             $('.' + $("input[name='status_type']:checked").val() +
                 '_input').show();
             setStatusType($(this).val());
-
         });
     });
 
@@ -37,17 +36,15 @@
 <div class="form well ">
     <?php $form = $this->beginWidget('CActiveForm', array(
     'id' => 'status-form',
-    'enableAjaxValidation' => false,
+    //'enableAjaxValidation' => true,
     'enableClientValidation'=>true,
     'method' => 'post',
     'htmlOptions' => array(
         'enctype' => 'multipart/form-data',
         'target'=>'helperFrame',
-
     ),
     'clientOptions' => array(
         'validateOnSubmit' => true,
-
     ),
 )); ?>
     <div class="row-fluid">

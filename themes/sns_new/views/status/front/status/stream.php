@@ -9,7 +9,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Statuses</h1>
+<h1>Statusessdfsdf</h1>
 <?php
 $this->widget('zii.widgets.CListView',array(
 'id'=>'status-stream-list',

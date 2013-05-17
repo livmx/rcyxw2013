@@ -244,7 +244,7 @@ class Post extends CActiveRecord
              */
             $status = array(
                 'creator'=>$this->author_id,
-                'type'=>BlogHelper::getStatusTypeId(),
+                'type'=>'blog_create',
                 'profile'=>$this->author_id,
                 'update'=>CJSON::encode($statusData),
                //  'created'=>time(),
