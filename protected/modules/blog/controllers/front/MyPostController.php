@@ -76,8 +76,10 @@ class MyPostController extends BaseBlogController
 			$model->attributes=$_POST['Post'];
             $model->author_id = Yii::app()->user->getId();
 
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->save()){
+                $this->redirect(array('view','id'=>$model->id));
+            }
+
 		}
 
 		$this->render('create',array(

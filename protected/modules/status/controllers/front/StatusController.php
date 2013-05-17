@@ -85,7 +85,6 @@ class StatusController extends BaseStatusController
             }
 
             $model->attributes = $_POST['Status'];
-            $model->generateType();
 
             //echo   YiiUtil::getPathOfClass($model) ;  die(__METHOD__);
             if ($model->save()){

@@ -10,17 +10,16 @@ class StatusManager
 {
 
 
-    public static function processTypeStatus($data)
+
+    /**
+     * @param $data
+     * @param $actor
+     */
+    public static function processTypeStatus($data,$actor=array())
     {
         $controller = Yii::app()->getController();
-        /*
-        switch($data['type_reference']){
-            case 'image':
-                echo 'hi'; break;
-                default:
-                echo __METHOD__;
-        }*/
-        $type = $data['type_reference'];
+
+        $type = $data['type'];
         echo $data['update'];
         if ($type == 'update') {
             echo '';
@@ -31,7 +30,13 @@ class StatusManager
         } elseif ($type == 'link') {
             $controller->renderPartial('status.plugins.link.linkView', array('data' => $data));
         } else {
-            echo __METHOD__;
+            // above is core status
+
+            //echo __METHOD__;
+            $statusTypeHandler = self::getStatusHandler($type);
+            $statusTypeHandler->actor =  $actor;
+            $statusTypeHandler->data = $data ;
+            $statusTypeHandler->renderBody() ;
         }
 
     }
@@ -54,5 +59,30 @@ class StatusManager
         }else{
             return '未知类型:'.$typeReference;
         }
+    }
+
+    /**
+     * @var array
+     */
+    static protected $typeHandlers = array();
+
+
+    /**
+     * @param string $statusTypeReference
+     * @return AbstractStatusHandler|null
+     */
+    static public function getStatusHandler($statusTypeReference=''){
+
+        if(!isset(self::$typeHandlers[$statusTypeReference])){
+            // 取db  仍旧可以使用缓存
+            $eq = EasyQuery::instance('status_type');
+            $statusTypeRow = $eq->queryRow('id=:type_ref',array(':type_ref'=>$statusTypeReference));
+
+            $statusTypeHandlerClass = $statusTypeRow['handler'];
+            $statusTypeHandlerObj = Yii::createComponent(array('class'=>$statusTypeHandlerClass));
+
+            self::$typeHandlers[$statusTypeReference] = $statusTypeHandlerObj;
+        }
+        return self::$typeHandlers[$statusTypeReference];
     }
 }

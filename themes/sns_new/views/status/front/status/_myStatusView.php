@@ -10,7 +10,7 @@
                 <div class="col sizefill">
                     <div class="cell">
                         <a href="#"><?php echo UserHelper::getLoginUserModel()->username ; ?> </a>
-                        <?php echo StatusManager::getStatusTypeName($data['type_reference'])?>:<br>
+
                         <div class="cell">
                             <?php  StatusManager::processTypeStatus($data); ?>
                         </div>

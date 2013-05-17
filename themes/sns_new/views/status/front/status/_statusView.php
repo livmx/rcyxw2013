@@ -14,7 +14,6 @@
                         <a href="<?php echo UserHelper::getUserSpaceUrl($data['creator']); ?>">
                             <?php echo CHtml::encode($data['username']); ?>
                         </a>
-                        <?php echo StatusManager::getStatusTypeName($data['type_reference'])?>:<br>
 
                         <div class="cell">
                             <?php  StatusManager::processTypeStatus($data); ?>

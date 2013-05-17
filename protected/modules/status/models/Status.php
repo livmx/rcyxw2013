@@ -4,6 +4,9 @@ Yii::import('status.models._base.BaseStatus');
 
 class Status extends BaseStatus
 {
+
+    public $type = 'update';
+
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
@@ -19,29 +22,6 @@ class Status extends BaseStatus
         );
     }
 
-    protected $typeReference = 'update';
-
-    /**
-     * Generate the type of status based of the type reference
-     * @return void
-     */
-    public function generateType()
-    {
-        $sql = "SELECT id FROM status_type WHERE
-        type_reference='{$this->typeReference}'";
-        $this->type = $this->dbConnection->createCommand($sql)->queryScalar();
-        // die(__METHOD__. $this->typeReference);
-    }
-
-    /**
-     * Set the type reference, so we can get the type ID from the database
-     * @param String $typeReference the reference of the type
-     * @return void
-     */
-    public function setTypeReference($typeReference)
-    {
-        $this->typeReference = $typeReference;
-    }
 
     /**
      * @static
@@ -66,14 +46,23 @@ class Status extends BaseStatus
         */
 
         $cmd = Yii::app()->db->createCommand();
-        $cmd->select("t.type_reference, t.type_name, s.*, pa.first_name as poster_name, i.image, v.video_id, l.url, l.description")
-            ->from("status_type t, user_profile p, user_profile pa, status s")
+        $cmd->select("   s.*, pa.first_name as poster_name,
+                       i.image,
+                        v.video_id,
+                         l.url, l.description")
+            ->from(" user_profile p, user_profile pa, status s")
             ->leftJoin('status_image i', 's.id = i.id')
             ->leftJoin('status_video v', 's.id = v.id')
             ->leftJoin('status_link l', 's.id = l.id')
-            ->where(" t.id = s.type AND p.user_id = s.profile AND pa.user_id = s.creator " . (empty($user) ? '' : " AND p.user_id={$user}"));
+            ->where("  p.user_id = s.profile AND pa.user_id = s.creator " . (empty($user) ? '' : " AND p.user_id={$user}"));
         if (empty($user)) {
-            $cmd->select("u.username , u.icon_uri, t.type_reference, t.type_name, s.*, pa.first_name as poster_name, i.image, v.video_id, l.url, l.description,u.username,pa.photo as avatar");
+            $cmd->select("u.username , u.icon_uri,
+             s.*, pa.first_name as poster_name,
+              i.image,
+               v.video_id,
+               l.url, l.description,
+               u.username,
+               pa.photo as avatar");
             $cmd->join('user u', 's.creator = u.id ');
         }
         $sql = $cmd->text;
@@ -125,7 +114,7 @@ class Status extends BaseStatus
         $cmd = Yii::app()->db->createCommand();
         $cmd->select("
         u.username , u.icon_uri
-        , t.type_reference  , t.type_name
+        , t.type_name
         , s.*
         , i.image
         , v.video_id
@@ -173,7 +162,7 @@ class Status extends BaseStatus
         $cmd = Yii::app()->db->createCommand();
         $cmd->select("
         u.username , u.icon_uri
-        , t.type_reference  , t.type_name
+        , t.type_name
         , s.*
         , i.image
         , v.video_id
@@ -234,7 +223,7 @@ class Status extends BaseStatus
         $network[] = 0;
         $network = implode(',', $network);
         // query the statuses table
-        $sql = "SELECT t.type_reference, t.type_name, s.*, UNIX_TIMESTAMP(s.created) as timestamp,
+        $sql = "SELECT  t.type_name, s.*, UNIX_TIMESTAMP(s.created) as timestamp,
                p.first_name as poster_name, r.first_name as profile_name
         FROM status s, status_type t, user_profile p, user_profile r
          WHERE t.id = s.type AND p.user_id = s.creator AND r.user_id = s.profile

@@ -228,6 +228,30 @@ class Post extends CActiveRecord
 
         if($this->getIsNewRecord()){
             Category::model()->updateCounters(array('mbr_count'=>1),'id=:cate',array(':cate'=>$this->category_id));
+            //  状态墙 这里以后可能引入队列或者异步
+            $statusData = array(
+                'id'=>$this->primaryKey,
+              'title'=>$this->title,
+                'teaser'=>$this->summary,
+            );
+            /**
+             *   $statusModel->creator = $creator ;
+            $statusModel->type = $type ;
+            $statusModel->profile = $profile;
+            $statusModel->update = $update ;
+            $statusModel->created = $created ;
+            $statusModel->approved = $approved ;
+             */
+            $status = array(
+                'creator'=>$this->author_id,
+                'type'=>BlogHelper::getStatusTypeId(),
+                'profile'=>$this->author_id,
+                'update'=>CJSON::encode($statusData),
+               //  'created'=>time(),
+                'approved'=>1
+            );
+            YsService::call('status','postStatus',array($status));
+
         }else{
             if($this->category_id != $this->old['category_id']){
                 Category::model()->updateCounters(array('mbr_count'=>1),'id=:cate',array(':cate'=>$this->category_id));

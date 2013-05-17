@@ -11,8 +11,15 @@
             $('.extra_field').hide();
             $('.' + $("input[name='status_type']:checked").val() +
                 '_input').show();
+            setStatusType($(this).val());
+
         });
     });
+
+    function setStatusType(type){
+        $(".status-type").val(type);
+    }
+
 
     function refreshListOrGridView(){
         var listViewClass = 'list-view';
@@ -77,7 +84,7 @@
                         <input type="text" id="" name="link_description" class=""/><br/>
                     </div>
 
-                    <?php  echo $form->hiddenField($model, 'type', array('class' => 'span5')); ?>
+                    <?php  echo $form->hiddenField($model, 'type', array('class' => 'span5 status-type')); ?>
 
                     <?php  echo $form->hiddenField($model, 'creator', array('class' => 'span5')); ?>
 

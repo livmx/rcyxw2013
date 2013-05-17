@@ -52,13 +52,20 @@ class YsService extends CApplicationComponent
     /**
      * @static
      * @param string $moduleId
-     * @param string $serviceName
+     * @param string|array $serviceMethodName
      * @param array $params
      * @return mixed|void
+     * -------------------------------------
+     * 可改进的地方 参数二如果是数组 那么认为第一个位置是服务名
+     * 暂未支持数组 以后有空再说！（或者按照某种格式来解析ServiceName::serviceMethod ?）
+     *
+     * 第二个是方法名，目前是按照单一服务来设计的
+     *早期的设计参考dolphin ，其中moduleService的方法全部出现在模块中
+     * -------------------------------------
      */
-    static public function call($moduleId = '', $serviceName = '', $params = array())
+    static public function call($moduleId = '', $serviceMethodName = '', $params = array())
     {
-         return self::instance()->callModuleService($moduleId,$serviceName,$params);
+         return self::instance()->callModuleService($moduleId,$serviceMethodName,$params);
     }
 
     public $mode = self::MODE_LOCAL;
