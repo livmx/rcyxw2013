@@ -24,9 +24,9 @@
         var listViewClass = 'list-view';
         var gridViewClass = 'grid-view';
         if($("."+listViewClass).size()>0){
-            $.fn.yiiListView.update($("."+listViewClass).attr("id"));
+            $.fn.yiiListView.update($("."+listViewClass,$('#myStatus')).attr("id"));
         }else{
-            $.fn.yiiGridView.update($("."+gridViewClass).attr("id"));
+            $.fn.yiiGridView.update($("."+gridViewClass,$('#myStatus')).attr("id"));
         }
 
     }

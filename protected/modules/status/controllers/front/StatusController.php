@@ -296,6 +296,11 @@ class StatusController extends BaseStatusController
     }
 
     public function actionStatusForAll(){
+        $cs=Yii::app()->clientScript;
+        $cs->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery.min.js'=>false,
+        );
        // die(print_r($_REQUEST,true));
         //die(print_r($_REQUEST,true));
         $this->layout = false;
@@ -303,7 +308,7 @@ class StatusController extends BaseStatusController
         $dp = Status::listAllStatus($user);
         $this->beginClip('allStatus');
         // My::listView4sqlDataProvider($dp);
-        $this->widget('zii.widgets.CListView',array(
+        $this->widget('YsAjaxListView',array(
             'id'=>'all-status-list',
             'template'=>'{pager}{items}{pager}',
             'dataProvider'=>$dp,
@@ -315,13 +320,19 @@ class StatusController extends BaseStatusController
     }
 
     public function actionStatusForFriends(){
+        $cs=Yii::app()->clientScript;
+        $cs->scriptMap=array(
+            'jquery.js'=>false,
+            'jquery.min.js'=>false,
+        );
+
        //die(print_r($_REQUEST,true));
         $this->layout = false;
         $user =  user()->getId() ;
         $dp = Status::listFriendsStatuses($user);
         $this->beginClip('friendsStatus');
         // My::listView4sqlDataProvider($dp);
-        $this->widget('zii.widgets.CListView',array(
+        $this->widget('YsAjaxListView',array(
             'id'=>'friends-status-list',
             'template'=>'{pager}{items}{pager}',
             'dataProvider'=>$dp,
