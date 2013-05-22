@@ -55,7 +55,7 @@ class Status extends BaseStatus
             ->leftJoin('status_image i', 's.id = i.id')
             ->leftJoin('status_video v', 's.id = v.id')
             ->leftJoin('status_link l', 's.id = l.id')
-            ->where("  ua.id = s.creator " . (empty($user) ? '' : " AND up.id={$user}"));
+            ->where("  ua.id = s.creator " . (empty($user) ? '' : " AND up.id={$user} AND s.profile = up.id"));
         if (empty($user)) {
             $cmd->select("u.username , u.icon_uri,
              s.*, pa.first_name as poster_name,

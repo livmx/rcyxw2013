@@ -45,6 +45,7 @@ class BlogInstallMigration extends CDbMigration
         'is_core');
          */
 
+        //  注册动态处理器
         $this->insert('status_type', array(
             'type_name' => 'post a blog ',
             'id' => 'blog_create',
@@ -53,6 +54,16 @@ class BlogInstallMigration extends CDbMigration
             'is_core' => 0,
         ));
 
+
+        AdminMenu::addTempAdminMenu(array(
+           'label'=>'日志系统分类管理',
+            'url'=>'/blog/blogSysCategory/admin',
+        ));
+
+        AdminMenu::addTempAdminMenu(array(
+            'label'=>'日志系统分类创建',
+            'url'=>'/blog/blogSysCategory/create',
+        ));
     }
 
     public function safeDown()

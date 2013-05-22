@@ -28,8 +28,11 @@ class AdminWebUser extends CWebUser {
 
 	public function __get($name) {
 		if (!parent::getIsGuest()) {
-			if (!$this->hasState('__userInfo'))
-				$this->setState('__userInfo', $this->getUserModel()->attributes);
+			if (!$this->hasState('__userInfo')){
+                $userModel = $this->getUserModel() ;
+                $this->setState('__userInfo', empty($userModel)?array():$userModel->getAttributes());
+            }
+
 			$user = $this->getState('__userInfo', array());
 
 			if (isset($user[$name])) {
@@ -62,7 +65,7 @@ class AdminWebUser extends CWebUser {
 
 	/**
 	 * 获取用户对象
-	 * @return AdminUser
+	 * @return AdminUser|null
 	 */
 	public function getUserModel() {
 		if ($this->userModel == null && $this->getId() !== null) {

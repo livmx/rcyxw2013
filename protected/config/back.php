@@ -32,6 +32,11 @@ return CMap::mergeArray(
                 'allowAutoLogin' => true,
                 'stateKeyPrefix'=>'admin',
             ),
+
+            'bootstrap' => array(
+                "class" => "ext.YiiBooster.components.Bootstrap",
+                //'coreCss'=>false,
+            ),
         ),
         'params'=>array(
             'layout'=>'//adminLayouts/main',

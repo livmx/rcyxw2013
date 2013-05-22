@@ -64,8 +64,8 @@ $this->widget('ext.ueditor.Ueditor',
         </div>
         <a href="<?php echo $this->createUrl('category/create'); ?>" class="create">创建分类</a>
         <?php
-         $categoryListId = CHtml::activeId($model,'category_id');
-         $onCategoryCreateSuccess = <<<CB
+        $categoryListId = CHtml::activeId($model, 'category_id');
+        $onCategoryCreateSuccess = <<<CB
                 function(data, e){
                     var category = data.category;
                     var newOption = "<option value='"+category.id+"'>"+category.name+"</option>";
@@ -79,10 +79,10 @@ CB;
         $this->widget('my.widgets.artDialog.ArtFormDialog', array(
                 'link' => 'a.create',
                 'options' => array(
-                    'onSuccess' => 'js:'.$onCategoryCreateSuccess,
+                    'onSuccess' => 'js:' . $onCategoryCreateSuccess,
                 ),
                 'dialogOptions' => array(
-                    'title'=>'创建相册',
+                    'title' => '创建相册',
                     'width' => 500,
                     'height' => 370,
 
@@ -183,6 +183,31 @@ CB;
     <div class="col sizefill">
         <div class="cell">
             <?php echo $form->error($model, 'status'); ?>
+        </div>
+    </div>
+
+</div>
+
+<div class="col">
+    <div class="col size1of5">
+        <div class="cell">
+            <?php echo $form->labelEx($model, 'sysCategories'); ?>
+        </div>
+    </div>
+    <div class="col size2of5">
+        <div class="cell">
+            <?php echo $form->checkBoxList($model, 'sysCategories',
+                CHtml::listData(BlogSysCategory::model()->findAllByAttributes(
+                        array('enable' => 1),
+                        array('order' => 'position')),
+                    'id', 'name')
+            ); ?>
+        </div>
+    </div>
+
+    <div class="col sizefill">
+        <div class="cell">
+            <?php echo $form->error($model, 'sysCategories'); ?>
         </div>
     </div>
 

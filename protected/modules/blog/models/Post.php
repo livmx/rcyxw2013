@@ -29,6 +29,11 @@ class Post extends CActiveRecord
 
 
     private $_oldTags;
+
+    /**
+     * @var array
+     */
+    public $sysCategories = array();
 	
 	/**
 	 * Returns the static model of the specified AR class.
@@ -59,12 +64,22 @@ class Post extends CActiveRecord
 			array('title', 'length', 'max'=>128),
 			array('summary', 'length', 'max'=>255),
 			array('status, created, updated, author_id, category_id', 'length', 'max'=>11),
-			array('tags', 'safe'),
+			array('tags,sysCategories', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, title, content, summary, tags, status, created, updated, author_id, category_id', 'safe', 'on'=>'search'),
 		);
 	}
+
+    public function behaviors()
+    {
+        return array(
+            'activerecord-relation'=>array(
+                'class'=>'ext.yiiext.behaviors.activerecord-relation.EActiveRecordRelationBehavior',
+            )
+        );
+    }
+
 
 	/**
 	 * @return array relational rules.
@@ -78,6 +93,8 @@ class Post extends CActiveRecord
             'category'=>array(self::BELONGS_TO,'Category','category_id'),
 			'comments' => array(self::HAS_MANY, 'Comment', 'post_id', 'condition'=>'comments.status='.Comment::STATUS_APPROVED, 'order'=>'comments.created DESC'),
 			'commentCount' => array(self::STAT, 'Comment', 'post_id', 'condition'=>'status='.Comment::STATUS_APPROVED),
+
+            'sysCates'=>array(self::MANY_MANY,'BlogSysCategory','blog_sys_category2post(post_id,sys_cate_id)'),
 		);
 	}
 
@@ -97,6 +114,7 @@ class Post extends CActiveRecord
 			'updated' => 'Updated',
 			'author_id' => 'Author',
 			'category_id' => 'Category',
+            'sysCategories'=>'系统分类'
 		);
 	}
 	

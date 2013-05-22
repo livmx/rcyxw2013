@@ -28,9 +28,9 @@
      * @see http://www.yiiframework.com/wiki/152/cookie-management-in-yii
      */
     /*
-    $currentTheme = isset(Yii::app()->request->cookies['current_theme']) ?
-        Yii::app()->request->cookies['current_theme']->value : user()->getState('currentTheme','cerulean');
-    */
+$currentTheme = isset(Yii::app()->request->cookies['current_theme']) ?
+Yii::app()->request->cookies['current_theme']->value : user()->getState('currentTheme','cerulean');
+*/
     $currentTheme = user()->getState('currentTheme', 'cerulean');
     ?>
     <!-- The styles -->
@@ -90,7 +90,7 @@
 $this->beginWidget('application.extensions.rightsidebar.RightSidebar', array('title' => 'Menu', 'collapsed' => true));
 ?>
 
-<?php Yii::app()->bootstrap->registerAffix();  ?>
+<?php Yii::app()->bootstrap->registerAffix(); ?>
 <div data-spy="affix" data-offset-top="200">
     <a href="javascript:;" onclick="parent.refresh()">刷新</a>
 </div>
@@ -104,7 +104,7 @@ $this->widget('zii.widgets.CMenu', array(
 <?php $this->endWidget();?>
 
 <!-- external javascript
-    ================================================== -->
+================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 
 <!-- chart libraries start -->
@@ -137,7 +137,7 @@ if ($_SERVER['HTTP_HOST'] == 'usman.it') {
 
 <?php
 /**
- *  // jSuccess('welcome to yiiSpace!');
+ * // jSuccess('welcome to yiiSpace!');
  * // jError('some thing wrong happened !');
  */
 $this->widget('my.widgets.jnotify.JNotify', array()); ?>
@@ -145,7 +145,7 @@ $this->widget('my.widgets.jnotify.JNotify', array()); ?>
 <script type="text/javascript">
 
     $(function () {
-        // set the current theme url same as the parent's
+// set the current theme url same as the parent's
         if ($('#bs-css').attr('href') !== parent.getCurrentThemeUrl()) {
             $('#bs-css').attr('href', parent.getCurrentThemeUrl());
         }
@@ -154,7 +154,7 @@ $this->widget('my.widgets.jnotify.JNotify', array()); ?>
         });
     });
     function switch_theme(theme_name) {
-        //$('#bs-css').attr('href','css/bootstrap-'+theme_name+'.css');
+//$('#bs-css').attr('href','css/bootstrap-'+theme_name+'.css');
         var themeTplUrl = $('#bs-css').attr("theme_tpl_url");
         $('#bs-css').attr('href', themeTplUrl.replace('{{theme_name}}', theme_name));
     }

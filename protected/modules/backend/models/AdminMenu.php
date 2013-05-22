@@ -244,4 +244,48 @@ class AdminMenu extends BaseAdminMenu
         }
         return AdminMenu::toHierarchy($descendants);
     }
+
+    //------------------------------------------------------------------\\
+    /**
+     * @param string $groupCode
+     * @return AdminMenu
+     * 确保须根存在
+     */
+    static public function ensureRootNode($groupCode  = 'sys_admin_menu_root'){
+        if (($topRoot = AdminMenu::model()->roots()->find('group_code=:group_code', array(':group_code' => $groupCode))) == null) {
+            $topRoot = new AdminMenu();
+            $topRoot->label = 'top_virtual_root';
+            $topRoot->group_code = $groupCode;
+            $topRoot->saveNode();
+        }
+        return $topRoot ;
+    }
+
+    static public function addAdminMenu($menuConfig=array()){
+
+
+
+    }
+
+    static public function addTempAdminMenu($menuConfig=array()){
+        $topRoot = self::ensureRootNode();
+        $rootMenuLabel = '临时菜单 用来安装应用的';
+        $root = self::model()->findByAttributes(array(
+           'label'=> $rootMenuLabel,
+        ));
+
+        if(empty($root)){
+            $root = new AdminMenu();
+            $root->label = $rootMenuLabel;
+            //$root->prependto($topRoot);
+            $root->appendto($topRoot);
+        }
+
+        $currentMenu = new AdminMenu();
+        $currentMenu->attributes = $menuConfig;
+
+        $currentMenu->appendTo($root);
+    }
+
+    //------------------------------------------------------------------//
 }

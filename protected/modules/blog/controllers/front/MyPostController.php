@@ -76,6 +76,12 @@ class MyPostController extends BaseBlogController
 			$model->attributes=$_POST['Post'];
             $model->author_id = Yii::app()->user->getId();
 
+            /**
+             * 赋值给多对多关联对象
+             *@see https://github.com/yiiext/activerecord-relation-behavior
+             */
+            $model->sysCates  = $model->sysCategories ;
+
 			if($model->save()){
                 $this->redirect(array('view','id'=>$model->id));
             }
@@ -94,7 +100,16 @@ class MyPostController extends BaseBlogController
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+		$model=$this->loadModel($id,'sysCates');
+
+        /**
+         * 也可以在afterFind中做
+         */
+        if(!empty($model->sysCates)){
+            foreach($model->sysCates  as $sysCateModel){
+                $model->sysCategories[] =  $sysCateModel->primaryKey ;
+            }
+        }
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -102,6 +117,13 @@ class MyPostController extends BaseBlogController
 		if(isset($_POST['Post']))
 		{
 			$model->attributes=$_POST['Post'];
+
+            /**
+             * 赋值给多对多关联对象
+             *@see https://github.com/yiiext/activerecord-relation-behavior
+             */
+            $model->sysCates  = $model->sysCategories ;
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -204,9 +226,14 @@ class MyPostController extends BaseBlogController
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer the ID of the model to be loaded
 	 */
-	public function loadModel($id)
+	public function loadModel($id,$with=array())
 	{
-		$model=Post::model()->findByPk($id);
+        if(!empty($with)){
+            $model=Post::model()->with($with)->findByPk($id);
+        }else{
+            $model=Post::model()->findByPk($id);
+        }
+
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @see  http://x-editable.demopage.ru/
+ */
+Yii::setPathOfAlias('editable', dirname(__FILE__).'/../extensions/x-editable');
+
 return array(
     'application.models.*',
     'application.models.forms.*',
@@ -36,4 +41,7 @@ return array(
 
     // 导入Cascade框架目录：
     'application.my.widgets.CascadeFr.*',
+
+    //
+    'editable.*' //easy include of editable classes
 );

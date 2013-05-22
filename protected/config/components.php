@@ -144,11 +144,6 @@ return array(
     ),
 
 
-    'bootstrap' => array(
-        "class" => "ext.YiiBooster.components.Bootstrap",
-        'coreCss'=>false,
-    ),
-
     //互斥锁
     'mutex' => array(
         'class' => 'application.extensions.EMutex',
@@ -184,6 +179,15 @@ return array(
         ),
     ),
 
+    //X-editable config
+    'editable' => array(
+        'class'     => 'editable.EditableConfig',
+        'form'      => 'bootstrap',        //form style: 'bootstrap', 'jqueryui', 'plain'
+        'mode'      => 'popup',            //mode: 'popup' or 'inline'
+        'defaults'  => array(              //default settings for all editable elements
+            'emptytext' => 'Click to edit'
+        )
+    ),
     //............{extension from yii repo /}................................................................
 );
 
