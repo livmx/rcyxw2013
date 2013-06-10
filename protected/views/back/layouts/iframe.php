@@ -15,6 +15,7 @@
 
     <?php $assetsUrl = PublicAssets::url('back');
     cs()->registerCoreScript('cookie');
+    PublicAssets::registerScriptFile('js/ys_base.js');
     ?>
 
     <meta charset="utf-8">

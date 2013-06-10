@@ -28,7 +28,6 @@ class FormDialog2 extends CJuiWidget
 
        e.preventDefault();
           $(this).formDialog({$options});
-           alert("dd");
           return false ;
        });
 INIT;

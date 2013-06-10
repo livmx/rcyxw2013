@@ -67,7 +67,7 @@ class Post extends CActiveRecord
 			array('tags,sysCategories', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, content, summary, tags, status, created, updated, author_id, category_id', 'safe', 'on'=>'search'),
+			array('id, title, content, summary, tags, status, created, updated, author_id, category_id,recommendGrade', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -318,4 +318,15 @@ class Post extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    /**
+     * @var int
+     * 推荐等级
+     */
+    public $recommendGrade ;
+    /**
+     * @var int
+     * 推荐id  把推荐表的东西移到这里了
+     */
+    public $recommendId ;
 }

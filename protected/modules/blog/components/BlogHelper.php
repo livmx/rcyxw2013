@@ -19,6 +19,21 @@ class BlogHelper {
         return Yii::app()->createUrl('/blog/my/create');
     }
 
+    /**
+     * @param array|Post $post
+     * @throws CException
+     * @return string
+     */
+    public static function createBlogUrl($post){
+        if(is_array($post)){
+            return Yii::app()->createUrl('blog/post/view',array('id'=>$post['id'],'title'=>$post['title']));
+        }elseif($post instanceof Post){
+            return Yii::app()->createUrl('blog/post/view',array('id'=>$post->primaryKey,'title'=>$post->title));
+        }else{
+            throw new CException('you give a wrong params for creating blog url');
+        }
+    }
+
     static  protected $statusTypeId ;
 
     /**

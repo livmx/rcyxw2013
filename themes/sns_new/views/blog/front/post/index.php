@@ -9,6 +9,10 @@ $this->menu = array(
 );
 ?>
 
+<?php
+$this->widget('blog.widgets.pagebox.BlogSliderPageBox');
+?>
+
     <h1>Posts</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
