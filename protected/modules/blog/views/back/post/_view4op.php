@@ -1,7 +1,5 @@
 
-
-
-        <?php if(!empty($data->recommendGrade)): ?>
+        <?php if(isset($data->recommendGrade)): ?>
             <?php  echo WebUtil::ajaxDeleteLink('delete',array('blogRecommend/delete','id'=>$data->recommendId),
                      array('success'=>'js:function(data){
                          reloadItemsView("body");
