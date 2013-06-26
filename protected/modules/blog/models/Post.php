@@ -98,6 +98,17 @@ class Post extends CActiveRecord
 		);
 	}
 
+
+    public function recent( $limit = 3 ) {
+
+        $this->getDbCriteria()->mergeWith(array(
+            //'order' => $this->getTableAlias(false, false).'.createTime DESC',
+            'limit' => (int) $limit,
+        ));
+
+        return $this;
+    }
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

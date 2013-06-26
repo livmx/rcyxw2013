@@ -15,14 +15,11 @@ $this->widget('blog.widgets.pagebox.BlogSliderPageBox');
 
     <h1>Posts</h1>
 
-
-<?php foreach($blogSysCategories as $blogSysCate): ?>
-
-    <?php $this->widget('blog.widgets.SysCategoryPostsPageBox',array(
-        'sysCategory'=>$blogSysCate,
-    )); ?>
-
-<?php endforeach; ?>
+<?php $this->widget('zii.widgets.CListView', array(
+    'dataProvider' => $dataProvider,
+    'itemView' => '_view',
+    'ajaxUpdate' => false,
+)); ?>
 
 
 <?php Layout::beginBlock('rightSideBar'); ?>
@@ -67,6 +64,14 @@ $this->widget('blog.widgets.pagebox.BlogSliderPageBox');
         ?>
 
     </div>
+
+<?php YsPageBox::endPanel(); ?>
+
+<?php YsPageBox::beginPanelWithHeader(array('header' => '最近评论')) ?>
+
+<?php $this->widget('RecentComments', array(
+    'maxComments' => Yii::app()->params['recentCommentCount'],
+)); ?>
 
 <?php YsPageBox::endPanel(); ?>
 

@@ -27,7 +27,7 @@ class PostController extends BaseBlogController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','SuggestTags'),
+				'actions'=>array('index','view','SuggestTags','list'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -73,35 +73,56 @@ class PostController extends BaseBlogController
 
         $this->layout = 'column1';
 
-		$year = Yii::app()->request->getParam('year');
-		$month = Yii::app()->request->getParam('month');
-		$tag = Yii::app()->request->getParam('tag');
+
+
+        $blogSysCategories = BlogSysCategory::model()->with(array('blogs:recent'))->findAll(array('order'=>'position DESC'));
+
+		$this->render('index',array(
+            'blogSysCategories'=>$blogSysCategories,
+		));
+	}
+
+    /**
+     * Lists all models.
+     */
+    public function actionList()
+    {
+
+        $this->layout = 'column1';
+
+        $year = Yii::app()->request->getParam('year');
+        $month = Yii::app()->request->getParam('month');
+        $tag = Yii::app()->request->getParam('tag');
         $category = Yii::app()->request->getParam('category');
-		$criteria = new CDbCriteria();
-		if(isset($tag)){
-			$criteria->addSearchCondition('tags',$tag);
-		}
+        $criteria = new CDbCriteria();
+        if(isset($tag)){
+            $criteria->addSearchCondition('tags',$tag);
+        }
         if(isset($category)){
             $criteria->addSearchCondition('category_id',$category);
         }
-		if(isset($month)){
-			$criteria=array(
-		      'condition'=>'created > :time1 AND created < :time2 AND status=2',
-		      'params'=>array(':time1' => mktime(0,0,0,$month,1,$year),
-		                      ':time2' => mktime(0,0,0,$month+1,1,$year),
-		                      ),
-          );
-		}
-		$dataProvider=new CActiveDataProvider('Post',array(
-			'criteria'=>$criteria,
+        if(isset($month)){
+            $criteria=array(
+                'condition'=>'created > :time1 AND created < :time2 AND status=2',
+                'params'=>array(':time1' => mktime(0,0,0,$month,1,$year),
+                    ':time2' => mktime(0,0,0,$month+1,1,$year),
+                ),
+            );
+        }
+        $dataProvider=new CActiveDataProvider('Post',array(
+            'criteria'=>$criteria,
             'sort'=>array(
                 'defaultOrder'=> 'created  DESC',
             )
-		));
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
+        ));
+
+        $blogSysCategories = BlogSysCategory::model()->with(array('blogs:recent'))->findAll(array('order'=>'position DESC'));
+
+        $this->render('list',array(
+            'dataProvider'=>$dataProvider,
+            'blogSysCategories'=>$blogSysCategories,
+        ));
+    }
 
 	/**
 	 * Suggests tags based on the current user input.

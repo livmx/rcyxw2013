@@ -76,9 +76,9 @@ class BlogModule extends CWebModule implements IUrlRewriteModule
     {
         return array(
             'view/<controller:\w+>-<title:.*?>-<id:\d+>'=>'blog/<controller>/view',
-            'tags/<tag:.*?>'=>'blog/post/index',
-            'category/<alias:.*?>-<category:.*?>'=>'blog/post/index',
-            'date/<year:\d+>-<month:\d+>'=>'blog/post/index',
+            'tags/<tag:.*?>'=>'blog/post/list',
+            'category/<alias:.*?>-<category:.*?>'=>'blog/post/list',
+            'date/<year:\d+>-<month:\d+>'=>'blog/post/list',
            // '/'=>'blog/post/index', //使用home
             'blog/member/u-<u:\d+>'=>'blog/member/list'
         );
