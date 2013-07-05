@@ -1,3 +1,10 @@
+<?php  $statusHandler = StatusManager::getStatusTypeHandler($data['type']);
+$statusHandler->data = $data;
+$statusHandler->actorLink = CHtml::link(UserHelper::getLoginUserModel()->username,UserHelper::getUserSpaceUrl($data['creator']));
+
+$statusHandler->init();
+?>
+
 <div class="col">
     <div class="cell panel">
         <div class="body">
@@ -8,11 +15,15 @@
                     </div>
                 </div>
                 <div class="col sizefill">
-                    <div class="cell">
-                        <a href="#"><?php echo UserHelper::getLoginUserModel()->username ; ?> </a>
 
+
+                    <div class="cell">
+<!--                          <a href="#">--><?php //echo UserHelper::getLoginUserModel()->username ; ?><!-- </a>-->
+
+                        <?php $statusHandler->renderTitle() ; ?>
                         <div class="cell">
-                            <?php  StatusManager::processTypeStatus($data); ?>
+                            <?php  //StatusManager::processTypeStatus($data); ?>
+                            <?php $statusHandler->renderBody() ; ?>
                         </div>
 
 

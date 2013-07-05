@@ -11,6 +11,10 @@
 
 abstract class AbstractStatusHandler  {
 
+    /**
+     * @var string
+     */
+    public $actorLink ;
 
     /**
      * @var User|array
@@ -21,6 +25,15 @@ abstract class AbstractStatusHandler  {
      * @var array
      */
     public $data ;
+
+    /**
+     * 这个方法可以用来做data的反序列化
+     * 便于renderTitle和renderBody不必多次
+     * 反序列data数据
+     */
+    public function init(){
+
+    }
 
     /**
      * @return mixed

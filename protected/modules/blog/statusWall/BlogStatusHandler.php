@@ -14,6 +14,10 @@ class BlogStatusHandler {
 
 
     /**
+     * @var string
+     */
+    public $actorLink ;
+    /**
      * @var User|array
      */
     public $actor ;
@@ -23,26 +27,38 @@ class BlogStatusHandler {
      */
     public $data ;
 
+
+    public function init(){
+        $this->data = CJSON::decode($this->data['update']); ;
+    }
+
     /**
      * @return mixed
      */
     public function renderTitle(){
 
+        $data = $this->data ;
+        //$blogTitleLink = CHtml::link($data['title'],Yii::app()->createUrl('blog/post/view',array('id'=>$data['id'],'title'=>$data['title'])));
+        echo " {$this->actorLink} 发布博文  ";
     }
 
     /**
      * @return mixed
      */
     public function renderBody(){
-       // echo __METHOD__;
-       // print_r($this->data);
 
-        $data = CJSON::decode($this->data['update']);
+        $data = $this->data ;
 
         $blogTitleLink = CHtml::link($data['title'],Yii::app()->createUrl('blog/post/view',array('id'=>$data['id'],'title'=>$data['title'])));
-
+        $blogTeaser =  '';
+        if(isset($data['teaser'])){
+            $blogTeaser = $data['teaser'];
+        }
         $bodyTpl = <<<BODY
-     创建 博文 ; {$blogTitleLink}
+     <h3> {$blogTitleLink} </h3>
+     <p>
+     {$blogTeaser}
+     </p>
 BODY;
        echo $bodyTpl;
 
