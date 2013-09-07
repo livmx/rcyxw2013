@@ -306,6 +306,9 @@ class Layout
      * @param $regionId
      * @param array $blockConfig
      * @throws CException
+     * 可以方便的添加一个不用明确指定blog区域的块
+     * 注意层级关系  Region has_many Block
+     * 每一个blog在添加时候需要指定添加到那个region下
      */
     static public function beginBlock($regionId, $blockConfig=array()){
         if(!empty(self::$blockConfig)){

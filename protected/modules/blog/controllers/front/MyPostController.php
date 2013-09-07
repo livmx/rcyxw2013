@@ -80,7 +80,10 @@ class MyPostController extends BaseBlogController
              * 赋值给多对多关联对象
              *@see https://github.com/yiiext/activerecord-relation-behavior
              */
-            $model->sysCates  = $model->sysCategories ;
+            if(!empty($model->sysCategories)){
+                $model->sysCates  = $model->sysCategories ;
+            }
+
 
 			if($model->save()){
                 $this->redirect(array('view','id'=>$model->id));
@@ -122,7 +125,9 @@ class MyPostController extends BaseBlogController
              * 赋值给多对多关联对象
              *@see https://github.com/yiiext/activerecord-relation-behavior
              */
-            $model->sysCates  = $model->sysCategories ;
+            if(!empty($model->sysCategories)){
+                $model->sysCates  = $model->sysCategories ;
+            }
 
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));

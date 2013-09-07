@@ -33,8 +33,10 @@ $statusHandler->init();
             </div>
             <div class="divider"></div>
             <p class="float-right">
-                <?php echo CHtml::link(CHtml::encode($data['id']), array('view', 'id' => $data['id'])); ?>
-                <?php echo CHtml::encode($data['creator']), WebUtil::timeAgo2(strtotime($data['created'])); ?>
+                <?php //echo CHtml::link(CHtml::encode($data['id']), array('view', 'id' => $data['id'])); ?>
+                 <span class="">
+                <?php echo  WebUtil::timeAgo2(strtotime($data['created'])); ?>
+                     </span>
             </p>
         </div>
     </div>

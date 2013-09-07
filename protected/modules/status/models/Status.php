@@ -163,14 +163,13 @@ class Status extends BaseStatus
         $cmd = Yii::app()->db->createCommand();
         $cmd->select("
         u.username , u.icon_uri
-        , t.type_name
         , s.*
         , i.image
         , v.video_id
         , l.url, l.description
         "
         )
-            ->from("status_type t, status s")
+            ->from("status s")
             ->join('user u', 's.creator = u.id ')
             ->leftJoin('status_image i', 's.id = i.id')
             ->leftJoin('status_video v', 's.id = v.id')
@@ -186,6 +185,7 @@ class Status extends BaseStatus
         $cmd->where($where);
         */
         $sql = $cmd->text;
+       // die($cmd->text);
 
         $totalItemCount = YiiUtil::countBySql($sql);
 

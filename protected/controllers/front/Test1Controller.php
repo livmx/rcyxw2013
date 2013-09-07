@@ -6,6 +6,18 @@
 class Test1Controller extends Controller
 {
 
+
+    public function actionTestJuiDialog(){
+        $this->render('juiDialog');
+    }
+
+    public function actionIconFonts(){
+        $this->render('iconFonts');
+    }
+
+
+
+
     public function actionPopover(){
         $this->render('popover');
     }
