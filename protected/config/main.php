@@ -30,6 +30,8 @@ return array(
         'my'=>'application.my',
         'user'=>'application.modules.user',
         'friend'=>'application.modules.friend',
-    ),
+		// ES 搜索
+	    'YiiElasticSearch' => 'composerVendor.codemix.yiielasticsearch.src',
+ ),
 
 );

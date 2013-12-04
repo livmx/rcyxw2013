@@ -15,7 +15,7 @@ return array(
        // 'timeout'=>120 ,
     ),
 
-    /* uncomment the following to enable URLs in path-format
+    /* uncomment the following to enable URLs in path-format*/
     'urlManager' => array(
         'urlFormat' => 'path',
         //'caseSensitive'=>false,
@@ -26,7 +26,7 @@ return array(
             //'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             //'<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
         ),
-    ),*/
+    ),
 
     // 云存储时的情况 参考： https://github.com/andremetzen/yii-s3assetmanager
     /**
@@ -187,6 +187,18 @@ return array(
         'defaults'  => array(              //default settings for all editable elements
             'emptytext' => 'Click to edit'
         )
+    ),
+
+    'elastica' => array(
+        'class' => 'ext.Yii-Elastica.components.YiiElastica',
+        'host' => 'localhost',
+        'port' => '9200',
+        'debug' => true
+    ),
+    // ES phpnode 的扩展！
+    'elasticSearch' => array(
+        'class' => 'YiiElasticSearch\Connection',
+        'baseUrl' => 'http://localhost:9200/',
     ),
     //............{extension from yii repo /}................................................................
 );

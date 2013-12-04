@@ -43,7 +43,9 @@ class BlogModule extends CWebModule implements IUrlRewriteModule
 
       //  Yii::app()->theme = 'dlfBlog';
         // Raise onModuleCreate event.
-       Yii::app()->onModuleCreate(new CEvent($this));
+        if(Yii::app() instanceof CWebApplication){
+            Yii::app()->onModuleCreate(new CEvent($this));
+        }
 	}
 
 	public function beforeControllerAction($controller, $action)

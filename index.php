@@ -18,9 +18,15 @@ defined('YS_CONTROLLER_HELP') or define('YS_CONTROLLER_HELP', true);
 // specify how many levels of call stack should be shown in each log message
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL', 3);
 
+// 导入composer生成的自动加载类
+require_once(dirname(__FILE__).'/vendor/autoload.php');
+
 // 配置文件移到下面来 可以使用上面定义的常量了！
 $config = dirname(__FILE__) . '/protected/config/front.php';
 require_once($yii);
+
+// 设置composer vendor 别名
+Yii::setPathOfAlias('composerVendor', dirname(__FILE__). DIRECTORY_SEPARATOR .'vendor');
 
 include_once(dirname(__FILE__) . '/protected/my/global.php');
 include_once(dirname(__FILE__) . '/protected/components/YsWebApplication.php');
@@ -28,6 +34,7 @@ include_once(dirname(__FILE__) . '/protected/components/YsWebApplication.php');
 Yii::$classMap = require(dirname(__FILE__) . '/protected/config/classMap.php');
 
 $app = Yii::createApplication('YsWebApplication', $config);
+Yii::setPathOfAlias('Elastica',Yii::getPathOfAlias('application.vendors.Elastica'));
 
 Yii::setPathOfAlias('my', Yii::getPathOfAlias('application.my'));
 Yii::setPathOfAlias('widgets', Yii::getPathOfAlias('application.widgets'));

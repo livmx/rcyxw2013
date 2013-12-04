@@ -32,7 +32,7 @@ class BaseBlogController extends Controller
         $this->settings = json_decode($settins_json->attributes['option_value']);
 
         //初始化网站名称
-        Yii::app()->name = $this->settings->site_name;
+       // Yii::app()->name = $this->settings->site_name;
 
 
     }

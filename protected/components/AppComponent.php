@@ -11,9 +11,26 @@ class AppComponent extends CComponent
 {
 
     /**
+     * @return TypeSearchManager
+     */
+    public static function typeSearchManager(){
+        return self::getComp('typeSearchManager',array(
+           'class'=>'application.components.TypeSearchManager',
+        ));
+    }
+
+    /**
+     * @return \YiiElasticSearch\Connection
+     */
+    public static function elasticSearch(){
+        return Yii::app()->elasticSearch;
+    }
+
+    /**
      * @static
      * @param string $componentId
      * @param array $config
+     * @return mixed
      */
     static protected function getComp($componentId = '', $config = array())
     {

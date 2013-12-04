@@ -59,6 +59,19 @@ class User extends CActiveRecord
         return Yii::app()->getModule('user')->tableUsers;
     }
 
+    public function behaviors()
+    {
+        return array(
+            'activerecord-relation' => array(
+                'class' => 'ext.yiiext.behaviors.activerecord-relation.EActiveRecordRelationBehavior',
+            ),
+            // 可以直接写类名 已经在配置文件中导入了整个文件夹
+            'searchable' => array(
+                'class' => 'ext.Yii-Elastica.components.ElasticArBehavior',
+            ),
+        );
+    }
+
     /**
      * @return array validation rules for model attributes.
      */

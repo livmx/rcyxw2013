@@ -1,11 +1,110 @@
 <?php
+Yii::setPathOfAlias('Elastica',Yii::getPathOfAlias('application.vendors.Elastica'));
 
+use Elastica\Client;
+use Elastica\Document;
 /**
  * @Desc('this is a test class . you can use test/help to see all available test items')
  */
 class Test1Controller extends Controller
 {
 
+    public function actionYiiElasticSearch2(){
+
+
+        $search = new \YiiElasticSearch\Search("yiitest" , "domainType");
+        $search->query = array(
+        //"match_all" => array()
+        );
+        // start returning results from the 20th onwards
+        $search->offset = 20;
+        $resultSet = Yii::app()->elasticSearch->search($search);
+        print_r($resultSet);
+
+        $client = Yii::app()->elasticSearch->client;
+        $client = AppComponent::elasticSearch()->getClient();
+
+        $esConn = AppComponent::elasticSearch();
+        $document = new \YiiElasticSearch\Document();
+        $document->setConnection($esConn);
+        $document->setIndex('yiitest');
+        $document->setType('domainType');
+        $document->setId(4+time());
+        $document['key'] = 'yiqing'.time();
+
+        AppComponent::elasticSearch()->index($document,true);
+        /*
+        $mapping = array(
+            'country' => array(
+                'properties' => array(
+                    'name' => array(
+                        'type' => 'string',
+                    ),
+                ),
+            ),
+        );
+
+
+// Create a mapping
+         $request = $client->put('yiiTest', array("Content-type" => "application/json"));
+        $request->setBody(array('mapping' => $mapping));
+
+        $response = $request->send();
+
+        $result = $response->getBody();
+        */
+
+    }
+
+    public function actionYiiElasticSearch(){
+       Yii::import('ext.Yii-Elastica.components.*');
+        $elastica_query = new Elastica\Query();
+     //   $term_filter = new \Elastica\Filter\Term();
+       // $term_filter->setTerm('name', 'Elastica_test');
+       // $elastica_query->setFilter($term_filter);
+       /*
+        $dataprovider = new  ElasticaDataProvider('test', $elastica_query, array(
+            'sort' => array(
+                'attributes' => array('attribute.desc',),
+            ),
+            'pagination' => array(
+                'pageSize' => 30,
+            ),
+        ), 'type_name_optional');
+        */
+        $dataprovider = new  ElasticaDataProvider('blog', $elastica_query, array(
+
+            'pagination' => array(
+                'pageSize' => 130,
+            ),
+        ));
+
+        $data = $dataprovider->getData();
+        print_r($data);
+    }
+
+    public function actionElasticSearch(){
+
+        $client = new Client();
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('test');
+
+        $start = microtime(true);
+
+        for ($i = 1; $i <= 100; $i++) {
+            $doc = new Document($i, array('test' => 1));
+            $type->addDocument($doc);
+        }
+
+        // Refresh index
+        $index->refresh();
+
+        $end = microtime(true);
+
+        //echo $end - $start;
+
+    }
 
     public function actionTestJuiDialog(){
         $this->render('juiDialog');

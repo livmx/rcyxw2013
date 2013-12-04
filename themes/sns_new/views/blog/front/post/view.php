@@ -61,3 +61,15 @@ $this->pageTitle=$model->title;
         </div>
 
 </div>
+<div>
+    more like this :
+    <?php
+    $resultSet = $model->moreLikeThis() ;
+    if($resultSet->getTotalHits()>0):?>
+    <?php foreach($resultSet as $result): ?>
+            <?php echo CHtml::link(CHtml::encode($result->title),
+                Post::createPostViewUrl($result->id,$result->title),
+                array('target'=>'_blank')); ?>
+     <?php endforeach ;?>
+    <?php endif;?>
+</div>

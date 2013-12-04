@@ -43,5 +43,8 @@ return array(
     'application.my.widgets.CascadeFr.*',
 
     //
-    'editable.*' //easy include of editable classes
+    'editable.*', //easy include of editable classes
+
+    // 搜索
+    'ext.Yii-Elastica.components.*',
 );
