@@ -8,6 +8,19 @@ use Elastica\Document;
  */
 class Test1Controller extends Controller
 {
+    /**
+     * @Desc('测试aliceUi seajs')
+     */
+    public function actionAliceUi2(){
+        $this->render('aliceUi2');
+    }
+
+    /**
+     * @Desc('测试aliceUi')
+     */
+    public function actionAliceUi(){
+        $this->render('aliceUi');
+    }
 
     public function actionYiiElasticSearch2(){
 

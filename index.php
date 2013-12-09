@@ -13,7 +13,7 @@ defined('DEV_STAGE') or define('DEV_STAGE',  true );
  * use  ?debug=yes to open debug mode
  */
 //defined('YII_DEBUG') or define('YII_DEBUG', isset($_GET['debug'])? true : false);
-defined('YII_DEBUG') or define('YII_DEBUG',true);
+defined('YII_DEBUG') or define('YII_DEBUG',false);
 defined('YS_CONTROLLER_HELP') or define('YS_CONTROLLER_HELP', true);
 // specify how many levels of call stack should be shown in each log message
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL', 3);
@@ -37,6 +37,8 @@ $app = Yii::createApplication('YsWebApplication', $config);
 Yii::setPathOfAlias('Elastica',Yii::getPathOfAlias('application.vendors.Elastica'));
 
 Yii::setPathOfAlias('my', Yii::getPathOfAlias('application.my'));
+Yii::setPathOfAlias('foy', Yii::getPathOfAlias('application.foy'));
+
 Yii::setPathOfAlias('widgets', Yii::getPathOfAlias('application.widgets'));
 // import common usage util tools
 Yii::import('my.utils.*');

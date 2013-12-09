@@ -3,10 +3,56 @@
 <head>
     <meta charset="utf-8">
 
-    <?php $this->widget('my.widgets.CascadeFr.CascadeFr'); ?>
+
+
+    <?php  $this->widget('my.widgets.CascadeFr.CascadeFr'); ?>
     <?php PublicAssets::registerCssFile('css/site.css'); ?>
 
+    <?php
+    //  aliceUi  看看跟cascadeFramework 冲突不？
+    Yii::import('foy.widgets.alice.*');
+    //     AliceUI::registerCoreCss() ;
+    ?>
+    <script src="<?php echo bu('public/sea-modules/seajs/seajs/2.1.1/sea.js') ?>" id="seajsnode"></script>
+    <!--
+      直接用script 的方式加载jquery 不然加载顺序无法保证 这样jquery常规插件就可以用了
+      @see https://github.com/seajs/seajs/issues/996
+    -->
+    <script src="<?php echo bu('public/sea-modules/jquery/jquery/1.10.1/jquery.js') ?>" ></script>
+
+    <script type="text/javascript">
+        // 配置 jquery 并放入预加载项中
+        seajs.config({
+            alias: {
+                'jquery': 'jquery/jquery/1.10.1/jquery.js',
+                '$': 'jquery/jquery/1.10.1/jquery.js'
+            },
+            preload: ["jquery"]
+        });
+
+
+        /*
+        seajs.use('jquery', function(jquery) {
+        });
+         // use 下才加载？
+         define(function(require, exports, module) {
+             var $ = require('jquery');
+             //=> 加载的是 http://path/to/base/jquery/jquery/1.10.1/jquery.js
+
+         });
+           */
+    </script>
+
+    <?php
+    // 禁用yii自带的jquery
+    $cs=Yii::app()->clientScript;
+    $cs->scriptMap=array(
+          'jquery.js'=>false,  // debug mode
+          'jquery.min.js'=>false, // disable debug mode
+    ); ?>
     <title>Cascade Framework</title>
+
+
     <meta name="description" content="Professional Frontend framework that makes building websites easier than ever.">
     <!--    <link rel="shortcut icon" href="../vendor/assets/img/favicon.ico" type="image/x-icon" />-->
     <meta name="viewport" content="width=device-width">
