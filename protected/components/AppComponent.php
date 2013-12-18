@@ -98,4 +98,11 @@ class AppComponent extends CComponent
             'options' => array()
         ));
     }
+
+    /**
+     * @return IApplicationComponent|AliceApi
+     */
+    static public function alice(){
+        return Yii::app()->getComponent('alice');
+    }
 }

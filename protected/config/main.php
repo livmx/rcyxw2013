@@ -32,6 +32,9 @@ return array(
         'friend'=>'application.modules.friend',
 		// ES 搜索
 	    'YiiElasticSearch' => 'composerVendor.codemix.yiielasticsearch.src',
+
+        // alice ui  configuration
+        'alice' => 'ext.alice', // change if necessary
  ),
 
 );

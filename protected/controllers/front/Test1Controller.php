@@ -8,6 +8,11 @@ use Elastica\Document;
  */
 class Test1Controller extends Controller
 {
+
+    public function actionAlice(){
+        $this->render('alice');
+    }
+
     /**
      * @Desc('测试aliceUi seajs')
      */

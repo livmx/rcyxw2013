@@ -200,6 +200,11 @@ return array(
         'class' => 'YiiElasticSearch\Connection',
         'baseUrl' => 'http://localhost:9200/',
     ),
+
+    'alice' => array(
+        'class' => 'alice.components.AliceApi',
+    ),
+
     //............{extension from yii repo /}................................................................
 );
 
