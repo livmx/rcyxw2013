@@ -50,14 +50,13 @@ class PostController extends BaseBlogController
 	 */
 	public function actionView($id)
 	{
-        $this->layout = 'userSpace';
+        $this->layout =  'userSpace';
 		$post=$this->loadModel($id,'author');
 
         UserHelper::setSpaceOwnerId($post->author_id);
         UserHelper::setSpaceOwnerModel($post->author);
 
         $comment=$this->newComment($post);
-
 		$this->render('view',array(
 			'model'=>$post,
 			'comment'=>$comment,

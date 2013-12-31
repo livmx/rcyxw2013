@@ -37,7 +37,9 @@ class SpaceVisitHelper
             $model->target = $target;
             $model->day = $day;
             $model->times = 1;
-            $model->save();
+            if(!$model->save()){
+               Yii::log('can not record the visit info to database !',CLogger::LEVEL_ERROR);
+            }
         }
 
     }

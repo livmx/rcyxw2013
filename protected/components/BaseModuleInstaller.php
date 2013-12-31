@@ -146,6 +146,7 @@ class BaseModuleInstaller extends CComponent implements IInstaller
             $moduleInstaller->install();
             return true ;
         } catch (CException $e) {
+            throw $e ;
             //do  nothing  here！ 什么也不做这里！
             return false;
         }

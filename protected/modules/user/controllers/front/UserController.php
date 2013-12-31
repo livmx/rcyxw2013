@@ -30,7 +30,7 @@ class UserController extends BaseUserController
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform
-                'actions' => array('home',),
+                'actions' => array('home',$this->action->id),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -177,9 +177,11 @@ class UserController extends BaseUserController
                 SpaceVisitHelper::recordAccess(date('Y-m-d'), $spaceOwnerId);
             } else {
                 // 已在访问历史中了 do nothing here
+
             }
 
         } else {
+
             //cookie 中并没有记录这个 表示是本次初次访问某个空间：
             $visitedSpacesArr = array($spaceOwnerId);
             $visitedSpacesCookie = new CHttpCookie($visitedSpacesKey, CJSON::encode($visitedSpacesArr));
@@ -215,4 +217,115 @@ class UserController extends BaseUserController
             'profile' => $model->profile,
         ));
     }
+    // ===================================================================================\\
+    //===================
+    // 收藏功能实现
+    //===================
+
+    /**
+     *
+     */
+    public function actionGlean(){
+        $request = Yii::app()->getRequest() ;
+        if($request->getIsPostRequest() && $request->getIsAjaxRequest()){
+            $objectType = $request->getParam('objectType');
+            $objectId = $request->getParam('objectId');
+
+            $userId = user()->getId();
+            // 查看是否收藏过了
+            if(!UserGlean::model()->exists('user_id = :user_id AND object_type = :object_type AND object_id = :object_id',
+                array(':user_id'=>$userId,':object_type'=>$objectType,':object_id'=>$objectId)
+            )){
+
+                $userGlean = new UserGlean();
+                $userGlean->user_id = $userId;
+                $userGlean->object_type = $objectType ;
+                $userGlean->object_id = $objectId ;
+                $userGlean->ctime = time() ;
+                if($userGlean->save()){
+                    $this->ajaxSuccess(array(
+                        'msg'=>'收藏成功',
+                    ));
+                }else{
+
+                    $this->ajaxFailure(array(
+                        'msg'=>$userGlean->getErrors(),
+                    ));
+                }
+            }else{
+                $this->ajaxSuccess(array(
+                    'msg'=>'已收藏',
+                ));
+            }
+
+        }
+    }
+
+    public function actionGleanList(){
+       $this->layout = 'userCenter';
+
+        $model=new UserGlean('search');
+        // 默认给一个收藏类型 在下面动态覆盖！
+        $model->object_type = 'blog';
+        $model->unsetAttributes();  // clear any default values
+        if(isset($_GET['UserGlean'])){
+            $model->attributes=$_GET['UserGlean'];
+            if(!isset($_GET['objectType'])){
+                $model->object_type = 'blog';
+            }else{
+                $model->object_type = $_GET['objectType'];
+            }
+        }
+        // 关联查询下收藏的对象 动态关联 存在跨模块访问的问题！
+        // $model->getDbCriteria()->with = array($model->object_type);
+
+        if(Yii::app()->request->getIsAjaxRequest()){
+            $cs=Yii::app()->clientScript;
+            $cs->scriptMap=array(
+                'jquery.js'=>false,
+                'jquery.min.js'=>false,
+            );
+            //die(print_r($_REQUEST,true));
+            $this->layout = false;
+
+            $dataProvider = $model->search() ;
+
+            $this->beginClip('glean-type-list');
+            // My::listView4sqlDataProvider($dp);
+            $dataProvider->pagination->pageSize = 1 ;
+
+            $this->widget('YsAjaxListView',array(
+                'id'=>'glean-list-'.$model->object_type,
+                'template'=>'{pager}{items}{pager}',
+                'dataProvider'=>$dataProvider,
+                'itemView'=>'glean/_view',
+            ));
+            $this->endClip();
+
+            $this->renderText($this->clips['glean-type-list']);
+
+            Yii::app()->end();
+        }
+
+
+        $this->render('glean/list',array('model'=>$model));
+    }
+
+    public function actionGleanDelete(){
+        $request = Yii::app()->request ;
+        if($request->getIsPostRequest() && $request->getIsAjaxRequest()){
+            $id = $request->getParam('id');
+
+            $userGlean = UserGlean::model()->findByPk($id);
+            if($userGlean->delete()){
+                $this->ajaxSuccess(array(
+                   'msg'=>'删除成功！' ,
+                ));
+            }
+
+        }else{
+            throw new CHttpException(404,'不允许的操作！.');
+        }
+    }
+    // ===================================================================================//
 }

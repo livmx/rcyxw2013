@@ -8,7 +8,7 @@ RewriteEngine on
 
 #Admin
 # Rewriterule ^admin$ admin.php
-RewriteRule ^admin admin.php
+# RewriteRule ^admin admin.php
 
 #Install
 #Rewriterule ^install$ install.php?r=Install/default

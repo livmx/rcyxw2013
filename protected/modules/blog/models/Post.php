@@ -9,11 +9,11 @@ Yii::import('blog.models.Comment');
  * @property string $content
  * @property string $summary
  * @property string $tags
- * @property string $status
- * @property string $created
- * @property string $updated
- * @property string $author_id
- * @property string $category_id
+ * @property int $status
+ * @property int $created
+ * @property int $updated
+ * @property int $author_id
+ * @property int $category_id
  */
 class Post extends CActiveRecord
 {
@@ -101,6 +101,14 @@ class Post extends CActiveRecord
         );
     }
 
+    /**
+     * 返回改对象的所有者id
+     * 所有的用户内容都提供这个方法 这样可以拷贝代码！！
+     * @return string
+     */
+    public function getOwnerId(){
+        return $this->author_id ;
+    }
 
     public function recent($limit = 3)
     {
@@ -388,6 +396,8 @@ class Post extends CActiveRecord
         $type = $this->getEsType() ;
         $resultSet = $type->search($query);
         //  $resultSet->count()
+       // var_dump($resultSet);die();
+
         return $resultSet ;
         // $resultSet->getResults()[0]->getSource()
         // return  $resultSet->getResponse()->getData();

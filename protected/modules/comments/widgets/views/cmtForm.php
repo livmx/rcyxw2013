@@ -6,7 +6,7 @@
 ?>
 
 <div class="form cmt-form">
-    <?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+    <?php $form = $this->beginWidget('CActiveForm', array(
     'action' => Yii::app()->urlManager->createUrl($this->postCommentAction),
     'id' => $this->id,
     'htmlOptions' => array(
@@ -36,12 +36,12 @@
     ?>
 
     <?php if (Yii::app()->user->isGuest == true): ?>
-    <?php echo $form->textFieldRow($newComment, 'user_name', array('size' => 40)); ?>
+    <?php echo $form->textField($newComment, 'user_name', array('size' => 40)); ?>
 
-    <?php echo $form->textFieldRow($newComment, 'user_email', array('size' => 40)); ?>
+    <?php echo $form->textField($newComment, 'user_email', array('size' => 40)); ?>
     <?php endif; ?>
 
-    <?php echo $form->textAreaRow($newComment, 'cmt_text', array('class' => 'span6 comment-content', 'rows' => 4)); ?>
+    <?php echo $form->textArea($newComment, 'cmt_text', array('class' => 'span6 comment-content', 'rows' => 4)); ?>
 
     <?php if ($this->useCaptcha === true && extension_loaded('gd')): ?>
     <div class="row">
@@ -65,15 +65,11 @@
 
     <?php if ($this->isPopupForm != true): ?>
     <div class="form-actions">
-        <?php $this->widget('bootstrap.widgets.TbButton', array(
-        'buttonType' => 'button',
-        'type' => 'primary',
-        'icon' => 'ok white',
-        'label' => 'ajaxSubmit',
-        'htmlOptions' => array(
-            'onclick' => "submitComment(this)"
-        )
-    )); ?>
+        <?php
+       echo CHtml::button('添加评论',array(
+          'onclick'=>'submitComment(this)' ,
+       ));
+        ?>
     </div>
     <?php endif; ?>
 

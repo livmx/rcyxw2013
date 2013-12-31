@@ -6,6 +6,10 @@
  * Time: 上午11:40
  * To change this template use File | Settings | File Templates.
  */
+/**
+ * 仅包含 数据相关的功能 尽量不要包含ui元素相关的东西 因为要用多皮肤！
+ * Class UserHelper
+ */
 class UserHelper
 {
    //---------------------------------------------------------------\\
@@ -60,6 +64,38 @@ class UserHelper
             return 'user.layouts.userCenter';
         }*/
 
+    }
+
+    /**
+     * 各个内容块使用user模块下的布局
+     * @return string
+     */
+    static public function getUserBaseLayoutAlias($layoutName = 'userSpace'){
+
+        if(isset(Yii::app()->endName)){
+            $endName = Yii::app()->endName ;
+            $rtn = "user.{$endName}.layouts.".$layoutName;
+
+            if(Yii::app()->theme !== null){
+                $themeName = Yii::app()->theme->getName() ;
+                $rtn =  "webroot.themes.{$themeName}.views.".$rtn;
+            }
+            return $rtn ;
+        }else{
+            $rtn = 'user.layouts.'.$layoutName ;
+            if(Yii::app()->theme !== null){
+                $themeName = Yii::app()->theme->getName() ;
+                return "webroot.themes.{$themeName}.".$rtn;
+            }
+            return $rtn;
+        }
+        /*
+        if ($this->backendTheme) {
+            return 'webroot.themes.backend_' . $this->backendTheme . '.views.yupe.layouts.' . ($layoutName ? $layoutName : $this->backendLayout);
+        } else {
+            return 'application.modules.yupe.views.layouts.' . ($layoutName ? $layoutName : $this->backendLayout);
+        }
+        */
     }
 
     /**
@@ -256,18 +292,19 @@ U_FACE;
      */
     static public function getSpaceOwnerId()
     {
-        return self::$spaceOwnerId ;
-        /*
-        if (!isset($_GET['u'])) {
-            if (user()->getIsGuest()) {
-                throw new CException('must pass the u  param in  $_GET variable ');
-            } else {
-                return $_GET['u'] = user()->getId();
-            }
+        if(isset(self::$spaceOwnerId)){
+           return  self::$spaceOwnerId ;
+        }elseif (isset($_GET['u'])) {
+            return  self::$spaceOwnerId =   $_GET['u'];
 
         } else {
-            return $_GET['u'];
-        }*/
+            if (user()->getIsGuest()) {
+                throw new CException('must pass the u  param in  $_GET variable or set the userSpaceId manually');
+            } else {
+                return  self::$spaceOwnerId = $_GET['u'] = user()->getId();
+            }
+
+        }
     }
 
     /**
@@ -293,10 +330,38 @@ U_FACE;
      * @return User
      */
     static public function getSpaceOwnerModel(){
+        if(empty(self::$spaceOwnerModel) && self::getSpaceOwnerId() != null){
+            self::loadSpaceOwnerModel(self::getSpaceOwnerId());
+        }
         return self::$spaceOwnerModel ;
     }
 
 
+    /**
+     * 加载用户模型 注意 跟直接调用的区别：
+     * 直接加载user实例 可能出现多次调用 ！
+     * 这里有场景含义 比如你加载的这个用户是用于空间显示的 那么对于profile 区域的一些信息
+     * 也给你加载进来 用户的信息可以通过behavior eav ，application.components.ExtraAttribute 等手段扩展！
+     * 这样用于个人空间的某些区域需要的信息可以通过这个模型一次性获取完整 ；
+     * 这里明白对于同一个模型（User ） 在不同场景下需要的信息字段是不一样的（scope 通过配置select 也可以表明需要什么信息
+     * 但对于非db源的数据-- 比如缓存等 获取的信息则可以单独写方法获取）。
+     *
+     *新型模型（可以名为superModel） 信息源可能来自各个方面 是一个混合型模型 比如来自db cache 或者第三方api调用
+     * 如 对于用户的统计信息 微博数，好友数 ，登陆次数等 这些信息可能来自后台统计脚本计算得来的 不一定需要放在user表
+     * 此时界面上又要显示 那么可以在一个地方合成！还有一种做法是通过ajax|bigpipe技术 加载这些不同源的信息.
+     *
+     * @param int $userId
+     * @return array|CActiveRecord|mixed|null
+     */
+    static public function loadSpaceOwnerModel($userId ){
+        // 注意这里的技巧 内部静态变量 跟声明本类的静态变量的区别
+        static $user ;
+        if(empty($user)){
+            $user = User::model()->findByPk($userId);
+        }
+        self::$spaceOwnerModel = $user ;
+        return $user ;
+    }
 //----------------------------------------------------------------\\
 
 

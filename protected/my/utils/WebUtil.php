@@ -11,6 +11,16 @@ class WebUtil
 {
 
     /**
+     * @param string $msg
+     * @throws CHttpException
+     */
+    public static function throw404httpException($msg=''){
+        throw new CHttpException(
+            404,
+           $msg
+        );
+    }
+    /**
      * @static
      * @param $text
      * @param string $url

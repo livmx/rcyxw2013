@@ -284,7 +284,13 @@ class UserModule extends CWebModule implements IUrlRewriteModule
     {
        return array(
          'user/home'=>'user/user/home',
-         'user/space/*'=>'user/user/space'
+         'user/space/*'=>'user/user/space',
+
+         'user/settings/'=>'user/settings',
+         'user/settings/<action:\w+>'=>'user/settings/<action>',
+
+         'user/<action:\w+>'=>'user/user/<action>',
+         'user/<action:\w+>/*'=>'user/user/<action>',
        );
     }
 

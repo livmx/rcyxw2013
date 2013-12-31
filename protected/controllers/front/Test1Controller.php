@@ -9,6 +9,24 @@ use Elastica\Document;
 class Test1Controller extends Controller
 {
 
+    public function actionPowerSwitch(){
+        $this->render('powerSwitch');
+    }
+
+    /**
+     * @Desc('测试 smint 插件')
+     */
+    public function actionSmint(){
+        $this->render('smint');
+    }
+
+    /**
+     * @Desc('测试 powerFloat 插件')
+     */
+    public function actionPowerFloat(){
+        $this->render('powerFloat');
+    }
+
     public function actionAlice(){
         $this->render('alice');
     }

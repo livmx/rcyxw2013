@@ -15,7 +15,7 @@ return array(
        // 'timeout'=>120 ,
     ),
 
-    /* uncomment the following to enable URLs in path-format*/
+    /* uncomment the following to enable URLs in path-format
     'urlManager' => array(
         'urlFormat' => 'path',
         //'caseSensitive'=>false,
@@ -27,7 +27,7 @@ return array(
             //'<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
         ),
     ),
-
+*/
     // 云存储时的情况 参考： https://github.com/andremetzen/yii-s3assetmanager
     /**
      * 通过该例子 看出 凡是可以设置baseUrl的组件 都可以指到某个指定的域名去！！

@@ -17,6 +17,21 @@ class BlogInstaller extends BaseModuleInstaller
         $mig = new BlogInstallMigration();
         $mig->up();
 
+
+        $topNavArr['blog'] = array(
+            'text'=>'日志',
+            'url'=>array('/blog/member/list'),
+        );
+        YsNavSystem::addUserSpaceNav('top_nav','blog',$topNavArr);
+        // 安装 用户中心的应用菜单
+        YsNavSystem::addUserCenterNav('side_nav','blog',array(
+            'main'=>array(
+                'text'=>'日志',
+                'url'=>array(
+                    '/blog/my',
+                )
+            )
+        ));
     }
 
     public function uninstall()
@@ -25,6 +40,10 @@ class BlogInstaller extends BaseModuleInstaller
         $mig = new BlogInstallMigration();
         $mig->down();
 
+
+        // 卸载系统菜单
+        YsNavSystem::removeUserSpaceNav('top_nav','blog');
+        YsNavSystem::removeUserCenterNav('side_nav','blog');
     }
 
 

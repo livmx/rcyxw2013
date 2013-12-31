@@ -102,7 +102,6 @@ class ElasticArBehavior  extends CActiveRecordBehavior
 
         $index = $client->getIndex($this->getElasticIndex());
         $type = $index->getType($this->getElasticType());
-
         /*
         $id = 2;
         $data = array('firstname' => 'Nicolas', 'lastname' => 'Ruflin');

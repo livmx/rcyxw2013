@@ -1,18 +1,40 @@
-<?php $this->beginContent('//layouts/main'); ?>
+<?php $this->beginContent(UserHelper::getUserBaseLayoutAlias('userCenterContent')); ?>
+<?php  $currentUser = UserHelper::getLoginUserModel() ; ?>
 
-    <div class="container site-body">
+            <?php if(Layout::hasRegion('rightSideBar')): ?>
 
-        <div class="cell">
-            <div class="col size1of4">
-                <?PHP $this->widget('user.widgets.usercenter.AccountControlBox');?>
-            </div>
-            <div class="col sizefill">
-                <?php  YsPageBox::beginPanel(); ?>
-                <?php echo $content; ?>
-                <?php  YsPageBox::endPanel();?>
-            </div>
-        </div>
+                <div class="col size7of9">
+
+                    <?php echo $content; ?>
+
+                </div>
+
+                <div class="col sizefill">
+                  <?php Layout::renderRegion('rightSideBar'); ?>
+                </div>
+                
+            <?php else:?>
+
+                <div class="col">
+
+                    <?php echo $content; ?>
+
+                </div>
+
+            <?php  endif; ?>
+
+<!--输出额外的box给主用户中心布局-- >
+    <?php Layout::beginBlock('rightSideBox'); ?>
+<?php  YsPageBox::beginPanel(array('template' => '{header}{body}', 'header' => '最近访客')); ?>
+    <div class="cell">
+        <?php  $this->widget('user.widgets.4cascadeFr.latestVisitors.LatestVisitors', array(
+            'spaceId' => user()->getId(),
+            'maxCount' => 9,
+        ));  ?>
 
     </div>
+<?php  YsPageBox::endPanel();?>
+    <?php  Layout::endBlock() ?>
+    <!--输出额外的box给主用户中心布局/-->
 
 <?php $this->endContent(); ?>

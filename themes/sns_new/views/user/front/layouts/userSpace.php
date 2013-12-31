@@ -12,12 +12,24 @@
                         <div class="cell">
                             <div class="menu cell page-sub-menu  ">
                                 <ul class="bottom nav">
-                                    <li class="">
-                                        <a href="#" class="">相册</a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo $this->createUrl('/blog/member/list',array('u'=> UserHelper::getSpaceOwnerId() )); ?> ">博文</a>
-                                    </li>
+                                    <?php
+                                    $topNavList = YsNavSystem::getUserSpaceNav('top_nav');
+
+                                    foreach ($topNavList as $fromModule => $moduleMenuConfig):
+                                        foreach ($moduleMenuConfig as $menuKey => $menuConfig):
+                                            ?>
+
+                                            <li class="">
+                                                <?php
+                                                $menuConfig['url']['u'] = UserHelper::getSpaceOwnerId();
+                                                echo CHtml::link($menuConfig['text'], $menuConfig['url']);
+                                                ?>
+                                            </li>
+
+                                        <?php
+                                        endforeach;
+                                    endforeach;
+                                    ?>
                                 </ul>
 
                             </div>
@@ -46,6 +58,7 @@
     <div class="container site-body">
 
         <div class="cell">
+
             <div class="col size1of4">
                 <?php $spaceOwnerModel = UserHelper::getSpaceOwnerModel();
 
@@ -97,9 +110,11 @@
                 </div>
 
             </div>
+
             <div class="col sizefill">
                 <?php echo $content; ?>
             </div>
+
         </div>
 
     </div>

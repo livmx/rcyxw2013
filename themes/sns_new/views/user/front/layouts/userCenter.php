@@ -54,7 +54,7 @@
                                                     </li>
                                                     <li class="">
                                                         <!-- 用class=active来高亮当前菜单-->
-                                                        <a href="#" class="">昵称</a>
+                                                        <a href="<?php echo Yii::app()->controller->createUrl('/user/gleanList');?>" class="">收藏</a>
                                                     </li>
                                                     <li class="">
                                                         <a href="#" class="">邮箱</a>

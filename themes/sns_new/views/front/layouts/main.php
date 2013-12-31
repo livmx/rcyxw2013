@@ -10,7 +10,7 @@
 
     <?php
     //  aliceUi  看看跟cascadeFramework 冲突不？
-    Yii::import('foy.widgets.alice.*');
+    // Yii::import('foy.widgets.alice.*');
     //     AliceUI::registerCoreCss() ;
     ?>
     <script src="<?php echo bu('public/sea-modules/seajs/seajs/2.1.1/sea.js') ?>" id="seajsnode"></script>
@@ -19,6 +19,7 @@
       @see https://github.com/seajs/seajs/issues/996
     -->
     <script src="<?php echo bu('public/sea-modules/jquery/jquery/1.10.1/jquery.js') ?>" ></script>
+
 
     <script type="text/javascript">
         // 配置 jquery 并放入预加载项中
@@ -29,7 +30,9 @@
             },
             preload: ["jquery"]
         });
-
+        seajs.use(['jquery'], function ($) {
+            window.jQuery  =   window.$ = $ ;
+        });
 
         /*
         seajs.use('jquery', function(jquery) {
@@ -46,10 +49,13 @@
     <?php
     // 禁用yii自带的jquery
     $cs=Yii::app()->clientScript;
+
     $cs->scriptMap=array(
           'jquery.js'=>false,  // debug mode
           'jquery.min.js'=>false, // disable debug mode
-    ); ?>
+    );
+
+    ?>
     <title>Cascade Framework</title>
 
 

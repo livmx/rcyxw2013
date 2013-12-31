@@ -8,6 +8,7 @@
  * -------------------------------------------------------
  * -------------------------------------------------------
  */
+//print_r($data);
 $this->widget('application.extensions.morris.MorrisChartWidget', array(
     'id'      => 'myChartElement',
     'options' => array(

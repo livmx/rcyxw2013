@@ -6,7 +6,15 @@ class MemberPostController extends BaseBlogController
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='userSpace';
+	 // public $layout='userSpace';
+
+    protected function beforeAction($action)
+    {
+            $this->layout = 'userSpace';
+           // $this->layout = UserHelper::getUserBaseLayoutAlias('userSpaceContent');
+
+        return parent::beforeAction($action);
+    }
 
 	/**
 	 * @return array action filters

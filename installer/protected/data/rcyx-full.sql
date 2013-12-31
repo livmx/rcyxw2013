@@ -1,5 +1,5 @@
 /*
-SQLyog Trial v11.25 (64 bit)
+SQLyog Trial v11.3 (64 bit)
 MySQL - 5.6.12-log : Database - rcyx
 *********************************************************************
 */
@@ -12,6 +12,8 @@ MySQL - 5.6.12-log : Database - rcyx
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`rcyx` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
 USE `rcyx`;
 
 /*Table structure for table `access_trace` */
@@ -52,11 +54,11 @@ CREATE TABLE `admin_menu` (
   KEY `lft` (`lft`),
   KEY `rgt` (`rgt`),
   KEY `level` (`level`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='用nestedset保存树关系';
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COMMENT='用nestedset保存树关系';
 
 /*Data for the table `admin_menu` */
 
-insert  into `admin_menu`(`id`,`root`,`lft`,`rgt`,`level`,`label`,`url`,`params`,`ajaxoptions`,`htmloptions`,`is_visible`,`uid`,`group_code`) values (8,8,1,54,1,'top_virtual_root',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu_root'),(10,8,2,5,2,'HOME',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(11,8,6,13,2,'user',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(14,8,9,10,3,'User Profile Manager','/user/profileField/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(16,8,7,8,3,'用户管理','/user/admin/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(18,8,11,12,3,'新增用户profile字段','/user/profileField/create',NULL,NULL,NULL,1,0,'sys_admin_menu'),(19,8,14,17,2,'modules',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(20,8,15,16,3,'manage','/module/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(27,8,18,21,2,'评论管理',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(28,8,19,20,3,'管理','/comments/comment/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(29,8,22,31,2,'系统',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(35,8,23,24,3,'后台用户管理','/adminUser/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(37,8,3,4,3,'index',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(38,8,25,26,3,'后台角色管理','/adminRole/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(39,8,32,37,2,'新闻管理',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(40,8,33,34,3,'新闻分类管理','/news/newsCategory/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(41,8,35,36,3,'新闻条目管理','/news/newsEntry/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(42,8,38,43,2,'公告',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(43,8,39,40,3,'公告分类管理','/notice/noticeCategory/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(44,8,41,42,3,'公告管理','/notice/noticePost/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(45,8,27,28,3,'友情链接','/sysFriendLink/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(46,8,29,30,3,'系统菜单','/sysMenu/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(47,8,44,45,2,'临时菜单 用来安装应用的',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(48,8,47,48,3,'日志系统分类管理','/blog/blogSysCategory/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(49,8,49,50,3,'日志系统分类创建','/blog/blogSysCategory/create',NULL,NULL,NULL,1,0,'sys_admin_menu'),(50,8,46,53,2,'博文',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(51,8,51,52,3,'日志管理','/blog/post/admin',NULL,NULL,NULL,1,0,'sys_admin_menu');
+insert  into `admin_menu`(`id`,`root`,`lft`,`rgt`,`level`,`label`,`url`,`params`,`ajaxoptions`,`htmloptions`,`is_visible`,`uid`,`group_code`) values (8,8,1,58,1,'top_virtual_root',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu_root'),(10,8,2,5,2,'HOME',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(11,8,6,13,2,'user',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(14,8,9,10,3,'User Profile Manager','/user/profileField/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(16,8,7,8,3,'用户管理','/user/admin/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(18,8,11,12,3,'新增用户profile字段','/user/profileField/create',NULL,NULL,NULL,1,0,'sys_admin_menu'),(19,8,14,17,2,'modules',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(20,8,15,16,3,'manage','/module/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(27,8,18,21,2,'评论管理',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(28,8,19,20,3,'管理','/comments/comment/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(29,8,22,31,2,'系统',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(35,8,23,24,3,'后台用户管理','/adminUser/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(37,8,3,4,3,'index',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(38,8,25,26,3,'后台角色管理','/adminRole/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(39,8,32,37,2,'新闻管理',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(40,8,33,34,3,'新闻分类管理','/news/newsCategory/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(41,8,35,36,3,'新闻条目管理','/news/newsEntry/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(42,8,38,43,2,'公告',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(43,8,39,40,3,'公告分类管理','/notice/noticeCategory/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(44,8,41,42,3,'公告管理','/notice/noticePost/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(45,8,27,28,3,'友情链接','/sysFriendLink/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(46,8,29,30,3,'系统菜单','/sysMenu/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(47,8,44,49,2,'临时菜单 用来安装应用的',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(48,8,51,52,3,'日志系统分类管理','/blog/blogSysCategory/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(49,8,53,54,3,'日志系统分类创建','/blog/blogSysCategory/create',NULL,NULL,NULL,1,0,'sys_admin_menu'),(50,8,50,57,2,'博文',NULL,NULL,NULL,NULL,1,0,'sys_admin_menu'),(51,8,55,56,3,'日志管理','/blog/post/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(52,8,45,46,3,'日志系统分类管理','/blog/blogSysCategory/admin',NULL,NULL,NULL,1,0,'sys_admin_menu'),(53,8,47,48,3,'日志系统分类创建','/blog/blogSysCategory/create',NULL,NULL,NULL,1,0,'sys_admin_menu');
 
 /*Table structure for table `admin_role` */
 
@@ -500,7 +502,155 @@ CREATE TABLE `photo` (
 
 /*Data for the table `photo` */
 
-insert  into `photo`(`id`,`uid`,`album_id`,`title`,`desc`,`path`,`orig_path`,`ext`,`size`,`tags`,`create_time`,`views`,`rate`,`rate_count`,`cmt_count`,`is_featured`,`status`,`hash`,`categories`,`up_votes`,`down_votes`) values (7,1,17,NULL,'','uploads/photo/14b78418_1_0580202001354080827.gif','uploads/photo/14b78418_1_0572068001354080827.gif','',NULL,'',0,8,4.1667,6,0,0,'pending','150ea03ec2e732c40cc6f2d67e7b738f','',1,4),(6,1,17,NULL,'','uploads/photo/14b78418_1_0536732001354080827.jpg','uploads/photo/14b78418_1_0354406001354080827.jpg','',NULL,'',0,4,4,5,0,0,'pending','4fdd716936ea044df6bfb7f7fd1b5f4d','',5,1),(5,1,17,NULL,'','uploads/photo/14b78418_1_0186442001354080827.jpg','uploads/photo/14b78418_1_0904550001354080826.jpg','',NULL,'',0,4,3.3333,3,0,0,'pending','889db8de76d6801e6d54d038e265e85b','',1,0),(8,1,14,'klll','','uploads/photo/14b78418_1_0149329001354082256.jpg','uploads/photo/14b78418_1_0967305001354082255.jpg','',NULL,'',0,8,3,1,0,0,'pending','7b906bf144e9780e836e4ff7790c7f33','',2,2),(9,1,18,NULL,'','uploads/photo/14b78418_1_0469778001354083471.gif','uploads/photo/14b78418_1_0434331001354083471.gif','',NULL,'',0,6,4,2,0,0,'pending','35f235aec029932f729686997bb56282','',0,0),(10,1,18,'sdf','','uploads/photo/14b78418_1_0695832001354115228.jpg','uploads/photo/14b78418_1_0415269001354115215.jpg','',NULL,'',0,12,5,3,0,0,'pending','f140b59579d9a0e37e2635250d13d1e6','',0,0),(11,1,14,'dsfsdfdf','','uploads/photo/14b78418_1_0338850001354202427.gif','uploads/photo/14b78418_1_0779175001354202426.gif','',NULL,'',0,3,5,1,0,0,'pending','99f201acbb1706cf46e2600716c14255','',0,0),(12,1,14,'dsfsdfdf','','uploads/photo/14b78418_1_0786619001354202427.gif','uploads/photo/14b78418_1_0774837001354202427.gif','',NULL,'',0,0,3,1,0,0,'pending','8e80c03905ece04f05d5d0643865acbe','',0,0),(13,1,14,'dsfsdfdf','','uploads/photo/14b78418_1_0846882001354202427.jpg','uploads/photo/14b78418_1_0795038001354202427.jpg','',NULL,'',0,1,5,1,0,0,'pending','c866ab522343b1f80d153283d1d14846','',0,0),(14,2,19,'yteen','','uploads/photo/14b78418_2_0576444001354434888.jpg','uploads/photo/14b78418_2_0216119001354434888.jpg','',NULL,'',0,102,5,3,0,0,'pending','d7f69143f8e937b31fc85c42414bc980','',1,0),(15,2,19,'yteen','','uploads/photo/14b78418_2_0903833001354434888.jpg','uploads/photo/14b78418_2_0862540001354434888.jpg','',NULL,'',0,55,4,4,0,0,'pending','3f4148cf362badc0c9b6ec71fc3b84e3','',1,0),(16,2,20,'fgdfg','','uploads/photo/14b78418_2_0620196001354435271.gif','uploads/photo/14b78418_2_0436555001354435271.gif','',NULL,'',0,0,3.6667,3,0,0,'pending','fe8c3a4a952e2c6a5e17dca4046d1ab2','',0,0),(17,2,20,'fgdfg','','uploads/photo/14b78418_2_0706584001354435271.jpg','uploads/photo/14b78418_2_0662943001354435271.jpg','',NULL,'',0,16,3.5,2,0,0,'pending','c6d4f4aeb8077329252f303218bff299','',0,0),(18,1,14,'dsfsdf','','uploads/photo/14b78418_1_0165501001354603881.gif','uploads/photo/14b78418_1_0000093001354603879.gif','',NULL,'',0,5,3,2,0,0,'pending','84efd6df578978564df480a70eecf953','',0,0),(19,1,17,'dd','','uploads/photo/14b78418_1_0874141001354718058.gif','uploads/photo/14b78418_1_0783212001354718057.gif','',NULL,'',0,20,4,2,0,0,'pending','99a7ad42c41ba8d70145cbbea343292f','',0,1),(20,1,18,'的','','uploads/photo/14b78418_1_0268352001355038984.jpg','uploads/photo/14b78418_1_0375692001355038981.jpg','',NULL,'',0,8,5,1,0,0,'pending','5aecb131e0487aea7445d233545781e4','',0,0),(21,1,18,'的','','uploads/photo/14b78418_1_0455574001355038989.jpg','uploads/photo/14b78418_1_0333254001355038989.jpg','',NULL,'',0,7,4.5,2,0,0,'pending','eb2c823e25120f00f269899aec06129d','',0,0),(22,2,20,'efsd','','uploads/photo/14b78418_2_0833420001355195632.jpg','uploads/photo/14b78418_2_0130276001355195632.jpg','',NULL,'',0,53,3,1,0,0,'pending','0a633f7e25c511121b9f3b6de9495403','',1,0),(23,2,20,'efsd','','uploads/photo/14b78418_2_0297742001355195633.jpg','uploads/photo/14b78418_2_0243559001355195633.jpg','',NULL,'',0,57,3,1,0,0,'pending','0133dc56f63bbf39625d88b51764f74c','',0,0),(24,1,22,'sdgsdf','','uploads/photo/14b78418_1_0573148001356329979.jpg','uploads/photo/14b78418_1_0148744001356329979.jpg','',NULL,'',0,7,5,2,0,0,'pending','91ac43893c0e92db9e9bb6628115a9e7','',2,0),(25,2,19,NULL,'','uploads/photo/14b78418_2_0217468001356859521.jpg','uploads/photo/14b78418_2_0361770001356859520.jpg','',NULL,'',0,6,0,0,0,0,'pending','a1fc9aa8cf29bec3d7b61ce480827899','',1,0),(26,1,18,'dsfsdf','','uploads/photo/14b78418_1_0068947001359599793.jpg','uploads/photo/14b78418_1_0734863001359599792.jpg','',NULL,'',0,5,5,1,0,0,'pending','deba9299774bc3a0338e3c9198dc9caf','',0,0),(27,1,18,'dsfsdf','','uploads/photo/14b78418_1_0293438001359599793.jpg','uploads/photo/14b78418_1_0263305001359599793.jpg','',NULL,'',0,3,0,0,0,0,'pending','0cd16748c40c6573320e7c07ba2a0dc0','',1,0),(28,1,18,'呵呵','','uploads/photo/14b78418_1_0827872001363450391.jpg','uploads/photo/14b78418_1_0576211001363450391.jpg','',NULL,'',0,5,5,1,0,0,'pending','79aa5171a3beb012b86d5d499b5e40e4','',1,0);
+insert  into `photo`(`id`,`uid`,`album_id`,`title`,`desc`,`path`,`orig_path`,`ext`,`size`,`tags`,`create_time`,`views`,`rate`,`rate_count`,`cmt_count`,`is_featured`,`status`,`hash`,`categories`,`up_votes`,`down_votes`) values (7,1,17,NULL,'','uploads/photo/14b78418_1_0580202001354080827.gif','uploads/photo/14b78418_1_0572068001354080827.gif','',NULL,'',0,8,4.1667,6,0,0,'pending','150ea03ec2e732c40cc6f2d67e7b738f','',1,4),(6,1,17,NULL,'','uploads/photo/14b78418_1_0536732001354080827.jpg','uploads/photo/14b78418_1_0354406001354080827.jpg','',NULL,'',0,4,4,5,0,0,'pending','4fdd716936ea044df6bfb7f7fd1b5f4d','',5,1),(5,1,17,NULL,'','uploads/photo/14b78418_1_0186442001354080827.jpg','uploads/photo/14b78418_1_0904550001354080826.jpg','',NULL,'',0,4,3.3333,3,0,0,'pending','889db8de76d6801e6d54d038e265e85b','',1,0),(8,1,14,'klll','','uploads/photo/14b78418_1_0149329001354082256.jpg','uploads/photo/14b78418_1_0967305001354082255.jpg','',NULL,'',0,9,3,1,0,0,'pending','7b906bf144e9780e836e4ff7790c7f33','',2,2),(9,1,18,NULL,'','uploads/photo/14b78418_1_0469778001354083471.gif','uploads/photo/14b78418_1_0434331001354083471.gif','',NULL,'',0,6,4,2,0,0,'pending','35f235aec029932f729686997bb56282','',0,0),(10,1,18,'sdf','','uploads/photo/14b78418_1_0695832001354115228.jpg','uploads/photo/14b78418_1_0415269001354115215.jpg','',NULL,'',0,12,5,3,0,0,'pending','f140b59579d9a0e37e2635250d13d1e6','',0,0),(11,1,14,'dsfsdfdf','','uploads/photo/14b78418_1_0338850001354202427.gif','uploads/photo/14b78418_1_0779175001354202426.gif','',NULL,'',0,3,5,1,0,0,'pending','99f201acbb1706cf46e2600716c14255','',0,0),(12,1,14,'dsfsdfdf','','uploads/photo/14b78418_1_0786619001354202427.gif','uploads/photo/14b78418_1_0774837001354202427.gif','',NULL,'',0,0,3,1,0,0,'pending','8e80c03905ece04f05d5d0643865acbe','',0,0),(13,1,14,'dsfsdfdf','','uploads/photo/14b78418_1_0846882001354202427.jpg','uploads/photo/14b78418_1_0795038001354202427.jpg','',NULL,'',0,1,5,1,0,0,'pending','c866ab522343b1f80d153283d1d14846','',0,0),(14,2,19,'yteen','','uploads/photo/14b78418_2_0576444001354434888.jpg','uploads/photo/14b78418_2_0216119001354434888.jpg','',NULL,'',0,103,5,3,0,0,'pending','d7f69143f8e937b31fc85c42414bc980','',1,0),(15,2,19,'yteen','','uploads/photo/14b78418_2_0903833001354434888.jpg','uploads/photo/14b78418_2_0862540001354434888.jpg','',NULL,'',0,55,4,4,0,0,'pending','3f4148cf362badc0c9b6ec71fc3b84e3','',1,0),(16,2,20,'fgdfg','','uploads/photo/14b78418_2_0620196001354435271.gif','uploads/photo/14b78418_2_0436555001354435271.gif','',NULL,'',0,0,3.6667,3,0,0,'pending','fe8c3a4a952e2c6a5e17dca4046d1ab2','',0,0),(17,2,20,'fgdfg','','uploads/photo/14b78418_2_0706584001354435271.jpg','uploads/photo/14b78418_2_0662943001354435271.jpg','',NULL,'',0,16,4,3,0,0,'pending','c6d4f4aeb8077329252f303218bff299','',0,0),(18,1,14,'dsfsdf','','uploads/photo/14b78418_1_0165501001354603881.gif','uploads/photo/14b78418_1_0000093001354603879.gif','',NULL,'',0,5,3,2,0,0,'pending','84efd6df578978564df480a70eecf953','',0,0),(19,1,17,'dd','','uploads/photo/14b78418_1_0874141001354718058.gif','uploads/photo/14b78418_1_0783212001354718057.gif','',NULL,'',0,20,4,2,0,0,'pending','99a7ad42c41ba8d70145cbbea343292f','',0,1),(20,1,18,'的','','uploads/photo/14b78418_1_0268352001355038984.jpg','uploads/photo/14b78418_1_0375692001355038981.jpg','',NULL,'',0,8,5,1,0,0,'pending','5aecb131e0487aea7445d233545781e4','',0,0),(21,1,18,'的','','uploads/photo/14b78418_1_0455574001355038989.jpg','uploads/photo/14b78418_1_0333254001355038989.jpg','',NULL,'',0,7,4.5,2,0,0,'pending','eb2c823e25120f00f269899aec06129d','',0,0),(22,2,20,'efsd','','uploads/photo/14b78418_2_0833420001355195632.jpg','uploads/photo/14b78418_2_0130276001355195632.jpg','',NULL,'',0,54,3,1,0,0,'pending','0a633f7e25c511121b9f3b6de9495403','',1,0),(23,2,20,'efsd','','uploads/photo/14b78418_2_0297742001355195633.jpg','uploads/photo/14b78418_2_0243559001355195633.jpg','',NULL,'',0,58,3,1,0,0,'pending','0133dc56f63bbf39625d88b51764f74c','',1,0),(24,1,22,'sdgsdf','','uploads/photo/14b78418_1_0573148001356329979.jpg','uploads/photo/14b78418_1_0148744001356329979.jpg','',NULL,'',0,9,5,3,0,0,'pending','91ac43893c0e92db9e9bb6628115a9e7','',2,0),(25,2,19,NULL,'','uploads/photo/14b78418_2_0217468001356859521.jpg','uploads/photo/14b78418_2_0361770001356859520.jpg','',NULL,'',0,6,0,0,0,0,'pending','a1fc9aa8cf29bec3d7b61ce480827899','',1,0),(26,1,18,'dsfsdf','','uploads/photo/14b78418_1_0068947001359599793.jpg','uploads/photo/14b78418_1_0734863001359599792.jpg','',NULL,'',0,6,5,1,0,0,'pending','deba9299774bc3a0338e3c9198dc9caf','',0,0),(27,1,18,'dsfsdf','','uploads/photo/14b78418_1_0293438001359599793.jpg','uploads/photo/14b78418_1_0263305001359599793.jpg','',NULL,'',0,3,0,0,0,0,'pending','0cd16748c40c6573320e7c07ba2a0dc0','',1,0),(28,1,18,'呵呵','','uploads/photo/14b78418_1_0827872001363450391.jpg','uploads/photo/14b78418_1_0576211001363450391.jpg','',NULL,'',0,11,5,1,0,0,'pending','79aa5171a3beb012b86d5d499b5e40e4','',2,0);
+
+/*Table structure for table `photo_album` */
+
+DROP TABLE IF EXISTS `photo_album`;
+
+CREATE TABLE `photo_album` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `name` varchar(60) NOT NULL,
+  `desc` varchar(255) DEFAULT '',
+  `create_time` int(11) unsigned DEFAULT NULL,
+  `update_time` int(11) unsigned DEFAULT NULL,
+  `cover_uri` varchar(255) DEFAULT NULL,
+  `mbr_count` int(11) DEFAULT '0',
+  `views` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(2) unsigned NOT NULL DEFAULT '1',
+  `is_hot` varchar(1) NOT NULL DEFAULT '0',
+  `privacy` tinyint(1) DEFAULT NULL,
+  `privacy_data` text,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `cTime` (`create_time`),
+  KEY `mTime` (`update_time`)
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_album` */
+
+insert  into `photo_album`(`id`,`uid`,`name`,`desc`,`create_time`,`update_time`,`cover_uri`,`mbr_count`,`views`,`status`,`is_hot`,`privacy`,`privacy_data`) values (15,3,'dii','yiing2\r\n',NULL,NULL,NULL,0,0,1,'0',NULL,NULL),(18,1,'njia',NULL,NULL,NULL,NULL,7,0,1,'0',NULL,NULL),(19,2,'test','hhehhe\r\n',NULL,NULL,NULL,3,0,1,'0',NULL,NULL),(14,1,'jj','pp\r\n',NULL,NULL,NULL,5,0,1,'0',1,NULL),(20,2,'tt','jj\r\n',NULL,NULL,NULL,4,0,1,'0',NULL,NULL),(17,1,'danteng','pp',NULL,NULL,NULL,4,0,1,'0',1,NULL),(16,3,'罪人','啊',NULL,NULL,NULL,0,0,1,'0',NULL,NULL),(22,1,'jj','pp\r\n',NULL,NULL,NULL,1,0,1,'0',1,NULL);
+
+/*Table structure for table `photo_album_cmt` */
+
+DROP TABLE IF EXISTS `photo_album_cmt`;
+
+CREATE TABLE `photo_album_cmt` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id 主键',
+  `pid` int(11) NOT NULL DEFAULT '0' COMMENT '对评论的评论',
+  `object_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评论的目标id 即ar的主键',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'author_id 评论者 0 表示游客身份',
+  `content` text NOT NULL COMMENT '评论内容',
+  `mood` tinyint(4) NOT NULL DEFAULT '0' COMMENT '心情',
+  `rate` int(11) NOT NULL DEFAULT '0' COMMENT '投票总分 5星制',
+  `rate_count` int(11) NOT NULL DEFAULT '0' COMMENT '投票次数',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '评论的时间',
+  `replies` int(11) NOT NULL DEFAULT '0' COMMENT '回复数',
+  PRIMARY KEY (`id`),
+  KEY `cmt_object_id` (`object_id`,`pid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_album_cmt` */
+
+/*Table structure for table `photo_cmt` */
+
+DROP TABLE IF EXISTS `photo_cmt`;
+
+CREATE TABLE `photo_cmt` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id 主键',
+  `pid` int(11) NOT NULL DEFAULT '0' COMMENT '对评论的评论',
+  `object_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评论的目标id 即ar的主键',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'author_id 评论者 0 表示游客身份',
+  `content` text NOT NULL COMMENT '评论内容',
+  `mood` tinyint(4) NOT NULL DEFAULT '0' COMMENT '心情',
+  `rate` int(11) NOT NULL DEFAULT '0' COMMENT '投票总分 5星制',
+  `rate_count` int(11) NOT NULL DEFAULT '0' COMMENT '投票次数',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '评论的时间',
+  `replies` int(11) NOT NULL DEFAULT '0' COMMENT '回复数',
+  PRIMARY KEY (`id`),
+  KEY `cmt_object_id` (`object_id`,`pid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_cmt` */
+
+/*Table structure for table `photo_favorite` */
+
+DROP TABLE IF EXISTS `photo_favorite`;
+
+CREATE TABLE `photo_favorite` (
+  `object_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '目标对象ar的id',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '动作执行者',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`object_id`,`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_favorite` */
+
+/*Table structure for table `photo_rating` */
+
+DROP TABLE IF EXISTS `photo_rating`;
+
+CREATE TABLE `photo_rating` (
+  `pt_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `pt_rating_count` int(11) NOT NULL DEFAULT '0',
+  `pt_rating_sum` int(11) NOT NULL DEFAULT '0',
+  UNIQUE KEY `med_id` (`pt_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_rating` */
+
+insert  into `photo_rating`(`pt_id`,`pt_rating_count`,`pt_rating_sum`) values (7,6,25),(5,3,10),(6,5,20),(10,3,15),(9,2,8),(14,3,15),(17,3,12),(16,3,11),(15,4,16),(19,2,8),(18,2,6),(13,1,5),(11,1,5),(12,1,3),(21,2,9),(20,1,5),(23,1,3),(8,1,3),(22,1,3),(24,3,15),(26,1,5),(28,1,5);
+
+/*Table structure for table `photo_thumb_vote` */
+
+DROP TABLE IF EXISTS `photo_thumb_vote`;
+
+CREATE TABLE `photo_thumb_vote` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `object_id` int(11) unsigned NOT NULL,
+  `value` tinyint(1) unsigned NOT NULL,
+  `uid` int(11) unsigned DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `create_time` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `only_once` (`object_id`,`ip`,`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_thumb_vote` */
+
+insert  into `photo_thumb_vote`(`id`,`object_id`,`value`,`uid`,`ip`,`create_time`) values (16,6,0,1,'127.0.0.1',1355507933),(17,19,0,1,'127.0.0.1',1355508001),(18,7,0,1,'127.0.0.1',1355509095),(19,8,1,2,'127.0.0.1',1355551810),(20,7,0,2,'127.0.0.1',1355551814),(21,6,1,2,'127.0.0.1',1355551823),(22,22,1,1,'127.0.0.1',1355553468),(23,15,1,2,'127.0.0.1',1355560986),(24,24,1,1,'127.0.0.1',1356329995),(25,14,1,2,'127.0.0.1',1356794277),(26,24,1,0,'127.0.0.1',1357469569),(27,25,1,1,'127.0.0.1',1362918865),(28,27,1,1,'127.0.0.1',1363082259),(29,28,1,0,'127.0.0.1',1363450826),(30,28,1,1,'127.0.0.1',1365847881),(31,23,1,2,'127.0.0.1',1370773016);
+
+/*Table structure for table `photo_view_track` */
+
+DROP TABLE IF EXISTS `photo_view_track`;
+
+CREATE TABLE `photo_view_track` (
+  `id` int(10) unsigned NOT NULL,
+  `viewer` int(10) unsigned NOT NULL,
+  `ip` int(10) unsigned NOT NULL,
+  `ts` int(10) unsigned NOT NULL,
+  KEY `id` (`id`,`viewer`,`ip`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_view_track` */
+
+insert  into `photo_view_track`(`id`,`viewer`,`ip`,`ts`) values (10,1,0,1354295444),(7,1,0,1354295801),(6,1,0,1354295834),(6,2,0,1354295922),(7,2,0,1354295977),(9,1,0,1354297211),(5,1,0,1354334958),(14,2,16777343,1370773043),(15,2,16777343,1356792377),(10,2,16777343,1354686988),(17,2,16777343,1354963048),(5,2,16777343,1354442196),(13,1,16777343,1354518829),(6,0,16777343,1354554312),(17,0,16777343,1354673645),(5,0,16777343,1354554792),(15,0,16777343,1355202146),(14,1,16777343,1355369339),(18,1,16777343,1354603897),(14,0,16777343,1354673645),(15,1,16777343,1355242405),(7,0,16777343,1354716174),(8,1,16777343,1388249209),(19,1,16777343,1363450189),(19,0,16777343,1354724009),(17,1,16777343,1354726037),(11,1,16777343,1359599859),(18,0,16777343,1355038837),(18,2,16777343,1354972425),(19,2,16777343,1354972548),(20,1,16777343,1358487618),(21,1,16777343,1357144042),(22,2,16777343,1356849166),(23,2,16777343,1370772968),(23,0,16777343,1355217621),(22,1,16777343,1356849998),(22,0,16777343,1371241859),(23,1,16777343,1356857352),(24,1,16777343,1371605948),(21,2,16777343,1356507220),(25,2,16777343,1356859525),(24,0,16777343,1357469484),(25,1,16777343,1362918852),(26,1,16777343,1365847492),(27,1,16777343,1363082241),(26,0,16777343,1363021841),(28,1,16777343,1365847733),(28,0,16777343,1371403274);
+
+/*Table structure for table `photo_vote_track` */
+
+DROP TABLE IF EXISTS `photo_vote_track`;
+
+CREATE TABLE `photo_vote_track` (
+  `pt_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `pt_ip` varchar(20) DEFAULT NULL,
+  `pt_date` datetime DEFAULT NULL,
+  KEY `med_ip` (`pt_ip`,`pt_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_vote_track` */
+
+insert  into `photo_vote_track`(`pt_id`,`pt_ip`,`pt_date`) values (19,'127.0.0.1','2012-12-06 00:50:04'),(7,'127.0.0.1','2012-12-06 00:49:40'),(10,'127.0.0.1','2012-12-06 00:48:57'),(9,'127.0.0.1','2012-12-06 00:48:52'),(16,'127.0.0.1','2012-12-06 00:47:31'),(17,'127.0.0.1','2012-12-06 00:47:21'),(15,'127.0.0.1','2012-12-06 00:46:56'),(14,'127.0.0.1','2012-12-06 00:46:48'),(18,'127.0.0.1','2012-12-06 01:31:28'),(13,'127.0.0.1','2012-12-06 01:31:34'),(11,'127.0.0.1','2012-12-06 01:31:39'),(12,'127.0.0.1','2012-12-06 01:31:54'),(6,'127.0.0.1','2012-12-06 15:23:25'),(5,'127.0.0.1','2012-12-06 15:23:48'),(21,'127.0.0.1','2012-12-09 16:14:02'),(20,'127.0.0.1','2012-12-09 16:14:24'),(23,'127.0.0.1','2012-12-11 12:54:47'),(7,'127.0.0.1','2012-12-13 12:11:35'),(8,'127.0.0.1','2012-12-13 12:12:36'),(18,'127.0.0.1','2012-12-13 12:13:13'),(22,'127.0.0.1','2012-12-14 22:20:28'),(15,'127.0.0.1','2012-12-15 16:42:35'),(24,'127.0.0.1','2012-12-24 14:19:59'),(21,'127.0.0.1','2012-12-25 00:23:51'),(15,'127.0.0.1','2012-12-29 22:47:24'),(16,'127.0.0.1','2012-12-30 16:45:59'),(24,'127.0.0.1','2013-01-06 18:52:53'),(14,'127.0.0.1','2013-03-10 20:35:22'),(26,'127.0.0.1','2013-03-12 17:57:42'),(28,'127.0.0.1','2013-03-17 00:31:49'),(17,'127.0.0.1','2013-06-09 18:17:04'),(24,'127.0.0.1','2013-06-17 01:22:22');
 
 /*Table structure for table `relationship` */
 
@@ -547,11 +697,11 @@ CREATE TABLE `settings` (
   `value` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `category_key` (`category`,`key`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `settings` */
 
-insert  into `settings`(`id`,`category`,`key`,`value`) values (1,'cate1','key1','s:27:\"hello actionTestCmsSettings\";'),(2,'action_feed','Relationship','s:61:\"application.modules.friend.components.RelationshipFeedHandler\";'),(3,'cate1','key2','a:2:{s:1:\"k\";s:1:\"v\";s:2:\"k2\";i:2;}');
+insert  into `settings`(`id`,`category`,`key`,`value`) values (1,'cate1','key1','s:27:\"hello actionTestCmsSettings\";'),(2,'action_feed','Relationship','s:61:\"application.modules.friend.components.RelationshipFeedHandler\";'),(3,'cate1','key2','a:2:{s:1:\"k\";s:1:\"v\";s:2:\"k2\";i:2;}'),(4,'ys_nav:userSpace:top_nav','blog','a:1:{s:4:\"blog\";a:2:{s:4:\"text\";s:6:\"日志\";s:3:\"url\";a:1:{i:0;s:17:\"/blog/member/list\";}}}'),(5,'ys_nav:UserCenter:side_nav','blog','a:1:{s:4:\"main\";a:2:{s:4:\"text\";s:6:\"日志\";s:3:\"url\";a:1:{i:0;s:8:\"/blog/my\";}}}'),(6,'ys_nav:userSpace:top_nav','photo','a:1:{s:5:\"photo\";a:2:{s:4:\"text\";s:6:\"相册\";s:3:\"url\";a:1:{i:0;s:13:\"/album/member\";}}}'),(7,'ys_nav:UserCenter:side_nav','photo','a:1:{s:4:\"main\";a:2:{s:4:\"text\";s:6:\"相册\";s:3:\"url\";a:1:{i:0;s:9:\"/album/my\";}}}');
 
 /*Table structure for table `status` */
 
@@ -800,11 +950,11 @@ CREATE TABLE `sys_hook` (
   `create_time` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQUE` (`client_hook_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=228 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_hook` */
 
-insert  into `sys_hook`(`id`,`host_module`,`hook_name`,`client_module`,`client_hook_name`,`hook_content`,`priority`,`type`,`create_time`) values (142,'app','createUrl','photo','photo_appCreateUrl','{\"route\":[\"album\\/member\",\"\\/album\\/member\"],\"paramsExpression\":\"isset($_GET[\'u\'])?$params+array(\'u\'=>$_GET[\'u\']):$params;\"}',0,'\'custom\'',1355501348),(221,'app','test','app','appOnAppTest2','dddhi can not be blank ',0,'\'custom\'',1358013771);
+insert  into `sys_hook`(`id`,`host_module`,`hook_name`,`client_module`,`client_hook_name`,`hook_content`,`priority`,`type`,`create_time`) values (227,'app','createUrl','photo','photo_appCreateUrl','{\"route\":[\"album\\/member\",\"\\/album\\/member\"],\"paramsExpression\":\"isset($_GET[\'u\'])?$params+array(\'u\'=>$_GET[\'u\']):$params;\"}',0,'\'custom\'',1388249130);
 
 /*Table structure for table `sys_menu` */
 
@@ -866,11 +1016,104 @@ CREATE TABLE `sys_module` (
   `dependencies` varchar(255) NOT NULL DEFAULT '',
   `ctime` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_module` */
 
-insert  into `sys_module`(`id`,`module_id`,`title`,`vendor`,`version`,`dependencies`,`ctime`) values (44,'friend','','','','',1346038195),(50,'blog','','','','',1369221335);
+insert  into `sys_module`(`id`,`module_id`,`title`,`vendor`,`version`,`dependencies`,`ctime`) values (44,'friend','','','','',1346038195),(51,'blog','','','','',1388248784),(52,'photo','','','','',1388249131);
+
+/*Table structure for table `sys_object_cmt` */
+
+DROP TABLE IF EXISTS `sys_object_cmt`;
+
+CREATE TABLE `sys_object_cmt` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `object_name` varchar(50) NOT NULL,
+  `table_cmt` varchar(50) NOT NULL,
+  `table_track` varchar(50) DEFAULT NULL,
+  `per_view` smallint(6) NOT NULL,
+  `is_ratable` smallint(1) NOT NULL,
+  `is_on` smallint(1) NOT NULL,
+  `is_mood` smallint(1) NOT NULL,
+  `trigger_table` varchar(32) NOT NULL,
+  `trigger_field_id` varchar(32) NOT NULL,
+  `trigger_field_cmts` varchar(32) NOT NULL,
+  `class` varchar(32) NOT NULL DEFAULT '',
+  `extra_config` tinytext COMMENT '额外配置 这里主要存针对commentsModule扩展的配置',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_object_cmt` */
+
+insert  into `sys_object_cmt`(`id`,`object_name`,`table_cmt`,`table_track`,`per_view`,`is_ratable`,`is_on`,`is_mood`,`trigger_table`,`trigger_field_id`,`trigger_field_cmts`,`class`,`extra_config`) values (30,'photo','photo_cmt',NULL,15,0,1,1,'photo','id','cmt_count','','{\"registeredOnly\":false,\"useCaptcha\":false,\"allowSubcommenting\":true,\"premoderate\":false,\"postCommentAction\":\"comments\\/comment\\/postComment\",\"isSuperuser\":\"true\",\"orderComments\":\"DESC\"}'),(31,'photo','photo_cmt',NULL,15,0,1,1,'photo','id','cmt_count','','{\"registeredOnly\":false,\"useCaptcha\":false,\"allowSubcommenting\":true,\"premoderate\":false,\"postCommentAction\":\"comments\\/comment\\/postComment\",\"isSuperuser\":\"true\",\"orderComments\":\"DESC\"}');
+
+/*Table structure for table `sys_object_thumb_vote` */
+
+DROP TABLE IF EXISTS `sys_object_thumb_vote`;
+
+CREATE TABLE `sys_object_thumb_vote` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `object_name` varchar(50) NOT NULL COMMENT 'ar 的类名',
+  `table_track` varchar(50) NOT NULL COMMENT '投票跟踪表 防止重复投票',
+  `row_prefix` varchar(20) NOT NULL DEFAULT '' COMMENT '行前缀 join表时防止冲突',
+  `duplicate_sec` int(10) NOT NULL DEFAULT '0' COMMENT '判断是重复的秒数阈值',
+  `trigger_table` varchar(60) NOT NULL,
+  `trigger_field_up_vote` varchar(60) NOT NULL DEFAULT '''up_votes''',
+  `trigger_field_down_vote` varchar(60) NOT NULL DEFAULT '''down_votes''',
+  `trigger_field_id` varchar(60) NOT NULL DEFAULT '''id''',
+  `is_on` smallint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_object_thumb_vote` */
+
+insert  into `sys_object_thumb_vote`(`id`,`object_name`,`table_track`,`row_prefix`,`duplicate_sec`,`trigger_table`,`trigger_field_up_vote`,`trigger_field_down_vote`,`trigger_field_id`,`is_on`) values (1,'photo','photo_thumb_vote','',0,'photo','up_votes','down_votes','id',1),(2,'photo','photo_thumb_vote','',0,'photo','up_votes','down_votes','id',1);
+
+/*Table structure for table `sys_object_view` */
+
+DROP TABLE IF EXISTS `sys_object_view`;
+
+CREATE TABLE `sys_object_view` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL COMMENT '唯一 一般是ar类名称',
+  `table_track` varchar(32) NOT NULL COMMENT '跟踪每次点击的表名',
+  `period` int(11) NOT NULL DEFAULT '86400' COMMENT '多长时间内不重复累积',
+  `trigger_table` varchar(32) NOT NULL COMMENT '触发的主表 即ar所对应的表名',
+  `trigger_field_id` varchar(32) NOT NULL DEFAULT '''id''' COMMENT '主键名称',
+  `trigger_field_views` varchar(32) NOT NULL DEFAULT '''views''' COMMENT '记录点击量的字段名称',
+  `enable` tinyint(2) NOT NULL DEFAULT '1' COMMENT '是否启用',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_object_view` */
+
+insert  into `sys_object_view`(`id`,`name`,`table_track`,`period`,`trigger_table`,`trigger_field_id`,`trigger_field_views`,`enable`) values (37,'photo','photo_view_track',86400,'photo','id','views',1),(38,'photo','photo_view_track',86400,'photo','id','views',1);
+
+/*Table structure for table `sys_object_vote` */
+
+DROP TABLE IF EXISTS `sys_object_vote`;
+
+CREATE TABLE `sys_object_vote` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `object_name` varchar(50) NOT NULL COMMENT 'ar 的类名',
+  `table_rating` varchar(50) NOT NULL COMMENT 'rating表名字',
+  `table_track` varchar(50) NOT NULL COMMENT '投票跟踪表 防止重复投票',
+  `row_prefix` varchar(20) NOT NULL COMMENT '行前缀 join表时防止冲突',
+  `max_votes` smallint(2) NOT NULL COMMENT '最大投票数 一般是5',
+  `duplicate_sec` int(10) NOT NULL COMMENT '判断是重复的秒数阈值',
+  `trigger_table` varchar(60) NOT NULL,
+  `trigger_field_rate` varchar(60) NOT NULL,
+  `trigger_field_rate_count` varchar(60) NOT NULL,
+  `trigger_field_id` varchar(60) NOT NULL,
+  `override_class` varchar(256) NOT NULL DEFAULT '' COMMENT '重载类别名 最好用相对于applicaiton的',
+  `post_name` varchar(50) NOT NULL DEFAULT 'rate' COMMENT '投票时用的postParam名称',
+  `is_on` smallint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+
+/*Data for the table `sys_object_vote` */
+
+insert  into `sys_object_vote`(`id`,`object_name`,`table_rating`,`table_track`,`row_prefix`,`max_votes`,`duplicate_sec`,`trigger_table`,`trigger_field_rate`,`trigger_field_rate_count`,`trigger_field_id`,`override_class`,`post_name`,`is_on`) values (35,'photo','photo_rating','photo_vote_track','pt_',5,0,'photo','rate','rate_count','id','','rate',1),(36,'photo','photo_rating','photo_vote_track','pt_',5,0,'photo','rate','rate_count','id','','rate',1);
 
 /*Table structure for table `sys_slider` */
 
@@ -981,7 +1224,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`username`,`password`,`icon_uri`,`email`,`activkey`,`superuser`,`status`,`create_at`,`lastvisit_at`) values (1,'yiqing','32ee7d239bcc2eff68f47ca70bd6e4a7','uploads/user/13678133261367813326.jpg','webmaster@example.com','8abda1b47ccc436c2aaf3eb5912d3971',1,1,'2012-07-24 15:46:36','2013-07-05 07:50:42'),(2,'yiqing2','32ee7d239bcc2eff68f47ca70bd6e4a7','uploads/user/13676024711367602471.jpg','66104992@qq.com','c1a5a5f7d1cc198d132d2d367ca08877',0,1,'2012-07-27 10:29:01','2013-05-19 16:37:57'),(3,'yiqing3','32ee7d239bcc2eff68f47ca70bd6e4a7','uploads/user/13686870341368687034.jpg','yiqing_95@qq.com','f07550b610f3388b17ffc6b62aecb1ad',0,1,'2012-08-11 14:15:02','2013-06-26 16:48:09'),(4,'tewt','test',NULL,'ceshi@qq.com','',0,0,'2013-03-24 18:53:49','0000-00-00 00:00:00');
+insert  into `user`(`id`,`username`,`password`,`icon_uri`,`email`,`activkey`,`superuser`,`status`,`create_at`,`lastvisit_at`) values (1,'yiqing','32ee7d239bcc2eff68f47ca70bd6e4a7','uploads/user/13678133261367813326.jpg','webmaster@example.com','8abda1b47ccc436c2aaf3eb5912d3971',1,1,'2012-07-24 15:46:36','2013-12-28 15:49:12'),(2,'yiqing2','32ee7d239bcc2eff68f47ca70bd6e4a7','uploads/user/13676024711367602471.jpg','66104992@qq.com','c1a5a5f7d1cc198d132d2d367ca08877',0,1,'2012-07-27 10:29:01','2013-05-19 16:37:57'),(3,'yiqing3','32ee7d239bcc2eff68f47ca70bd6e4a7','uploads/user/13686870341368687034.jpg','yiqing_95@qq.com','f07550b610f3388b17ffc6b62aecb1ad',0,1,'2012-08-11 14:15:02','2013-06-26 16:48:09'),(4,'tewt','test',NULL,'ceshi@qq.com','',0,0,'2013-03-24 18:53:49','0000-00-00 00:00:00');
 
 /*Table structure for table `user_profile` */
 
@@ -1038,11 +1281,11 @@ CREATE TABLE `user_space_visit_stat` (
   `day` date NOT NULL,
   `times` int(5) unsigned NOT NULL DEFAULT '0' COMMENT 'quantity',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8321 DEFAULT CHARSET=utf8 COMMENT='空间访问量日统计';
+) ENGINE=MyISAM AUTO_INCREMENT=8323 DEFAULT CHARSET=utf8 COMMENT='空间访问量日统计';
 
 /*Data for the table `user_space_visit_stat` */
 
-insert  into `user_space_visit_stat`(`id`,`target`,`day`,`times`) values (8274,1,'2013-04-26',4),(8275,2,'2013-04-26',3),(8276,1,'2013-04-27',6),(8277,1,'2013-04-28',1),(8278,1,'2013-04-29',2),(8279,1,'2013-04-30',1),(8280,1,'2013-05-01',1),(8281,1,'2013-05-02',1),(8282,2,'2013-05-03',1),(8283,3,'2013-05-03',1),(8284,2,'2013-05-06',1),(8285,3,'2013-05-06',1),(8286,1,'2013-05-06',1),(8287,1,'2013-05-07',2),(8288,3,'2013-05-07',2),(8289,2,'2013-05-08',1),(8290,1,'2013-05-08',1),(8291,1,'2013-05-09',1),(8292,3,'2013-05-09',1),(8293,2,'2013-05-09',1),(8294,1,'2013-05-10',1),(8295,2,'2013-05-10',2),(8296,3,'2013-05-10',2),(8297,1,'2013-05-11',1),(8298,1,'2013-05-12',1),(8299,1,'2013-05-15',1),(8300,3,'2013-05-15',1),(8301,2,'2013-05-15',1),(8302,1,'2013-05-16',1),(8303,2,'2013-05-16',1),(8304,1,'2013-05-17',1),(8305,1,'2013-05-18',1),(8306,3,'2013-05-18',1),(8307,3,'2013-05-19',1),(8308,3,'2013-05-22',1),(8309,1,'2013-05-24',1),(8310,3,'2013-05-30',1),(8311,1,'2013-06-07',1),(8312,3,'2013-06-07',1),(8313,2,'2013-06-07',1),(8314,1,'2013-06-17',1),(8315,1,'2013-06-21',1),(8316,1,'2013-06-25',1),(8317,3,'2013-06-26',1),(8318,1,'2013-06-26',1),(8319,2,'2013-06-26',1),(8320,1,'2013-07-05',1);
+insert  into `user_space_visit_stat`(`id`,`target`,`day`,`times`) values (8274,1,'2013-04-26',4),(8275,2,'2013-04-26',3),(8276,1,'2013-04-27',6),(8277,1,'2013-04-28',1),(8278,1,'2013-04-29',2),(8279,1,'2013-04-30',1),(8280,1,'2013-05-01',1),(8281,1,'2013-05-02',1),(8282,2,'2013-05-03',1),(8283,3,'2013-05-03',1),(8284,2,'2013-05-06',1),(8285,3,'2013-05-06',1),(8286,1,'2013-05-06',1),(8287,1,'2013-05-07',2),(8288,3,'2013-05-07',2),(8289,2,'2013-05-08',1),(8290,1,'2013-05-08',1),(8291,1,'2013-05-09',1),(8292,3,'2013-05-09',1),(8293,2,'2013-05-09',1),(8294,1,'2013-05-10',1),(8295,2,'2013-05-10',2),(8296,3,'2013-05-10',2),(8297,1,'2013-05-11',1),(8298,1,'2013-05-12',1),(8299,1,'2013-05-15',1),(8300,3,'2013-05-15',1),(8301,2,'2013-05-15',1),(8302,1,'2013-05-16',1),(8303,2,'2013-05-16',1),(8304,1,'2013-05-17',1),(8305,1,'2013-05-18',1),(8306,3,'2013-05-18',1),(8307,3,'2013-05-19',1),(8308,3,'2013-05-22',1),(8309,1,'2013-05-24',1),(8310,3,'2013-05-30',1),(8311,1,'2013-06-07',1),(8312,3,'2013-06-07',1),(8313,2,'2013-06-07',1),(8314,1,'2013-06-17',1),(8315,1,'2013-06-21',1),(8316,1,'2013-06-25',1),(8317,3,'2013-06-26',1),(8318,1,'2013-06-26',1),(8319,2,'2013-06-26',1),(8320,1,'2013-07-05',1),(8321,1,'2013-12-28',1),(8322,3,'2013-12-28',1);
 
 /*Table structure for table `user_space_visitor` */
 
@@ -1058,7 +1301,7 @@ CREATE TABLE `user_space_visitor` (
 
 /*Data for the table `user_space_visitor` */
 
-insert  into `user_space_visitor`(`space_id`,`visitor_id`,`vtime`) values (1,2,1368759929),(1,3,1372265516),(2,1,1370623297),(2,3,1372265532),(3,1,1370623303),(3,2,1368981614);
+insert  into `user_space_visitor`(`space_id`,`visitor_id`,`vtime`) values (1,2,1368759929),(1,3,1372265516),(2,1,1370623297),(2,3,1372265532),(3,1,1388249286),(3,2,1368981614);
 
 /*Table structure for table `yiisession` */
 
@@ -1074,7 +1317,7 @@ CREATE TABLE `yiisession` (
 
 /*Data for the table `yiisession` */
 
-insert  into `yiisession`(`id`,`expire`,`data`,`user_id`) values ('vgk9cf1q8lash776gp9ncdd8f6',1373021057,'',0);
+insert  into `yiisession`(`id`,`expire`,`data`,`user_id`) values ('r5khcdf9gvpobgvpnndcgproj1',1388250744,'be7fd2ce866c03f23255492879669432__id|s:1:\"1\";be7fd2ce866c03f23255492879669432__name|s:6:\"yiqing\";be7fd2ce866c03f23255492879669432__states|a:0:{}Yii.CCaptchaAction.78302593.site.captcha|s:6:\"uevana\";Yii.CCaptchaAction.78302593.site.captchacount|i:2;admin__id|s:1:\"6\";admin__name|s:6:\"yiqing\";admin__states|a:0:{}admin__userInfo|a:10:{s:2:\"id\";s:1:\"6\";s:8:\"username\";s:6:\"yiqing\";s:8:\"password\";s:32:\"a4b54fec26e9075c6447c436fef27cfc\";s:4:\"name\";s:6:\"yiqing\";s:7:\"encrypt\";s:6:\"uvcOSn\";s:7:\"role_id\";s:1:\"1\";s:8:\"disabled\";s:1:\"0\";s:7:\"setting\";N;s:11:\"create_time\";s:10:\"1357745292\";s:11:\"update_time\";s:10:\"1357745292\";}adminis_admin_action|b:1;adminactiveTopMenuId|s:2:\"19\";adminadminTopMenu|a:2:{s:7:\"modules\";s:0:\"\";s:6:\"manage\";s:52:\"/sns_my/rcyxw2013/admin.php?r=module/admin&menuId=20\";}',1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

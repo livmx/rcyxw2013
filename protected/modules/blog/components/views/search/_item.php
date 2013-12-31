@@ -1,3 +1,12 @@
+<?php
+  // 注意数据不一致现象 需要推入高速可写的队列（redis、resque）去同步啊！
+
+  if(empty($data->author)){
+     // 用户已经删除了 但其博客还存在 ！
+      return ;
+  }
+?>
+
 <div class="post">
     <div class="title">
         <h2><?php echo CHtml::link(

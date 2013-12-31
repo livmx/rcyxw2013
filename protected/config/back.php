@@ -16,7 +16,7 @@ return CMap::mergeArray(
         'components'=>array(
             // uncomment the following to enable URLs in path-format
             'urlManager' => array(
-                'urlFormat' => 'path',
+                //'urlFormat' => 'path',
                 //'caseSensitive'=>false,
                 // 'showScriptName' => false, //隐藏index.php  要配合  服务器重写 将所有请求导航到 index.php上 后台不能隐藏
                 'rules' => array(

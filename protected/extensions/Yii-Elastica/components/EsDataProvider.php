@@ -73,6 +73,7 @@ class EsDataProvider extends CDataProvider
             $search  = new Elastica\Search(Yii::app()->elastica->getClient());
             $search->addIndex( $this->model->elasticIndex);
             $search->addType( $this->model->elasticType);
+           
         }
         if(count($search->getIndices())== 0) {
             $search->addIndex($this->model->elasticIndex);

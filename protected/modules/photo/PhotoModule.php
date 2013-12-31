@@ -12,7 +12,32 @@ class PhotoModule extends CWebModule implements IUrlRewriteModule
             'class'=>'PhotoModule.controllers.photoAlbumController'),
     );
      */
+    /**
+     * @property boolean whether to enable debug mode.
+     */
+    public $debug = false;
 
+    private $_assetsUrl;
+    /**
+     * borrow  from Rights module!
+     * Publishes the module assets path.
+     * @return string the base URL that contains all published asset files of photo.
+     */
+    public function getAssetsUrl()
+    {
+        if( $this->_assetsUrl===null )
+        {
+            $assetsPath = Yii::getPathOfAlias($this->getId(). '.assets');
+
+            // We need to republish the assets if debug mode is enabled.
+            if( $this->debug===true )
+                $this->_assetsUrl = Yii::app()->getAssetManager()->publish($assetsPath, false, -1, true);
+            else
+                $this->_assetsUrl = Yii::app()->getAssetManager()->publish($assetsPath);
+        }
+
+        return $this->_assetsUrl;
+    }
 
 	public function init()
 	{
