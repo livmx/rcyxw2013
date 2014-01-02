@@ -66,6 +66,22 @@ class PhotoInstaller extends BaseModuleInstaller
            )
         ));
 
+        // 安装照片收藏功能的顶部菜单
+        YsNavSystem::addUserCenterNav('user_glean_nav','photo',array(
+            'main'=>array(
+                'text'=>'收藏的照片',
+                'url'=>array(
+                    '/photo/glean/list',
+                ),
+                'htmlOptions'=>array(
+
+                ),
+                // 这个是给菜单容器用的
+                'htmlOptionsExpression'=>' array("class"=>(controller()->getModule()->getId() == "photo" )? "active":"" ) ',
+            )
+        ));
+
+
 
         echo __METHOD__ ;
     }

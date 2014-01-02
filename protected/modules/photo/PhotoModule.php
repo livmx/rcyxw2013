@@ -88,6 +88,9 @@ class PhotoModule extends CWebModule implements IUrlRewriteModule
 
             'photo/<controller:home>/*'=>'photo/home/block',
 
+            'photo/glean/<action:\w+>'=>'photo/glean/<action>',
+            'photo/glean/<action:\w+>/*'=>'photo/glean/<action>',
+
             'photo/<action:\w+>'=>'photo/photo/<action>',
             'photo/<action:\w+>/*'=>'photo/photo/<action>',
 

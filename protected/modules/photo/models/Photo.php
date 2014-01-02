@@ -25,6 +25,19 @@ class Photo extends BasePhoto
         return parent::beforeSave();
     }
 
+    public function relations()
+    {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+                      // 收藏
+            'glean'=>array(self::BELONGS_TO, 'UserGlean', array('id'=>'object_id'),
+                'condition' => 'object_type = :object_type ',
+                'params' => array(':object_type' =>'photo')
+            ),
+        );
+    }
+
     public function getThumbUrl()
     {
         return Ys::thumbUrl($this->path, 90, 90);

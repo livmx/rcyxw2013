@@ -98,6 +98,12 @@ class Post extends CActiveRecord
             'commentCount' => array(self::STAT, 'Comment', 'post_id', 'condition' => 'status=' . Comment::STATUS_APPROVED),
 
             'sysCates' => array(self::MANY_MANY, 'BlogSysCategory', 'blog_sys_category2post(post_id,sys_cate_id)'),
+
+            // 收藏
+            'glean'=>array(self::BELONGS_TO, 'UserGlean', array('id'=>'object_id'),
+                'condition' => 'object_type = :object_type ',
+                'params' => array(':object_type' =>'blog')
+            ),
         );
     }
 

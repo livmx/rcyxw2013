@@ -262,6 +262,9 @@ class UserController extends BaseUserController
     }
 
     public function actionGleanList(){
+
+        $this->redirect(array('/blog/glean/list'));
+
        $this->layout = 'userCenter';
 
         $model=new UserGlean('search');

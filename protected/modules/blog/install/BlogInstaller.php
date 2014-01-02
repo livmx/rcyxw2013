@@ -44,6 +44,21 @@ class BlogInstaller extends BaseModuleInstaller
         // 卸载系统菜单
         YsNavSystem::removeUserSpaceNav('top_nav','blog');
         YsNavSystem::removeUserCenterNav('side_nav','blog');
+
+        // 安装照片收藏功能的顶部菜单
+        YsNavSystem::addUserCenterNav('user_glean_nav','blog',array(
+            'main'=>array(
+                'text'=>'收藏的日志',
+                'url'=>array(
+                    '/blog/glean/list',
+                ),
+                'htmlOptions'=>array(
+
+                ),
+                // 这个是给菜单容器用的
+                'htmlOptionsExpression'=>' array("class"=>(controller()->getModule()->getId() == "blog" )? "active":"" ) ',
+            )
+        ));
     }
 
 

@@ -69,13 +69,22 @@ $this->pageTitle=$model->title;
                         </div>
                         <div class="object_op">
                             <?php if(!user()->getIsGuest() && user()->getId() != $model->getOwnerId()): ?>
-                            <a class="button user-op-glean"
-                               data-object-type="blog"
-                               data-object-id="<?php echo $model->primaryKey ;?>"
-                               data-action-url="<?php echo Yii::app()->createUrl('/user/glean') ;?>"
-                                >
-                                收藏
-                            </a>
+<!--                            -->
+<!--                            <a class="button user-op-glean"-->
+<!--                               data-object-type="blog"-->
+<!--                               data-object-id="--><?php //echo $model->primaryKey ;?><!--"-->
+<!--                               data-action-url="--><?php //echo Yii::app()->createUrl('/user/glean') ;?><!--"-->
+<!--                                >-->
+<!--                                收藏-->
+<!--                            </a>-->
+
+                                <?php
+                                $this->widget('widgets.YsGleanWidget',array(
+                                    'objectType'=>'blog',
+                                    'objectId'=>$model->primaryKey,
+                                    'actionConfirmation'=>'确定收藏该博文？',
+                                ));
+                                ?>
                             <?php endif ; ?>
                         </div>
 
@@ -129,43 +138,5 @@ $this->pageTitle=$model->title;
     <?php endif; ?>
 </div>
 <script type="text/javascript">
-    $(function(){
-       $("body").on("click",'a.user-op-glean',function(){
-           var objectType = $(this).attr("data-object-type");
-           var objectId = $(this).attr("data-object-id");
 
-           var url = $(this).attr("data-action-url");
-
-           $.ajax({
-               type: "POST",
-               url: url,
-               dataType:"json",
-               data: {"objectType":objectType,"objectId":objectId},
-               beforeSend:function(){
-                 if(confirm("确定收藏该文章?")){
-                     return true;
-                 }  else{
-                     return false ;
-                 }
-               },
-               success: function(resp){
-                   if(resp.status == 'success'){
-                       alert( "Data Saved: " + resp.msg );
-
-                   }else{
-                       var errors = [];
-                       errors = resp.msg ;
-
-                       var alertMsg = '';
-                       for(var idx in errors){
-                           alertMsg += ""+idx+"|"+errors[idx] ;
-                       }
-                       // 操作失败了
-                       alert(  alertMsg );
-                   }
-
-               }
-           });
-       }) ;
-    });
 </script>

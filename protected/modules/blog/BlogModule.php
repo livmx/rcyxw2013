@@ -82,7 +82,8 @@ class BlogModule extends CWebModule implements IUrlRewriteModule
             'category/<alias:.*?>-<category:.*?>'=>'blog/post/list',
             'date/<year:\d+>-<month:\d+>'=>'blog/post/list',
            // '/'=>'blog/post/index', //使用home
-            'blog/member/u-<u:\d+>'=>'blog/member/list'
+            'blog/member/u-<u:\d+>'=>'blog/member/list',
+            '<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
         );
     }
 }
