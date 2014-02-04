@@ -5,10 +5,10 @@
         <div class="col">
             <div class="size5of7 col">
                 <div class="col">
-                    <div class="col size1of5 cell">
+                    <div class="col width-1of5 cell">
                         <img src="<?php echo UserHelper::getUserIconUrl($currentUser); ?>" width="64px" height="64px">
                     </div>
-                    <div class="col sizefill">
+                    <div class="col width-fill">
                         <div class="menu cell">
                             <ul class="nav">
                                 <li class=""><a href="#" class="">Normal item</a></li>

@@ -3,7 +3,7 @@
     <div class="container site-body">
 
         <div class="cell">
-            <div class="col size1of4">
+            <div class="col width-1of4">
                 <?php $spaceOwnerModel = UserHelper::getLoginUserModel(); ?>
                 <div class="cell">
                     <?php YsPageBox::beginPanel();?>
@@ -112,7 +112,7 @@
                 </div>
 
             </div>
-            <div class="col sizefill">
+            <div class="col width-fill">
                 <?php  YsPageBox::beginPanel(); ?>
                 <?php echo $content; ?>
                 <?php  YsPageBox::endPanel();?>

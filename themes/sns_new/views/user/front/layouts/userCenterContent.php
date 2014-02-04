@@ -3,7 +3,7 @@
     <div class="container site-body">
 
         <div class="cell">
-            <div class="col size1of4">
+            <div class="col width-1of4">
                 <?php    $spaceOwnerModel = UserHelper::getLoginUserModel(); ?>
                 <div class="cell">
                     <?php YsPageBox::beginPanel();?>
@@ -24,6 +24,7 @@
                                 <li>
                                     注册时间：<?php echo Yii::app()->dateFormatter->format('y-m-d', $spaceOwnerModel->create_at); ?>
                                 </li>
+
 
                             </ul>
                         </div>
@@ -130,7 +131,7 @@
 <!--                    额外的box输出-->
 <?php if(Layout::hasRegion('rightSideBox')): ?>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <?php Layout::renderRegion('rightSideBox'); ?>
     </div>
 
@@ -142,7 +143,7 @@
                 </div>
 
             </div>
-            <div class="col sizefill">
+            <div class="col width-fill">
 
                 <?php echo $content; ?>
 

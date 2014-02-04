@@ -33,18 +33,18 @@ $this->widget('ext.ueditor.Ueditor',
 
 
 <div class="col">
-    <div class="col size1of5">
+    <div class="col width-1of5">
         <div class="cell">
             <?php echo $form->labelEx($model, 'title'); ?>
         </div>
     </div>
-    <div class="col size2of5">
+    <div class="col width-2of5">
         <div class="cell">
             <?php echo $form->textField($model, 'title', array('size' => 60, 'maxlength' => 128)); ?>
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model, 'title'); ?>
         </div>
@@ -53,12 +53,12 @@ $this->widget('ext.ueditor.Ueditor',
 </div>
 
 <div class="col">
-    <div class="col size1of5">
+    <div class="col width-1of5">
         <div class="cell">
             <?php echo $form->labelEx($model, 'category_id'); ?>
         </div>
     </div>
-    <div class="col size2of5">
+    <div class="col width-2of5">
         <div class="cell">
             <?php echo $form->dropDownList($model, 'category_id', Category::CategoryList(user()->getId())); ?>
         </div>
@@ -93,7 +93,7 @@ CB;
 
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model, 'category_id'); ?>
         </div>
@@ -102,18 +102,18 @@ CB;
 </div>
 
 <div class="col">
-    <div class="col size1of5">
+    <div class="col width-1of5">
         <div class="cell">
             <?php echo $form->labelEx($model, 'content'); ?>
         </div>
     </div>
-    <div class="col size3of5">
+    <div class="col width-3of5">
         <div class="cell">
             <?php echo $form->textArea($model, 'content', array('rows' => 6, 'cols' => 50)); ?>
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model, 'content'); ?>
         </div>
@@ -122,18 +122,18 @@ CB;
 </div>
 
 <div class="col">
-    <div class="col size1of5">
+    <div class="col width-1of5">
         <div class="cell">
             <?php echo $form->labelEx($model, 'summary'); ?>
         </div>
     </div>
-    <div class="col size2of5">
+    <div class="col width-2of5">
         <div class="cell">
             <?php echo CHtml::activeTextArea($model, 'summary', array('rows' => 5, 'cols' => 60,)); ?>
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model, 'summary'); ?>
         </div>
@@ -142,12 +142,12 @@ CB;
 </div>
 
 <div class="col">
-    <div class="col size1of5">
+    <div class="col width-1of5">
         <div class="cell">
             <?php echo $form->labelEx($model, 'tags'); ?>
         </div>
     </div>
-    <div class="col size2of5">
+    <div class="col width-2of5">
         <div class="cell">
             <?php $this->widget('CAutoComplete', array(
                 'model' => $model,
@@ -160,7 +160,7 @@ CB;
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model, 'tags'); ?>
         </div>
@@ -169,18 +169,18 @@ CB;
 </div>
 
 <div class="col">
-    <div class="col size1of5">
+    <div class="col width-1of5">
         <div class="cell">
             <?php echo $form->labelEx($model, 'status'); ?>
         </div>
     </div>
-    <div class="col size2of5">
+    <div class="col width-2of5">
         <div class="cell">
             <?php echo $form->dropDownList($model, 'status', Lookup::items('PostStatus')); ?>
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model, 'status'); ?>
         </div>
@@ -189,12 +189,12 @@ CB;
 </div>
 
 <div class="col">
-    <div class="col size1of5">
+    <div class="col width-1of5">
         <div class="cell">
             <?php echo $form->labelEx($model, 'sysCategories'); ?>
         </div>
     </div>
-    <div class="col size2of5">
+    <div class="col width-2of5">
         <div class="cell">
             <?php echo $form->checkBoxList($model, 'sysCategories',
                 CHtml::listData(BlogSysCategory::model()->findAllByAttributes(
@@ -205,7 +205,7 @@ CB;
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model, 'sysCategories'); ?>
         </div>
@@ -214,9 +214,9 @@ CB;
 </div>
 
 <div class="col">
-    <div class="col size1of5">
+    <div class="col width-1of5">
     </div>
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' => 'button')); ?>
         </div>

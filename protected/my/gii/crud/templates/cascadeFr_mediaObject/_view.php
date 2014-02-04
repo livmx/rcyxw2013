@@ -15,13 +15,13 @@
         <div class="cell">
             <div class="col">
                 <div class="cell">
-                    <div class="col sizefit">
+                    <div class="col width-fit">
                         <?php
                         echo "\t<b><?php echo CHtml::encode(\$data->getAttributeLabel('{$this->tableSchema->primaryKey}')); ?>:</b>\n";
                         echo "\t<?php echo CHtml::link(CHtml::encode(\$data->{$this->tableSchema->primaryKey}), array('view', 'id'=>\$data->{$this->tableSchema->primaryKey})); ?>\n\t<br />\n\n";
                         ?>
                     </div>
-                    <div class="col sizefill">
+                    <div class="col width-fill">
                         <div class="cell">
                             <?php
                             $count=0;

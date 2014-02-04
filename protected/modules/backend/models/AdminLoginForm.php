@@ -1,4 +1,5 @@
 <?php
+Yii::app()->getModule('backend');
 
 class AdminLoginForm extends CFormModel {
 

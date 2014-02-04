@@ -14,21 +14,42 @@ Yii::import($alias.'.ArtDialog');
 
 class ArtFormDialog extends ArtDialog{
 
+    /**
+     * 触发对话框弹出的css 链接选择器
+     * @var
+     */
     public $link;
 
+    /**
+     * 传递给底层对话框的参数选项
+     * @var array
+     */
     public $dialogOptions = array();
+
+    /**
+     * 提交成功后关闭对话框？
+     * @var bool
+     */
+    public $closeOnSuccess = true ;
 
     public function init(){
         parent::init();
         $this->options['id'] = $this->getId();
+        if(!isset($this->options['closeOnSuccess'])){
+            $this->options['closeOnSuccess'] = $this->closeOnSuccess ;
+        }
     }
 
     public function run(){
         parent::run();
-        $this->registerFormDialogPlugin();
+        self::registerFormDialogPlugin();
+        if(empty($this->link)){
+            return ;
+        }
 
-        if (!$this->options['onSuccess'])
-            $this->options['onSuccess']='js:function(data, e){alert("Success")}';
+        // 如果不是成功就关闭对话框 那么最好手动关闭它 在这个方法里面
+        if (!isset($this->options['onSuccess']))
+            $this->options['onSuccess']='js:function(data ,dialog , e){alert("Success")}';
 
 
         $this->options['dialogOptions'] = $this->dialogOptions ;
@@ -38,6 +59,7 @@ class ArtFormDialog extends ArtDialog{
         $jsCode = <<<INIT
 
  $(document).on('click',"{$this->link}", function (e) {
+ // $("{$this->link}").on('click',function (e) {
                 e.preventDefault();
              //   alert($(this).html());
                   $(this).formDialog({$options});
@@ -46,19 +68,20 @@ class ArtFormDialog extends ArtDialog{
 
 
 INIT;
-
-
-        Yii::app()->clientScript->registerScript('FormDialog'.$this->link, $jsCode,CClientScript::POS_HEAD);
+        // 以前是在pos_head 段加的 ！！bug 纠正了
+        Yii::app()->clientScript->registerScript('FormDialog'.$this->link, $jsCode,CClientScript::POS_READY);
 
     }
 
-    protected function registerFormDialogPlugin(){
+    public static  function registerFormDialogPlugin(){
         $js = <<<PLUGIN
-(function ($) {
-    $.fn.formDialog = function (options) {
+;(function ($) {
+
+  $.fn.formDialog = function (options) {
 
         return this.each(function(){
             var link = $(this);
+            // 将options 存在该jquery对象上
             var url = link.attr('href');
             //alert(url);
 
@@ -70,7 +93,6 @@ INIT;
                 'success': function (data) {
 
                     var dialogContent = $('<div class="content-wrapper"> <div class="forView  "></div> </div> ');
-                   //  dialogContent.find('.forView').html('lskadjf;lsakdjg;ladfjg;dfgjd;lfkjgd;lsfkgj;dlkfjg;ldskfg');
 
                     dialogContent.find('.forView').html(data.view || data.form);
 
@@ -91,12 +113,15 @@ INIT;
                             'data': $(this).serialize(),
                             'dataType': 'json',
                             'success': function (data) {
-                                if (data.status == 'failure')
+                                if (data.status == 'failure'){
                                     $('.forView').html(data.view || data.form);
-                                else if (data.status == 'success') {
+                                }else if (data.status == 'success') {
                                     // var dialog = $.dialog.get(artDialogId);
-                                    artDialogId.close();
-                                    options['onSuccess'](data, e);
+
+                                    if(options['closeOnSuccess']==true){
+                                        artDialogId.close();
+                                    }
+                                    options['onSuccess'](data,artDialogId , e);
                                 }
                             }
                         });
@@ -106,11 +131,13 @@ INIT;
                 }
             });
         });
-    }
+    };
+    $.fn.formDialog.options = {};
+
 })(jQuery);
 
 PLUGIN;
-      $this->cs->registerScript(__CLASS__.__METHOD__,$js,CClientScript::POS_END);
+      Yii::app()->clientScript->registerScript(__CLASS__.__METHOD__,$js,CClientScript::POS_HEAD);
 
 
     }

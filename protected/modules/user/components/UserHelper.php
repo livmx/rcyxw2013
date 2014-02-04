@@ -6,21 +6,23 @@
  * Time: 上午11:40
  * To change this template use File | Settings | File Templates.
  */
+
 /**
  * 仅包含 数据相关的功能 尽量不要包含ui元素相关的东西 因为要用多皮肤！
  * Class UserHelper
  */
 class UserHelper
 {
-   //---------------------------------------------------------------\\
-    static public function spaceVisitorRecord($uid){
-        echo CHtml::image(Yii::app()->createUrl('/user/user/doSpaceVisitorRecord',array('u'=>$uid)),'invisible',array(
-            'style'=>'display:none'
+    //---------------------------------------------------------------\\
+    static public function spaceVisitorRecord($uid)
+    {
+        echo CHtml::image(Yii::app()->createUrl('/user/user/doSpaceVisitorRecord', array('u' => $uid)), 'invisible', array(
+            'style' => 'display:none'
         ));
     }
 
 
-  //----------------------------------------------------------------//
+    //----------------------------------------------------------------//
     /**
      * @static
      * @param int $uid
@@ -35,7 +37,8 @@ class UserHelper
      * @return string
      * 返回用户中心的URL地址！
      */
-    static public function getUserCenterUrl(){
+    static public function getUserCenterUrl()
+    {
         return Yii::app()->createUrl('/user/home');
     }
 
@@ -51,7 +54,8 @@ class UserHelper
      *  YiiUtil::getAliasOfPath(Yii::app()->getTheme()->getViewPath(),'webroot').'.user.front.layouts.userCenter';
      * 上面的方式是可行的 但感觉有点丑陋！
      */
-    static public function getUserCenterLayout(){
+    static public function getUserCenterLayout()
+    {
         return 'userCenter';
         //return  YiiUtil::getAliasOfPath(Yii::app()->getTheme()->getViewPath(),'webroot').'.user.front.layouts.userCenter';
 
@@ -70,22 +74,23 @@ class UserHelper
      * 各个内容块使用user模块下的布局
      * @return string
      */
-    static public function getUserBaseLayoutAlias($layoutName = 'userSpace'){
+    static public function getUserBaseLayoutAlias($layoutName = 'userSpace')
+    {
 
-        if(isset(Yii::app()->endName)){
-            $endName = Yii::app()->endName ;
-            $rtn = "user.{$endName}.layouts.".$layoutName;
+        if (isset(Yii::app()->endName)) {
+            $endName = Yii::app()->endName;
+            $rtn = "user.{$endName}.layouts." . $layoutName;
 
-            if(Yii::app()->theme !== null){
-                $themeName = Yii::app()->theme->getName() ;
-                $rtn =  "webroot.themes.{$themeName}.views.".$rtn;
+            if (Yii::app()->theme !== null) {
+                $themeName = Yii::app()->theme->getName();
+                $rtn = "webroot.themes.{$themeName}.views." . $rtn;
             }
-            return $rtn ;
-        }else{
-            $rtn = 'user.layouts.'.$layoutName ;
-            if(Yii::app()->theme !== null){
-                $themeName = Yii::app()->theme->getName() ;
-                return "webroot.themes.{$themeName}.".$rtn;
+            return $rtn;
+        } else {
+            $rtn = 'user.layouts.' . $layoutName;
+            if (Yii::app()->theme !== null) {
+                $themeName = Yii::app()->theme->getName();
+                return "webroot.themes.{$themeName}." . $rtn;
             }
             return $rtn;
         }
@@ -260,7 +265,8 @@ U_FACE;
      * @param int $userB
      * @return bool
      */
-    public static function isFriend($userA,$userB){
+    public static function isFriend($userA, $userB)
+    {
 
         $sql = "SELECT 2
                 FROM
@@ -274,7 +280,7 @@ U_FACE;
         $sql .= " AND r.user_b=:userB ";
 
         $cmd = Yii::app()->db->createCommand($sql);
-        return $cmd->queryScalar(array(':userA'=>$userA,':userB'=>$userB)) !== false;
+        return $cmd->queryScalar(array(':userA' => $userA, ':userB' => $userB)) !== false;
     }
 
     //----------------------------------------------------------------\\
@@ -282,7 +288,7 @@ U_FACE;
     /**
      * @var int
      */
-    static  protected $spaceOwnerId ;
+    static protected $spaceOwnerId;
 
     /**
      * @static
@@ -292,16 +298,16 @@ U_FACE;
      */
     static public function getSpaceOwnerId()
     {
-        if(isset(self::$spaceOwnerId)){
-           return  self::$spaceOwnerId ;
-        }elseif (isset($_GET['u'])) {
-            return  self::$spaceOwnerId =   $_GET['u'];
+        if (isset(self::$spaceOwnerId)) {
+            return self::$spaceOwnerId;
+        } elseif (isset($_GET['u'])) {
+            return self::$spaceOwnerId = $_GET['u'];
 
         } else {
             if (user()->getIsGuest()) {
                 throw new CException('must pass the u  param in  $_GET variable or set the userSpaceId manually');
             } else {
-                return  self::$spaceOwnerId = $_GET['u'] = user()->getId();
+                return self::$spaceOwnerId = $_GET['u'] = user()->getId();
             }
 
         }
@@ -310,30 +316,33 @@ U_FACE;
     /**
      * @param int $userId
      */
-    static public function setSpaceOwnerId($userId = 0){
-        self::$spaceOwnerId = $userId ;
+    static public function setSpaceOwnerId($userId = 0)
+    {
+        self::$spaceOwnerId = $userId;
     }
 
     /**
      * @var User
      */
-    static protected $spaceOwnerModel ;
+    static protected $spaceOwnerModel;
 
     /**
      * @param User $userModel
      */
-    static public function setSpaceOwnerModel(User $userModel){
-            self::$spaceOwnerModel = $userModel ;
+    static public function setSpaceOwnerModel(User $userModel)
+    {
+        self::$spaceOwnerModel = $userModel;
     }
 
     /**
      * @return User
      */
-    static public function getSpaceOwnerModel(){
-        if(empty(self::$spaceOwnerModel) && self::getSpaceOwnerId() != null){
+    static public function getSpaceOwnerModel()
+    {
+        if (empty(self::$spaceOwnerModel) && self::getSpaceOwnerId() != null) {
             self::loadSpaceOwnerModel(self::getSpaceOwnerId());
         }
-        return self::$spaceOwnerModel ;
+        return self::$spaceOwnerModel;
     }
 
 
@@ -353,14 +362,15 @@ U_FACE;
      * @param int $userId
      * @return array|CActiveRecord|mixed|null
      */
-    static public function loadSpaceOwnerModel($userId ){
+    static public function loadSpaceOwnerModel($userId)
+    {
         // 注意这里的技巧 内部静态变量 跟声明本类的静态变量的区别
-        static $user ;
-        if(empty($user)){
+        static $user;
+        if (empty($user)) {
             $user = User::model()->findByPk($userId);
         }
-        self::$spaceOwnerModel = $user ;
-        return $user ;
+        self::$spaceOwnerModel = $user;
+        return $user;
     }
 //----------------------------------------------------------------\\
 
@@ -368,7 +378,8 @@ U_FACE;
     /**
      * @return User
      */
-    static public function getLoginUserModel(){
+    static public function getLoginUserModel()
+    {
         return UserModule::user(user()->getId());
     }
 
@@ -376,20 +387,22 @@ U_FACE;
      * @return string
      * 返回当前用户空间主人的图标
      */
-    static public function getSpaceOwnerIconUrl(){
+    static public function getSpaceOwnerIconUrl()
+    {
         return self::getUserIconUrl(self::getSpaceOwnerModel());
     }
 
-    static public function getUserIconUrl($data){
-        if($data instanceof CActiveRecord){
+    static public function getUserIconUrl($data)
+    {
+        if ($data instanceof CActiveRecord) {
             $iconUri = $data->icon_uri;
-        }else{
+        } else {
             $iconUri = $data['icon_uri'];
         }
 
         if (empty($iconUri)) {
             $picId = rand(1, 5);
-            return Yii::app()->getModule('user')->getAssetsUrl() ."/defaultAvatars/{$picId}.jpg";
+            return Yii::app()->getModule('user')->getAssetsUrl() . "/defaultAvatars/{$picId}.jpg";
 
         } else {
             return bu($iconUri);
@@ -399,11 +412,12 @@ U_FACE;
     /**
      * @param User $userModel
      */
-    static public function renderSimpleProfile(  $userModel){
+    static public function renderSimpleProfile($userModel)
+    {
         $spaceOwner = $userModel;
         $iconUrl = $userModel->getIconUrl();
         $userNameLabel = $userModel->getAttributeLabel('username');
-        $regTime = Yii::app()->dateFormatter->format('y-m-d',$userModel->create_at);
+        $regTime = Yii::app()->dateFormatter->format('y-m-d', $userModel->create_at);
         $spaceUrl = self::getUserSpaceUrl($userModel->primaryKey);
         $simpleProfile = <<<SP
                      <div class="col">
@@ -434,4 +448,24 @@ SP;
         echo $simpleProfile;
     }
 
+
+    /**
+     * 获取可访问的用户图像url
+     * @param $iconUrl
+     * @return string
+     */
+    static public function getIconUrl($iconUrl)
+    {
+        // die(__METHOD__);
+
+        if (empty($iconUrl)) {
+
+            $picId = rand(1, 5);
+            return Yii::app()->getModule('user')->getAssetsUrl() . "/defaultAvatars/{$picId}.jpg";
+
+        } else {
+            return bu($iconUrl);
+        }
+
+    }
 }

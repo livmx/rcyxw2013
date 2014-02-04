@@ -26,13 +26,13 @@
             </ul>
         </div>
     </div>
-    <div class="col sizefill sitemenu">
-        <div class="col sizefit mobile-sizefit">
+    <div class="col width-fill sitemenu">
+        <div class="col width-fit mobile-sizefit">
             <div class="cell">
                 <a href="index.html" class="logo"></a>
             </div>
         </div>
-        <div class="col sizefill mobile-sizefill">
+        <div class="col width-fill mobile-sizefill">
             <div class="cell">
                 <ul class="nav">
                     <li><a href="grid.html">Grid</a></li>
@@ -56,7 +56,7 @@
         </div>
     </div>
 </div>
-<div class="col size1of4">
+<div class="col width-1of4">
     <div class="cell menu">
         <span class="tiny">Component types</span>
         <ul class="left nav links">
@@ -67,7 +67,7 @@
         </ul>
     </div>
 </div>
-<div class="col sizefill">
+<div class="col width-fill">
 
 
 <div class="col">
@@ -198,29 +198,29 @@
                             Header
                         </div>
                         <div class="body">
-                            <div class="col size1of2">
+                            <div class="col width-1of2">
                                 <div class="cell">
                                     This is a panel body.
                                 </div>
                             </div>
-                            <div class="col sizefill">
+                            <div class="col width-fill">
                                 <div class="cell">
                                     This is a panel body.
                                 </div>
                             </div>
                         </div>
                         <div class="body">
-                            <div class="col size1of3">
+                            <div class="col width-1of3">
                                 <div class="cell">
                                     This is a panel body.
                                 </div>
                             </div>
-                            <div class="col size1of3">
+                            <div class="col width-1of3">
                                 <div class="cell">
                                     This is a panel body.
                                 </div>
                             </div>
-                            <div class="col sizefill">
+                            <div class="col width-fill">
                                 <div class="cell">
                                     This is a panel body.
                                 </div>
@@ -254,7 +254,7 @@
                             Header
                         </div>
                         <div class="body">
-                            <div class="col size1of2">
+                            <div class="col width-1of2">
                                 <div class="cell panel">
                                     <div class="header">
                                         Header
@@ -269,7 +269,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col sizefill">
+                            <div class="col width-fill">
                                 <div class="cell panel">
                                     <div class="header">
                                         Header
@@ -290,7 +290,7 @@
                                         Header
                                     </div>
                                     <div class="body">
-                                        <div class="col size1of2">
+                                        <div class="col width-1of2">
                                             <div class="cell panel">
                                                 <div class="header">
                                                     Header
@@ -305,7 +305,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col sizefill">
+                                        <div class="col width-fill">
                                             <div class="cell panel">
                                                 <div class="header">
                                                     Header
@@ -418,7 +418,7 @@
                                         <div class="body collapse-section">
                                             <div class="cell">
                                                 <div class="col">
-                                                    <div class="col size1of2">
+                                                    <div class="col width-1of2">
                                                         <div class="cell collapsible panel collapsed">
                                                             <div class="header collapse-trigger">
                                                                 <span class="icon icon-collapse"></span>
@@ -437,7 +437,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col sizefill">
+                                                    <div class="col width-fill">
                                                         <div class="cell collapsible panel collapsed">
                                                             <div class="header collapse-trigger">
                                                                 <span class="icon icon-collapse"></span>
@@ -458,7 +458,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="col size1of2">
+                                                    <div class="col width-1of2">
                                                         <div class="cell collapsible panel collapsed">
                                                             <div class="header collapse-trigger">
                                                                 <span class="icon icon-collapse"></span>
@@ -477,7 +477,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col sizefill">
+                                                    <div class="col width-fill">
                                                         <div class="cell collapsible panel collapsed">
                                                             <div class="header collapse-trigger">
                                                                 <span class="icon icon-collapse"></span>
@@ -560,14 +560,14 @@
         <div class="footer collapse-section">Footer</div>
     </div>
 </div>
-<div class="col size1of2">
+<div class="col width-1of2">
     <div class="panel cell">
         <div class="header">Repo list</div>
         <div class="body">
             <div class="cell">
                 <div class="col">
-                    <div class="col sizefit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
-                    <div class="col sizefill mobile-sizefill">
+                    <div class="col width-fit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
+                    <div class="col width-fill mobile-sizefill">
                                                                     <span class="float-right">
                                                                         <span class="text">
                                                                             123
@@ -576,7 +576,7 @@
                                                                             class="icon icon-star color-yellow"></span>
                                                                     </span>
 
-                        <div class="col sizefill mobile-sizefill">
+                        <div class="col width-fill mobile-sizefill">
                             <a class="fatty" href="#">Repo 1</a>
                         </div>
                         <div class="col">This is one of my coolest repos.</div>
@@ -587,8 +587,8 @@
         <div class="body">
             <div class="cell">
                 <div class="col">
-                    <div class="col sizefit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
-                    <div class="col sizefill mobile-sizefill">
+                    <div class="col width-fit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
+                    <div class="col width-fill mobile-sizefill">
                                                                     <span class="float-right">
                                                                         <span class="text">
                                                                             123
@@ -597,7 +597,7 @@
                                                                             class="icon icon-star color-yellow"></span>
                                                                     </span>
 
-                        <div class="col sizefill mobile-sizefill">
+                        <div class="col width-fill mobile-sizefill">
                             <a class="fatty" href="#">Repo 2</a>
                         </div>
                         <div class="col">This is one of my coolest repos.</div>
@@ -608,8 +608,8 @@
         <div class="body">
             <div class="cell">
                 <div class="col">
-                    <div class="col sizefit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
-                    <div class="col sizefill mobile-sizefill">
+                    <div class="col width-fit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
+                    <div class="col width-fill mobile-sizefill">
                                                                     <span class="float-right">
                                                                         <span class="text">
                                                                             123
@@ -618,7 +618,7 @@
                                                                             class="icon icon-star color-yellow"></span>
                                                                     </span>
 
-                        <div class="col sizefill mobile-sizefill">
+                        <div class="col width-fill mobile-sizefill">
                             <a class="fatty" href="#">Repo 3</a>
                         </div>
                         <div class="col">This is one of my coolest repos.</div>
@@ -629,8 +629,8 @@
         <div class="body">
             <div class="cell">
                 <div class="col">
-                    <div class="col sizefit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
-                    <div class="col sizefill mobile-sizefill">
+                    <div class="col width-fit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
+                    <div class="col width-fill mobile-sizefill">
                                                                     <span class="float-right">
                                                                         <span class="text">
                                                                             123
@@ -639,7 +639,7 @@
                                                                             class="icon icon-star color-yellow"></span>
                                                                     </span>
 
-                        <div class="col sizefill mobile-sizefill">
+                        <div class="col width-fill mobile-sizefill">
                             <a class="fatty" href="#">Repo 4</a>
                         </div>
                         <div class="col">This is one of my coolest repos.</div>
@@ -649,14 +649,14 @@
         </div>
     </div>
 </div>
-<div class="col sizefill">
+<div class="col width-fill">
     <div class="panel cell">
         <div class="header">Repo list</div>
         <div class="body">
             <div class="cell">
                 <div class="col">
-                    <div class="col sizefit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
-                    <div class="col sizefill mobile-sizefill">
+                    <div class="col width-fit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
+                    <div class="col width-fill mobile-sizefill">
                                                                     <span class="float-right">
                                                                         <span class="text">
                                                                             123
@@ -665,7 +665,7 @@
                                                                             class="icon icon-star color-yellow"></span>
                                                                     </span>
 
-                        <div class="col sizefill mobile-sizefill">
+                        <div class="col width-fill mobile-sizefill">
                             <a class="fatty" href="#">Repo 5</a>
                         </div>
                         <div class="col">This is one of my coolest repos.</div>
@@ -676,8 +676,8 @@
         <div class="body">
             <div class="cell">
                 <div class="col">
-                    <div class="col sizefit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
-                    <div class="col sizefill mobile-sizefill">
+                    <div class="col width-fit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
+                    <div class="col width-fill mobile-sizefill">
                                                                     <span class="float-right">
                                                                         <span class="text">
                                                                             123
@@ -686,7 +686,7 @@
                                                                             class="icon icon-star color-yellow"></span>
                                                                     </span>
 
-                        <div class="col sizefill mobile-sizefill">
+                        <div class="col width-fill mobile-sizefill">
                             <a class="fatty" href="#">Repo 6</a>
                         </div>
                         <div class="col">This is one of my coolest repos.</div>
@@ -697,8 +697,8 @@
         <div class="body">
             <div class="cell">
                 <div class="col">
-                    <div class="col sizefit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
-                    <div class="col sizefill mobile-sizefill">
+                    <div class="col width-fit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
+                    <div class="col width-fill mobile-sizefill">
                                                                     <span class="float-right">
                                                                         <span class="text">
                                                                             123
@@ -707,7 +707,7 @@
                                                                             class="icon icon-star color-yellow"></span>
                                                                     </span>
 
-                        <div class="col sizefill mobile-sizefill">
+                        <div class="col width-fill mobile-sizefill">
                             <a class="fatty" href="#">Repo 7</a>
                         </div>
                         <div class="col">This is one of my coolest repos.</div>
@@ -718,8 +718,8 @@
         <div class="body">
             <div class="cell">
                 <div class="col">
-                    <div class="col sizefit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
-                    <div class="col sizefill mobile-sizefill">
+                    <div class="col width-fit mobile-sizefit"><span class="icon icon-bookmark color-blue"></span></div>
+                    <div class="col width-fill mobile-sizefill">
                                                                     <span class="float-right">
                                                                         <span class="text">
                                                                             123
@@ -728,7 +728,7 @@
                                                                             class="icon icon-star color-yellow"></span>
                                                                     </span>
 
-                        <div class="col sizefill mobile-sizefill">
+                        <div class="col width-fill mobile-sizefill">
                             <a class="fatty" href="#">Repo 8</a>
                         </div>
                         <div class="col">This is one of my coolest repos.</div>
@@ -747,36 +747,36 @@
             <div class="cell">
                 <form>
                     <div class="col">
-                        <div class="col size1of4">
+                        <div class="col width-1of4">
                             <div class="cell">
                                 <label for="firstname">First name</label>
                             </div>
                         </div>
-                        <div class="col sizefill">
+                        <div class="col width-fill">
                             <div class="cell">
                                 <input type="text" id="firstname" placeholder="Your first name" class="text">
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="col size1of4">
+                        <div class="col width-1of4">
                             <div class="cell">
                                 <label for="lastname">Last name</label>
                             </div>
                         </div>
-                        <div class="col sizefill">
+                        <div class="col width-fill">
                             <div class="cell">
                                 <input type="text" id="lastname" placeholder="Your last name" class="text">
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="col size1of4">
+                        <div class="col width-1of4">
                             <div class="cell">
                                 <label for="country">Country</label>
                             </div>
                         </div>
-                        <div class="col sizefill">
+                        <div class="col width-fill">
                             <div class="cell">
                                 <select id="country">
                                     <option>Canada</option>
@@ -787,12 +787,12 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="col size1of4">
+                        <div class="col width-1of4">
                             <div class="cell">
                                 <label for="male">Gender</label>
                             </div>
                         </div>
-                        <div class="col sizefill">
+                        <div class="col width-fill">
                             <div class="cell">
                                 <input name="gender" id="male" type="radio" class="radio">
                                 <label for="male">Man</label>
@@ -802,24 +802,24 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="col size1of4">
+                        <div class="col width-1of4">
                             <div class="cell">
                                 <label for="occupation">Occupation</label>
                             </div>
                         </div>
-                        <div class="col sizefill">
+                        <div class="col width-fill">
                             <div class="cell">
                                 <input type="text" id="occupation" placeholder="Your occupation" class="text">
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="col size1of4">
+                        <div class="col width-1of4">
                             <div class="cell">
                                 <label for="webdev">Hobbies</label>
                             </div>
                         </div>
-                        <div class="col sizefill">
+                        <div class="col width-fill">
                             <div class="cell">
                                 <input name="hobbies" id="webdev" type="checkbox" class="checkbox">
                                 <label for="webdev">Web development</label>
@@ -831,21 +831,21 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="col size1of4">
+                        <div class="col width-1of4">
                             <div class="cell">
                                 <label for="comment">Comment</label>
                             </div>
                         </div>
-                        <div class="col sizefill">
+                        <div class="col width-fill">
                             <div class="cell">
                                 <textarea id="comment"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="col size1of4">
+                        <div class="col width-1of4">
                         </div>
-                        <div class="col sizefill">
+                        <div class="col width-fill">
                             <div class="cell">
                                 <button class="button">Submit</button>
                             </div>

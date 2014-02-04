@@ -16,18 +16,18 @@
 
 
 <div class="col">
-    <div class="col size1of4">
+    <div class="col width-1of4">
         <div class="cell">
             <?php echo $form->labelEx($model,'uid'); ?>
         </div>
     </div>
-    <div class="col size2of4">
+    <div class="col width-2of4">
         <div class="cell">
             <?php echo $form->textField($model,'uid'); ?>
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model,'uid'); ?>
         </div>
@@ -36,18 +36,18 @@
 </div>
 
 <div class="col">
-    <div class="col size1of4">
+    <div class="col width-1of4">
         <div class="cell">
             <?php echo $form->labelEx($model,'name'); ?>
         </div>
     </div>
-    <div class="col size2of4">
+    <div class="col width-2of4">
         <div class="cell">
             <?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>60)); ?>
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model,'name'); ?>
         </div>
@@ -56,18 +56,18 @@
 </div>
 
 <div class="col">
-    <div class="col size1of4">
+    <div class="col width-1of4">
         <div class="cell">
             <?php echo $form->labelEx($model,'desc'); ?>
         </div>
     </div>
-    <div class="col size2of4">
+    <div class="col width-2of4">
         <div class="cell">
             <?php echo $form->textField($model,'desc',array('size'=>60,'maxlength'=>255)); ?>
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model,'desc'); ?>
         </div>
@@ -78,18 +78,18 @@
 
 
 <div class="col">
-    <div class="col size1of4">
+    <div class="col width-1of4">
         <div class="cell">
             <?php echo $form->labelEx($model,'cover_uri'); ?>
         </div>
     </div>
-    <div class="col size2of4">
+    <div class="col width-2of4">
         <div class="cell">
             <?php echo $form->textField($model,'cover_uri',array('size'=>60,'maxlength'=>255)); ?>
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model,'cover_uri'); ?>
         </div>
@@ -99,19 +99,19 @@
 
 
 <div class="col">
-    <div class="col size1of4">
+    <div class="col width-1of4">
         <div class="cell">
             <?php echo $form->labelEx($model,'privacy'); ?>
         </div>
     </div>
-    <div class="col size2of4">
+    <div class="col width-2of4">
         <div class="cell">
             <?php echo $form->dropdownList($model,'privacy',PhotoAlbum::privacyGroup()); ?>
             <?php // echo $form->textField($model,'privacy'); ?>
         </div>
     </div>
 
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo $form->error($model,'privacy'); ?>
         </div>
@@ -121,9 +121,9 @@
 
 
 <div class="col">
-    <div class="col size1of4">
+    <div class="col width-1of4">
     </div>
-    <div class="col sizefill">
+    <div class="col width-fill">
         <div class="cell">
             <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'button')); ?>
         </div>

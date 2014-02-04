@@ -1,4 +1,5 @@
 <?php  $statusHandler = StatusManager::getStatusTypeHandler($data['type']);
+//print_r($statusHandler);
 $statusHandler->data = $data;
 $statusHandler->actorLink = CHtml::link($data['username'],UserHelper::getUserSpaceUrl($data['creator']));
 
@@ -8,14 +9,14 @@ $statusHandler->init() ;
     <div class="cell panel">
         <div class="body">
             <div class="cell">
-                <div class="col sizefit">
+                <div class="col width-fit">
                     <div class="cell">
                         <a href="<?php echo UserHelper::getUserSpaceUrl($data['creator']); ?>">
                             <img src="<?php echo UserHelper::getUserIconUrl($data); ?>" width="75" height="75" alt="">
                         </a>
                     </div>
                 </div>
-                <div class="col sizefill">
+                <div class="col width-fill">
 
                     <div class="cell">
                       <?php $statusHandler->renderTitle() ; ?>

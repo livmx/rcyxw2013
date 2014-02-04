@@ -2,7 +2,7 @@
     <div class="container site-body">
 
         <div class="cell">
-            <div class="col size1of4">
+            <div class="col width-1of4">
                 <?php $spaceOwnerModel = UserHelper::getSpaceOwnerModel();
 
                 ?>
@@ -53,7 +53,7 @@
                 </div>
 
             </div>
-            <div class="col sizefill">
+            <div class="col width-fill">
                 <?php echo $content; ?>
             </div>
         </div>

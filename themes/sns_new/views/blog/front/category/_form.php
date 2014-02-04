@@ -24,18 +24,18 @@
 
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'uid'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'uid'); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'uid'); ?>
                                     </div>
@@ -44,18 +44,18 @@
                             </div>
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'pid'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'pid',array('size'=>11,'maxlength'=>11)); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'pid'); ?>
                                     </div>
@@ -64,18 +64,18 @@
                             </div>
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'name'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'name'); ?>
                                     </div>
@@ -84,18 +84,18 @@
                             </div>
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'alias'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'alias',array('size'=>60,'maxlength'=>255)); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'alias'); ?>
                                     </div>
@@ -104,18 +104,18 @@
                             </div>
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'position'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'position',array('size'=>11,'maxlength'=>11)); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'position'); ?>
                                     </div>
@@ -123,9 +123,9 @@
 
                             </div>
                                                 <div class="col">
-                            <div class="col size1of4">
+                            <div class="col width-1of4">
                             </div>
-                            <div class="col sizefill">
+                            <div class="col width-fill">
                                 <div class="cell">
                                     <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'button')); ?>
                                 </div>

@@ -49,17 +49,37 @@ GRAY_PAGE;
 
         // $this->clientScript->registerCss('for_yaAn',$forYaAn);
 
-        if (!empty($this->user->loginRequiredAjaxResponse)){
-            Yii::app()->clientScript->registerScript('ajaxLoginRequired', '
-            //jQuery("body").ajaxComplete(
-            jQuery("body").ajaxSuccess(
+        $loginRequiredAjaxResponse = $this->user->loginRequiredAjaxResponse ;
+
+        $userLoginUrl = $this->createUrl('/site/login') ;
+        if (!empty($loginRequiredAjaxResponse)){
+            // 判断是否ajax请求 但超时登录了 参考CWebUser 里面的loginRequired方法对ajax时的处理
+
+            $ajaxLoginRequiredHandler = <<<EOD
+                $.ajaxSetup({
+                  dataFilter:function (data, type) {
+                     // 对Ajax返回的原始数据进行预处理
+                     if (data == "{$loginRequiredAjaxResponse}") {
+                       alert("登录超时！");
+                        window.location.href = "{$userLoginUrl}";
+                    }
+                     return data ; // 返回处理后的数据
+                  }
+                });
+EOD;
+            Yii::app()->clientScript->registerScript('ajaxLoginRequired', $ajaxLoginRequiredHandler);
+           /*
+            Yii::app()->clientScript->registerScript('ajaxLoginRequired', $ajaxLoginRequiredHandler . '
+
+            jQuery("body").ajaxComplete(
+           // jQuery("body").ajaxSuccess(
                 function(event, request, options) {
                     if (request.responseText == "'.Yii::app()->components['user']->loginRequiredAjaxResponse.'") {
                         window.location.href = "'. $this->createUrl(UserHelper::getLoginUrl()) .'";
                     }
                 }
             );
-        ');
+         ');*/
         }
        return parent::beforeControllerAction($controller,$action);
     }

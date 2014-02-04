@@ -133,3 +133,21 @@
 <!--        <img src="--><?php //echo bu('public/images/tests/5.jpg');?><!--"  width="300px" height="300px"/>-->
     </a>
 </div>
+
+<div id="targetBox2">here is content !</div>
+<a id="trigger1" href="javascript:;" rel="targetBox">默认rel加载</a>
+<script type="text/javascript">
+   /// $(function(){
+        $("#trigger1").powerFloat({
+            target: $("#targetBox2")
+        });
+    // });
+</script>
+
+HTML代码：
+<a id="trigger4" href="javascript:;"
+   rel="http://localhost/sns_my/rcyxw2013/public/images/banner1.jpg">rel属性显示图片</a>
+JS代码：
+<script type="text/javascript">
+    $("#trigger4").powerFloat({ targetMode: "ajax" });
+</script>

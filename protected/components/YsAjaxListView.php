@@ -20,8 +20,9 @@ class YsAjaxListView extends CListView{
     /**
      * @var bool
      * don't register the js file for ajax loading !
+     * jquery 改版了 好像可以注册了！！
      */
-    public $registerScriptFile = false ;
+    public $registerScriptFile = true ;
 
     public function registerClientScript(){
         $id=$this->getId();
