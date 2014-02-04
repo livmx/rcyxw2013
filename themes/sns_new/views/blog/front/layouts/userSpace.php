@@ -27,11 +27,11 @@ endif;
     <div class="cell">
 
         <div class="col">
-            <div class="col size7of9">
+            <div class="col width-7of9">
                 <?php  echo $content; ?>
             </div>
 
-            <div class="col sizefill">
+            <div class="col width-fill">
                 <div class="cell">
                     <?php UserHelper::renderSimpleProfile(UserHelper::getSpaceOwnerModel()); ?>
                 </div>

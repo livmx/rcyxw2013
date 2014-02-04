@@ -11,9 +11,10 @@
         'id'=>'<?php echo $this->class2id($this->modelClass); ?>-items-view', // same as list view
          'summaryCssClass'=>'pull-right',
         'pager'=> array('class'=>'my.widgets.TbMixPager'),
-        'template' =>  "{summary}{pager}\n{items}\n{pager}\n" ,
+        'template' =>  Yii::app()->request->getIsAjaxRequest()? "{summary}{pager}\n{items}\n{pager}\n" : "",
          'afterAjaxUpdate'=>'js:function(){ parent.risizeIframe();}',
-        'dataProvider'=>$dataProvider, // do not use $model->search() if you want use pageSize widget
+        //  'dataProvider'=>$dataProvider, // do not use $model->search() if you want use pageSize widget
+        'dataProvider'=>Yii::app()->request->getIsAjaxRequest()? $dataProvider : new CArrayDataProvider(array()) , // 使用假数据提供者
         'filter'=>$model,
         'columns'=>array(
         array(
@@ -38,3 +39,12 @@ if ($count >= 7)
     ),
 ));
 ?>
+<?php echo "<?php "; ?> if(!Yii::app()->getRequest()->getIsAjaxRequest()): ?>
+<script type="text/javascript">
+    jQuery(function(){
+        setTimeout(function(){
+            $.fn.yiiGridView.update('<?php echo $this->class2id($this->modelClass); ?>-items-view');
+        },1500);
+    });
+</script>
+<?php echo "<?php "; ?> endif; ?>

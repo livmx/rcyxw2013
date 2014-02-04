@@ -26,11 +26,11 @@ class UserController extends BaseUserController
     {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'space'),
+                'actions' => array('index', 'view', 'space', 'ajaxLogin','ajaxProfileBox'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform
-                'actions' => array('home',$this->action->id),
+                'actions' => array('home', $this->action->id),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -185,7 +185,7 @@ class UserController extends BaseUserController
             //cookie 中并没有记录这个 表示是本次初次访问某个空间：
             $visitedSpacesArr = array($spaceOwnerId);
             $visitedSpacesCookie = new CHttpCookie($visitedSpacesKey, CJSON::encode($visitedSpacesArr));
-            $visitedSpacesCookie->expire = time() + 60 * 60 * 24 ;  //* 180;
+            $visitedSpacesCookie->expire = time() + 60 * 60 * 24; //* 180;
 
             Yii::app()->request->cookies[$visitedSpacesKey] = $visitedSpacesCookie;
 
@@ -225,83 +225,86 @@ class UserController extends BaseUserController
     /**
      *
      */
-    public function actionGlean(){
-        $request = Yii::app()->getRequest() ;
-        if($request->getIsPostRequest() && $request->getIsAjaxRequest()){
+    public function actionGlean()
+    {
+        $request = Yii::app()->getRequest();
+        if ($request->getIsPostRequest() && $request->getIsAjaxRequest()) {
             $objectType = $request->getParam('objectType');
             $objectId = $request->getParam('objectId');
 
             $userId = user()->getId();
             // 查看是否收藏过了
-            if(!UserGlean::model()->exists('user_id = :user_id AND object_type = :object_type AND object_id = :object_id',
-                array(':user_id'=>$userId,':object_type'=>$objectType,':object_id'=>$objectId)
-            )){
+            if (!UserGlean::model()->exists('user_id = :user_id AND object_type = :object_type AND object_id = :object_id',
+                array(':user_id' => $userId, ':object_type' => $objectType, ':object_id' => $objectId)
+            )
+            ) {
 
                 $userGlean = new UserGlean();
                 $userGlean->user_id = $userId;
-                $userGlean->object_type = $objectType ;
-                $userGlean->object_id = $objectId ;
-                $userGlean->ctime = time() ;
-                if($userGlean->save()){
+                $userGlean->object_type = $objectType;
+                $userGlean->object_id = $objectId;
+                $userGlean->ctime = time();
+                if ($userGlean->save()) {
                     $this->ajaxSuccess(array(
-                        'msg'=>'收藏成功',
+                        'msg' => '收藏成功',
                     ));
-                }else{
+                } else {
 
                     $this->ajaxFailure(array(
-                        'msg'=>$userGlean->getErrors(),
+                        'msg' => $userGlean->getErrors(),
                     ));
                 }
-            }else{
+            } else {
                 $this->ajaxSuccess(array(
-                    'msg'=>'已收藏',
+                    'msg' => '已收藏',
                 ));
             }
 
         }
     }
 
-    public function actionGleanList(){
+    public function actionGleanList()
+    {
 
         $this->redirect(array('/blog/glean/list'));
 
-       $this->layout = 'userCenter';
+        $this->layout = 'userCenter';
 
-        $model=new UserGlean('search');
+        $model = new UserGlean('search');
         // 默认给一个收藏类型 在下面动态覆盖！
         $model->object_type = 'blog';
-        $model->unsetAttributes();  // clear any default values
-        if(isset($_GET['UserGlean'])){
-            $model->attributes=$_GET['UserGlean'];
-            if(!isset($_GET['objectType'])){
+        $model->unsetAttributes(); // clear any default values
+        if (isset($_GET['UserGlean'])) {
+            $model->attributes = $_GET['UserGlean'];
+            if (!isset($_GET['objectType'])) {
                 $model->object_type = 'blog';
-            }else{
+            } else {
                 $model->object_type = $_GET['objectType'];
             }
         }
         // 关联查询下收藏的对象 动态关联 存在跨模块访问的问题！
         // $model->getDbCriteria()->with = array($model->object_type);
 
-        if(Yii::app()->request->getIsAjaxRequest()){
-            $cs=Yii::app()->clientScript;
-            $cs->scriptMap=array(
-                'jquery.js'=>false,
-                'jquery.min.js'=>false,
+        if (Yii::app()->request->getIsAjaxRequest()) {
+            $cs = Yii::app()->clientScript;
+            $cs->scriptMap = array(
+                'jquery.js' => false,
+                'jquery.min.js' => false,
             );
             //die(print_r($_REQUEST,true));
             $this->layout = false;
 
-            $dataProvider = $model->search() ;
+            $dataProvider = $model->search();
 
             $this->beginClip('glean-type-list');
             // My::listView4sqlDataProvider($dp);
-            $dataProvider->pagination->pageSize = 1 ;
+            $dataProvider->pagination->pageSize = 1;
 
-            $this->widget('YsAjaxListView',array(
-                'id'=>'glean-list-'.$model->object_type,
-                'template'=>'{pager}{items}{pager}',
-                'dataProvider'=>$dataProvider,
-                'itemView'=>'glean/_view',
+            $this->widget('YsAjaxListView', array(
+                'id' => 'glean-list-' . $model->object_type,
+                'template' => '{pager}{items}{pager}',
+                'dataProvider' => $dataProvider,
+                'itemView' => 'glean/_view',
             ));
             $this->endClip();
 
@@ -311,24 +314,93 @@ class UserController extends BaseUserController
         }
 
 
-        $this->render('glean/list',array('model'=>$model));
+        $this->render('glean/list', array('model' => $model));
     }
 
-    public function actionGleanDelete(){
-        $request = Yii::app()->request ;
-        if($request->getIsPostRequest() && $request->getIsAjaxRequest()){
+    public function actionGleanDelete()
+    {
+        $request = Yii::app()->request;
+        if ($request->getIsPostRequest() && $request->getIsAjaxRequest()) {
             $id = $request->getParam('id');
 
             $userGlean = UserGlean::model()->findByPk($id);
-            if($userGlean->delete()){
+            if ($userGlean->delete()) {
                 $this->ajaxSuccess(array(
-                   'msg'=>'删除成功！' ,
+                    'msg' => '删除成功！',
                 ));
             }
 
-        }else{
-            throw new CHttpException(404,'不允许的操作！.');
+        } else {
+            throw new CHttpException(404, '不允许的操作！.');
         }
     }
+
     // ===================================================================================//
+
+
+    public function actionAjaxProfileBox()
+    {
+        if (request()->getIsAjaxRequest()) {
+            $userId = request()->getParam('u');
+
+            $user = User::model()->findByPk($userId);
+            $this->renderPartial(
+                '_ajaxProfileBox', array(
+                    'user' => $user
+                )
+            );
+
+        } else {
+            WebUtil::throw404httpException('黑客么？');
+        }
+    }
+
+    //-----------------------------------------\\
+    // ajax登录
+    public function actionAjaxLogin()
+    {
+        $model = new LoginForm();
+
+        // Uncomment the following line if AJAX validation is needed
+        $this->performAjaxValidation($model);
+
+        if (isset($_POST['LoginForm'])) {
+            $model->attributes = $_POST['LoginForm'];
+            if ($model->validate() && $model->login()) {
+                if (Yii::app()->request->isAjaxRequest) {
+                    $this->ajaxSuccess(
+                        array(
+                            'message' => "LoginForm successfully added"
+                        )
+                    );
+                    return;
+                }
+            }
+        }
+        if (Yii::app()->request->isAjaxRequest) {
+            $this->ajaxFailure(
+                array(
+                    'form' => $this->renderPartial('_ajaxLoginForm', array('model' => $model), true)
+                )
+            );
+        }
+    }
+
+    protected function performAjaxValidation($model, $form = 'login-form')
+    {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === $form) {
+            $validateResult = CActiveForm::validate($model);
+            echo $validateResult;
+            /*
+             $validateResult = CJSON::decode($validateResult);
+             if(empty($validateResult)){
+                 // 验证通过 然后记录最后登录时间：
+
+             }*/
+            Yii::app()->end();
+        }
+    }
+
+    //-----------------------------------------//
+
 }

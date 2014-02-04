@@ -3,11 +3,34 @@ Yii::setPathOfAlias('Elastica',Yii::getPathOfAlias('application.vendors.Elastica
 
 use Elastica\Client;
 use Elastica\Document;
+
+// socketIo  客户端
+use ElephantIO\Client as ElephantIOClient;
 /**
  * @Desc('this is a test class . you can use test/help to see all available test items')
  */
 class Test1Controller extends Controller
 {
+
+
+    public function actionSocketIo2(){
+        $this->render('socketIo2');
+    }
+    public function actionSocketIo(){
+        $this->render('socketIo');
+    }
+
+    public function actionElephantIO(){
+
+        $elephant = new ElephantIOClient('http://localhost:8000', 'socket.io', 1, false, true, true);
+
+        $elephant->init();
+        $elephant->emit('action', 'foo');
+        $elephant->emit('my other event', 'foo');
+        $elephant->close();
+
+        echo 'tryin to send `foo` to the event called action';
+    }
 
     public function actionPowerSwitch(){
         $this->render('powerSwitch');

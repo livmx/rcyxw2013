@@ -27,7 +27,7 @@ endif;
     <div class="cell">
 
         <div class="col">
-            <div class="col size7of9">
+            <div class="col width-7of9">
                 <?php echo $content; ?>
             </div>
 

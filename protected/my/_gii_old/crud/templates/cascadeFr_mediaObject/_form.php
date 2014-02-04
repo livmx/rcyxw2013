@@ -36,18 +36,18 @@
                         ?>
 
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo "<?php echo ".$this->generateActiveLabel($this->modelClass,$column)."; ?>\n"; ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo "<?php echo ".$this->generateActiveField($this->modelClass,$column)."; ?>\n"; ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo "<?php echo \$form->error(\$model,'{$column->name}'); ?>\n"; ?>
                                     </div>
@@ -58,9 +58,9 @@
                         }
                         ?>
                         <div class="col">
-                            <div class="col size1of4">
+                            <div class="col width-1of4">
                             </div>
-                            <div class="col sizefill">
+                            <div class="col width-fill">
                                 <div class="cell">
                                     <?php echo "<?php echo CHtml::submitButton(\$model->isNewRecord ? 'Create' : 'Save',array('class'=>'button')); ?>\n"; ?>
                                 </div>

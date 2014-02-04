@@ -5,10 +5,10 @@
         <div class="col">
             <div class="cell">
                 <div class="col">
-                    <div class="col size1of5 cell">
+                    <div class="col width-1of5 cell">
                         <img src="<?php echo UserHelper::getSpaceOwnerIconUrl(); ?>" width="64px" height="64px">
                     </div>
-                    <div class="col size3of5">
+                    <div class="col width-3of5">
                         <div class="cell">
                             <div class="menu cell page-sub-menu  ">
                                 <ul class="bottom nav">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col sizefill">
+                    <div class="col width-fill">
                         <div class="cell">
                             <div class="cell menu">
                                 <ul class="links nav">
@@ -59,7 +59,7 @@
 
         <div class="cell">
 
-            <div class="col size1of4">
+            <div class="col width-1of4">
                 <?php $spaceOwnerModel = UserHelper::getSpaceOwnerModel();
 
                 ?>
@@ -82,7 +82,125 @@
                                    <li>
                                        注册时间：<?php echo Yii::app()->dateFormatter->format('y-m-d',$spaceOwnerModel->create_at); ?>
                                    </li>
+                                   <li>
+                                       <a class="button user-op-following"
+                                          data-object-id="<?php echo $spaceOwnerModel->primaryKey ?>"
+                                           style="display: none"
+                                           >
+                                           关注
+                                       </a>
+                                       <a class="button user-cate-following"
+                                          data-object-id="<?php echo $spaceOwnerModel->primaryKey ?>"
+                                           href="<?php echo Yii::app()->createUrl('/friend/relationshipCategory/create',
+                                                     array('userId'=>$spaceOwnerModel->primaryKey)
+                                           ); ?>"
+                                           >
+                                           关注
+                                       </a>
+                                       <?php
+                                       $onCategoryCreateSuccess = <<<CB
+                function(data, dialog , e){
+                    var category = data.category;
+                    var newOption = "<option value='"+category.id+"'>"+category.name+"</option>";
 
+                    $("#friend_category_id").prepend(newOption).val(category.id);
+                    // 存储对话框引用到按钮
+                     friendArtDialog = dialog;
+                     // $("#confirm_friend_category_selection").data("dialog",dialog);
+                     //alert(data.message);
+                    // $.alert(data.message);
+                }
+CB;
+                                       $this->widget('my.widgets.artDialog.ArtFormDialog', array(
+                                               'id'=>'user_add_friend_dialog',
+                                               'link' => 'a.user-cate-following',
+                                               'options' => array(
+                                                   'onSuccess' => 'js:' . $onCategoryCreateSuccess,
+                                                   'closeOnSuccess'=>false ,
+                                               ),
+                                               'dialogOptions' => array(
+                                                   'title' => '选择用户组',
+                                                   'width' => 500,
+                                                   'height' => 370,
+
+                                               )
+                                           )
+                                       );
+                                       ?>
+                                       ?>
+
+                                       <script type="text/javascript">
+                                           // 全局变量 用来通讯的
+                                           var friendArtDialog = null ;
+                                           $(function(){
+                                               var getHasFollowed = function(){
+                                                   var url = "<?php echo  $this->createUrl('/friend/relationship/hasFollowed'); ?>";
+                                                   var $opElement = $("a.user-op-following");
+                                                   var params = {
+                                                       objectId: $opElement.attr("data-object-id")
+                                                   };
+                                                   $.getJSON(url,params,function( resp){
+                                                       if(resp.status == 'success'){
+                                                           if(! resp.hasFollowed){
+                                                               $opElement.css('display','block');
+                                                           }
+                                                       }else{
+
+                                                       }
+                                                   });
+                                               };
+                                               // 延迟些时间在判断是不是已经follow了 ie有个settimeout最小时间！
+                                               setTimeout(getHasFollowed,13);
+
+                                               // 分组选择对话框中的确定按钮点击事件处理器
+                                               $("body").on('click','#confirm_friend_category_selection',function(){
+                                                   var category = $("#friend_category_id").val();
+                                                  if(category == ''){
+                                                      alert('请创建用户分组！');
+                                                      return  ;
+                                                  }
+                                                   var userId = $("#friend_object_user_id").val();
+
+                                                   var url = "<?php echo  $this->createUrl('/friend/relationship/follow'); ?>";
+
+                                                   var params = {
+                                                       objectId: userId,
+                                                       categoryId: category
+                                                   };
+                                                   $.post(url,params,function( resp){
+                                                       resp = $.parseJSON(resp);
+                                                       if(resp.status == 'success'){
+                                                           alert("添加成功！");
+                                                           // 关闭对话框
+                                                           friendArtDialog.close();
+                                                       }else{
+
+                                                       }
+                                                   });
+
+                                               });
+
+                                               $("body").on('click','a.user-op-following',function(){
+
+                                                   var url = "<?php echo  $this->createUrl('/friend/relationship/follow'); ?>";
+                                                   var $opElement = $("a.user-op-following");
+                                                   var params = {
+                                                       objectId: $opElement.attr("data-object-id")
+                                                   };
+                                                   $.post(url,params,function( resp){
+                                                       alert(resp);
+                                                       if(resp.status == 'success'){
+
+                                                       }else{
+
+                                                       }
+                                                   });
+
+                                                   return false ;
+                                               }) ;
+                                           });
+                                       </script>
+                                   </li>
                                </ul>
                          </div>
 
@@ -101,9 +219,13 @@
 
                     <?php  YsPageBox::beginPanel(array('template'=>'{header}{body}','header'=>'最近空间访问统计') ); ?>
                     <div class="cell">
-                        <?php  $this->widget('user.widgets.4cascadeFr.SpaceVisitStatBox', array(
+                        <?php
+
+                        $this->widget('user.widgets.4cascadeFr.SpaceVisitStatBox', array(
                             'spaceOwnerId' => $spaceOwnerModel->primaryKey,
-                        ));  ?>
+                        ));
+
+                        ?>
 
                     </div>
                     <?php  YsPageBox::endPanel() ;?>
@@ -111,7 +233,7 @@
 
             </div>
 
-            <div class="col sizefill">
+            <div class="col width-fill">
                 <?php echo $content; ?>
             </div>
 

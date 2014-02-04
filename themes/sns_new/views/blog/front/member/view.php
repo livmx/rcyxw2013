@@ -18,7 +18,7 @@ $this->pageTitle=$model->title;
 <div class="col">
         col
         <div class="col">
-            <div class="col size4of5">
+            <div class="col width-4of5">
 
                     <?php YsPageBox::beginPanel() ;?>
                     <div class="cell">
@@ -57,7 +57,7 @@ $this->pageTitle=$model->title;
                     <?php YsPageBox::endPanel(); ?>
             </div>
 
-            <div class="col size1of5">
+            <div class="col width-1of5">
                 <div class="cell">
                     <?php UserHelper::renderSimpleProfile(UserHelper::getSpaceOwnerModel()) ;?>
                 </div>

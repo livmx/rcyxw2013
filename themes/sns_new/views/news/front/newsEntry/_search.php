@@ -20,78 +20,78 @@
 
                                                     
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <?php echo $form->label($model,'id'); ?>
                                 </div>
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <?php echo $form->textField($model,'id',array('size'=>10,'maxlength'=>10)); ?>
                                 </div>
                             </div>
 
                                                     
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <?php echo $form->label($model,'creator'); ?>
                                 </div>
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <?php echo $form->textField($model,'creator'); ?>
                                 </div>
                             </div>
 
                                                     
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <?php echo $form->label($model,'cate_id'); ?>
                                 </div>
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <?php echo $form->textField($model,'cate_id'); ?>
                                 </div>
                             </div>
 
                                                     
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <?php echo $form->label($model,'title'); ?>
                                 </div>
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
                                 </div>
                             </div>
 
                                                     
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <?php echo $form->label($model,'order'); ?>
                                 </div>
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <?php echo $form->textField($model,'order'); ?>
                                 </div>
                             </div>
 
                                                     
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <?php echo $form->label($model,'deleted'); ?>
                                 </div>
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <?php echo $form->textField($model,'deleted'); ?>
                                 </div>
                             </div>
 
                                                     
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <?php echo $form->label($model,'create_time'); ?>
                                 </div>
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <?php echo $form->textField($model,'create_time'); ?>
                                 </div>
                             </div>
 
                         
                         <div class="col ">
-                            <div class="col size1of4"></div>
-                            <div class="col sizefill">
+                            <div class="col width-1of4"></div>
+                            <div class="col width-fill">
                                 <div class="cell">
                                     <?php echo CHtml::submitButton('Search',array(
                                        'class'=>'button',

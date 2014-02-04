@@ -9,12 +9,12 @@ $statusHandler->init();
     <div class="cell panel">
         <div class="body">
             <div class="cell">
-                <div class="col sizefit">
+                <div class="col width-fit">
                     <div class="cell">
                         <img src="<?php echo UserHelper::getLoginUserModel()->getIconUrl() ; ?>" width="75" height="75" alt="">
                     </div>
                 </div>
-                <div class="col sizefill">
+                <div class="col width-fill">
 
 
                     <div class="cell">

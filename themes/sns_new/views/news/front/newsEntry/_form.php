@@ -25,18 +25,18 @@
 
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'creator'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'creator'); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'creator'); ?>
                                     </div>
@@ -45,18 +45,18 @@
                             </div>
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'cate_id'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'cate_id'); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'cate_id'); ?>
                                     </div>
@@ -65,18 +65,18 @@
                             </div>
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'title'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'title'); ?>
                                     </div>
@@ -85,18 +85,18 @@
                             </div>
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'order'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'order'); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'order'); ?>
                                     </div>
@@ -105,18 +105,18 @@
                             </div>
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'deleted'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'deleted'); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'deleted'); ?>
                                     </div>
@@ -125,18 +125,18 @@
                             </div>
                         
                             <div class="col">
-                                <div class="col size1of4">
+                                <div class="col width-1of4">
                                     <div class="cell">
                                         <?php echo $form->labelEx($model,'create_time'); ?>
                                     </div>
                                 </div>
-                                <div class="col size2of4">
+                                <div class="col width-2of4">
                                     <div class="cell">
                                         <?php echo $form->textField($model,'create_time'); ?>
                                     </div>
                                 </div>
 
-                                <div class="col sizefill">
+                                <div class="col width-fill">
                                     <div class="cell">
                                         <?php echo $form->error($model,'create_time'); ?>
                                     </div>
@@ -144,9 +144,9 @@
 
                             </div>
                                                 <div class="col">
-                            <div class="col size1of4">
+                            <div class="col width-1of4">
                             </div>
-                            <div class="col sizefill">
+                            <div class="col width-fill">
                                 <div class="cell">
                                     <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save',array('class'=>'button')); ?>
                                 </div>

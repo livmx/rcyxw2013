@@ -5,10 +5,10 @@
         <div class="col">
             <div class="cell">
                 <div class="col">
-                    <div class="col size1of5 cell">
+                    <div class="col width-1of5 cell">
                         <img src="<?php echo UserHelper::getSpaceOwnerIconUrl(); ?>" width="64px" height="64px">
                     </div>
-                    <div class="col size3of5">
+                    <div class="col width-3of5">
                         <div class="cell">
                             <div class="menu cell page-sub-menu  ">
                                 <ul class="bottom nav">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col sizefill">
+                    <div class="col width-fill">
                         <div class="cell">
                             <div class="cell menu">
                                 <ul class="links nav">
@@ -59,7 +59,7 @@
 
         <div class="cell">
 
-            <div class="col size1of4">
+            <div class="col width-1of4">
                 <?php $spaceOwnerModel = UserHelper::getSpaceOwnerModel();
 
                 ?>
@@ -111,7 +111,7 @@
 
             </div>
 
-            <div class="col sizefill">
+            <div class="col width-fill">
 
                 <div class="col">
                     <div class="menu cell">

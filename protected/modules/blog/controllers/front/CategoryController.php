@@ -73,6 +73,8 @@ class CategoryController extends BaseBlogController
             $model->attributes=$_POST['Category'];
             if($model->save()){
                 if (Yii::app()->request->isAjaxRequest) {
+
+
                     $this->ajaxSuccess(
                         array(
                             'message' => "Category successfully added",

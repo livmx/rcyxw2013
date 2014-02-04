@@ -7,11 +7,11 @@
 
             <?php if(Layout::hasRegion('rightSideBar')): ?>
 
-                <div class="col size7of9">
+                <div class="col width-7of9">
                     <?php echo $content; ?>
                 </div>
 
-                <div class="col sizefill">
+                <div class="col width-fill">
                     <?php Layout::renderRegion('rightSideBar'); ?>
                 </div>
 

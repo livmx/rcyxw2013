@@ -4,6 +4,10 @@
  * - $this: the BootCrudCode object
  */
 ?>
+
+<?php
+echo "<?php\t"; ?> Yii::app()->clientScript->registerScriptFile(bu('public/js/backend/admin.js')); ?>
+
 <?php
 echo "<?php\n";
 $label = $this->pluralize($this->class2name($this->modelClass));

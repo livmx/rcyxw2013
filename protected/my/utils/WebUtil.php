@@ -9,12 +9,25 @@
 
 class WebUtil
 {
+    /**
+     * @param $containerId
+     * @param $url
+     * @param string $callback
+     */
+    public static function ajaxLoad($containerId,$url,$callback='function(res){}'){
+        $script = <<<EOD
+        $(function(){
+            $('#{$containerId}').load('{$url}',{$callback});
+        });
+EOD;
+        echo CHtml::script($script);
+    }
 
     /**
      * @param string $msg
      * @throws CHttpException
      */
-    public static function throw404httpException($msg=''){
+    public static function throw404httpException($msg='The requested page does not exist！'){
         throw new CHttpException(
             404,
            $msg

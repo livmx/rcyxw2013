@@ -1,6 +1,10 @@
 <?php
 class SiteController extends Controller
 {
+    public $menuLabelList = array() ;
+
+
+
     protected function beforeAction($action){
 
         if($action->id == 'page'){
@@ -102,6 +106,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+
         if (!AdminWebUser::getUser()->getIsGuest()){
             $this->redirect(array('/admin'));
         }

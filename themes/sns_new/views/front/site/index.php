@@ -1,11 +1,11 @@
 <div class="col">
     <div class="cell">
-        <div class="col size11of16">
+        <div class="col width-11of16">
             <?php
             $this->widget('photo.widgets.pageblock.PhotoCommendBlock');
             ?>
         </div>
-        <div class="col sizefill">
+        <div class="col width-fill">
           <?php     $this->widget('user.widgets.pageblock.MemberBlock'); ?>
         </div>
     </div>
@@ -13,7 +13,7 @@
 
 <div class="col border-bottom">
     <div class="cell">
-        <div class="col size11of16">
+        <div class="col width-11of16">
             <?php     $this->widget('photo.widgets.pagebox.photoPageBox'); ?>
         </div>
         <div class="sizefill">
@@ -24,7 +24,7 @@
 
 <div class="col">
     <div class="cell">
-        <div class="col size11of16">
+        <div class="col width-11of16">
             <?php     $this->widget('user.widgets.4cascadeFr.UserOnlineBox'); ?>
         </div>
         <div class="sizefill">

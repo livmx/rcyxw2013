@@ -62,13 +62,13 @@ Layout::addBlock('right', array(
             ?>
         </div>
         <div class="col">
-            <div class="col size4of5">
+            <div class="col width-4of5">
                 <div class="cell">
                     <?php echo $content; ?>
                 </div>
             </div>
 
-            <div class="col size1of5">
+            <div class="col width-1of5">
                 <div class="cell">
                     <?php Layout::renderRegion('right'); ?>
                 </div>

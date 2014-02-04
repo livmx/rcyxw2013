@@ -42,7 +42,7 @@ class ArtDialog  extends CWidget
      * @var string skin name
      * available : aero | black | blue | chrome | green | idialog | opera |
      */
-    public $skin = 'green';
+    public $skin = 'opera';
 
     /**
      * @return ArtDialog

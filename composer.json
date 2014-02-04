@@ -12,7 +12,8 @@
     "require": {
         "php": ">=5.3.0",
         "codemix/yiielasticsearch": "*",
-        "codemix/restyii": "*"
+        "codemix/restyii": "*",
+		"wisembly/elephant.io" : "*"
     },
     "minimum-stability": "dev"
 }

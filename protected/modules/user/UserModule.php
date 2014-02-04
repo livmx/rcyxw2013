@@ -289,6 +289,10 @@ class UserModule extends CWebModule implements IUrlRewriteModule
          'user/settings/'=>'user/settings',
          'user/settings/<action:\w+>'=>'user/settings/<action>',
 
+           'user/search'=>'user/search',
+           'user/search/<action:\w+>'=>'user/search/<action>',
+           'user/search/<action:\w+>/*'=>'user/search/<action>',
+
          'user/<action:\w+>'=>'user/user/<action>',
          'user/<action:\w+>/*'=>'user/user/<action>',
        );

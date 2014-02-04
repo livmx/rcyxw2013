@@ -1,7 +1,7 @@
     <li class="span3 view">
         <div class="thumbnail">
             <div align="center">
-                <?php echo CHtml::link(CHtml::image($data->getAlbumCoverUrl(), $data->name, array('width'=>'150px')),$data->getUrl()); ?>
+                <?php   echo CHtml::link(CHtml::image($data->getAlbumCoverUrl(), $data->name, array('width'=>'150px')),$data->getUrl()); ?>
             </div>
             <div >
             <span class="pull-left"><?php echo $data->name,'(',$data->mbr_count,')'; ?> </span>

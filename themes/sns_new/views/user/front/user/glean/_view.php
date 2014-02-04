@@ -9,13 +9,13 @@
             <div class="cell">
                 <div class="col">
                     <div class="cell">
-                        <div class="col sizefit">
+                        <div class="col width-fit">
                             <b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
                             <?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
                             <br />
 
                         </div>
-                        <div class="col sizefill">
+                        <div class="col width-fill">
                             <div class="cell">
                                 <b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
                                 <?php echo CHtml::encode($data->user_id); ?>
