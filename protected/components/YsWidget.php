@@ -8,7 +8,11 @@
  */
 
 class YsWidget extends  CWidget{
-
+    /**
+     * Yii::app()->getModule('yupe')->coreCacheTime
+     * yupe 项目思路! 每个widget都可能被缓存哦!
+     */
+    public $cacheTime;
     /**
      *
      */

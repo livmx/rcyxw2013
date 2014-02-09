@@ -1,13 +1,6 @@
 <?php
-/**
- * This is the template for generating a controller class file for CRUD feature.
- * The following variables are available in this template:
- * - $this: the BootCrudCode object
- */
-?>
-<?php echo "<?php\n"; ?>
 
-class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseControllerClass."\n"; ?>
+class CommentController extends BackendController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -71,25 +64,24 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	 */
 	public function actionCreate()
 	{
-		$model=new <?php echo $this->modelClass; ?>;
+		$model=new Comment;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['<?php echo $this->modelClass; ?>']))
+		if(isset($_POST['Comment']))
 		{
-			$model->attributes=$_POST['<?php echo $this->modelClass; ?>'];
+			$model->attributes=$_POST['Comment'];
 			if($model->save()){
                 if (Yii::app()->request->isAjaxRequest) {
                     $this->ajaxSuccess(
                         array(
-                            'message' => "<?php echo $this->modelClass; ?> successfully added"
+                            'message' => "Comment successfully added"
                         )
                     );
                     return ;
-                } else {
-		    		$this->redirect(array('view','id'=>$model-><?php echo $this->tableSchema->primaryKey; ?>));
-                }
+                } else
+				$this->redirect(array('view','id'=>$model->id));
             }
 		}
         if (Yii::app()->request->isAjaxRequest) {
@@ -98,11 +90,10 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
                             'form' => $this->renderPartial('_form', array('model' => $model), true)
                         )
                 );
-        } else{
-            $this->render('create',array(
-                'model'=>$model,
-            ));
-        }
+        } else
+		$this->render('create',array(
+			'model'=>$model,
+		));
 	}
 
 	/**
@@ -119,18 +110,18 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['<?php echo $this->modelClass; ?>']))
+		if(isset($_POST['Comment']))
 		{
-			$model->attributes=$_POST['<?php echo $this->modelClass; ?>'];
+			$model->attributes=$_POST['Comment'];
 			if($model->save()){
                 if (Yii::app()->request->isAjaxRequest) {
                     $this->ajaxSuccess(array(
-                            'message' => "<?php echo $this->modelClass; ?> successfully saved"
+                            'message' => "Comment successfully saved"
                         )
                     );
                     return ;
                 } else
-				$this->redirect(array('view','id'=>$model-><?php echo $this->tableSchema->primaryKey; ?>));
+				$this->redirect(array('view','id'=>$model->id));
             }
 		}
 
@@ -153,26 +144,26 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
      * @param integer $id the ID of the model to be updated
      *  --------------------------------------------------
      *  use the application.extensions.formDialog2.FormDialog2 extension
-     *  ajaxCreate functionality is almost using the same code (just change the $this->loadModel($id) to new <?php echo $this->modelClass; ?>)
+     *  ajaxCreate functionality is almost using the same code (just change the $this->loadModel($id) to new Comment)
      */
     public function actionUpdateAjax($id)
 	{
         $model=$this->loadModel($id);
         $this->onControllerAction(new ControllerActionEvent($this,$this->action->id,$model));
 
-		if(isset($_POST['<?php echo $this->modelClass; ?>']))
+		if(isset($_POST['Comment']))
 		{
-            $model->attributes=$_POST['<?php echo $this->modelClass; ?>'];
+            $model->attributes=$_POST['Comment'];
 			if($model->save()){
                 if (Yii::app()->request->isAjaxRequest) {
                     $this->ajaxSuccess(
                         array(
-                            'message' => "<?php echo $this->modelClass; ?> successfully saved"
+                            'message' => "Comment successfully saved"
                         )
                     );
                     return ;
                 } else
-                      $this->redirect(array('view','id'=>$model-><?php echo $this->tableSchema->primaryKey; ?>));
+                      $this->redirect(array('view','id'=>$model->id));
             }
 		}
 
@@ -217,7 +208,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('<?php echo $this->modelClass; ?>');
+		$dataProvider=new CActiveDataProvider('Comment');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -228,10 +219,10 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	 */
 	public function actionAdmin()
 	{
-		$model=new <?php echo $this->modelClass; ?>('search');
+		$model=new Comment('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['<?php echo $this->modelClass; ?>']))
-			$model->attributes=$_GET['<?php echo $this->modelClass; ?>'];
+		if(isset($_GET['Comment']))
+			$model->attributes=$_GET['Comment'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -245,7 +236,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	 */
 	public function loadModel($id)
 	{
-		$model=<?php echo $this->modelClass; ?>::model()->findByPk($id);
+		$model=Comment::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -257,7 +248,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='<?php echo $this->class2id($this->modelClass); ?>-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='comment-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
@@ -292,9 +283,9 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
             $successCount = $failureCount = 0;
 
             $criteria = new CDbCriteria();
-            $criteria->index = '<?php echo $this->tableSchema->primaryKey; ?>';
-            $criteria->addInCondition('<?php echo $this->tableSchema->primaryKey; ?>',$ids);
-            $models = <?php echo $this->modelClass; ?>::model()->findAll($criteria);
+            $criteria->index = 'id';
+            $criteria->addInCondition('id',$ids);
+            $models = Comment::model()->findAll($criteria);
             $this->onControllerAction(new ControllerActionEvent($this,$this->action->id,$models));
 
             foreach ($models as $model) {
@@ -321,23 +312,23 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
     public function actionBatchUpdateAjax()
 	{
 
-        $model = new <?php echo $this->modelClass; ?>;
+        $model = new Comment;
 
-		if(isset($_POST['<?php echo $this->modelClass; ?>']))
+		if(isset($_POST['Comment']))
 		{
-            $model->attributes=$_POST['<?php echo $this->modelClass; ?>'];
-			if($model->validate(array_keys($_POST['<?php echo $this->modelClass; ?>']))){
+            $model->attributes=$_POST['Comment'];
+			if($model->validate(array_keys($_POST['Comment']))){
                     $items=$this->getItemsToUpdate();
                     $this->onControllerAction(new ControllerActionEvent($this,$this->action->id,$items));
 
                     foreach($items as $i=>$item)
                     {
-                        $item->attributes = $_POST['<?php echo $this->modelClass; ?>'];
+                        $item->attributes = $_POST['Comment'];
                         $item->save(false);// $item->save(); will run the validate function !
                     }
                     $this->ajaxSuccess(
                         array(
-                            'message' => "<?php echo $this->modelClass; ?> successfully saved" // .print_r($_POST['Comment'],true),
+                            'message' => "Comment successfully saved" // .print_r($_POST['Comment'],true),
                         )
                     );
                 return ;
@@ -371,9 +362,9 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
             $ids = explode(',',$ids);
         }
         $criteria = new CDbCriteria();
-        $criteria->index = '<?php echo $this->tableSchema->primaryKey; ?>';
-        $criteria->addInCondition('<?php echo $this->tableSchema->primaryKey; ?>',$ids);
-        $items = <?php echo $this->modelClass; ?>::model()->findAll($criteria);
+        $criteria->index = 'id';
+        $criteria->addInCondition('id',$ids);
+        $items = Comment::model()->findAll($criteria);
 
          return $items ;
     }

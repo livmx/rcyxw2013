@@ -13,6 +13,13 @@ class Test1Controller extends Controller
 {
 
 
+    public function actionTestComment(){
+        // note : there is another Comment class under the application/models for latency usage !
+        Yii::app()->getModule('comment');
+        // above code will change the php include path order !
+        $this->render('testComment');
+    }
+
     public function actionSocketIo2(){
         $this->render('socketIo2');
     }

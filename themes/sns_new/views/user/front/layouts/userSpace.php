@@ -6,7 +6,39 @@
             <div class="cell">
                 <div class="col">
                     <div class="col width-1of5 cell">
-                        <img src="<?php echo UserHelper::getSpaceOwnerIconUrl(); ?>" width="64px" height="64px">
+                        <div class="">
+                            <img src="<?php echo UserHelper::getSpaceOwnerIconUrl(); ?>" width="64px" height="64px">
+                        </div>
+                        <div>
+                            <?php
+                            $topNavList = YsNavSystem::getUserSpaceNav('profile_nav');
+
+                            foreach ($topNavList as $fromModule => $moduleMenuConfig):
+                                foreach ($moduleMenuConfig as $menuKey => $menuConfig):
+                                    ?>
+
+                                    <li class="">
+                                        <?php
+                                           // 这里可以考虑 phpExpression的使用 配置全部来自string 动态变量可以执行之
+                                           if(isset($menuConfig['class'])){
+                                             $className =  Yii::import($menuConfig['class']);
+                                               unset($menuConfig['class']);
+                                               $options =  $menuConfig ;
+                                              // print_r($options);
+                                             if(is_subclass_of($className,'CWidget')){
+                                                 $this->widget($className,$options);
+                                             }
+                                           }
+                                           // print_r($menuConfig);
+                                        ?>
+                                    </li>
+
+                                <?php
+                                endforeach;
+                            endforeach;
+                            ?>
+                        </div>
+
                     </div>
                     <div class="col width-3of5">
                         <div class="cell">
@@ -126,7 +158,6 @@ CB;
                                                )
                                            )
                                        );
-                                       ?>
                                        ?>
 
                                        <script type="text/javascript">

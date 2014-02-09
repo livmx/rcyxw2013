@@ -50,6 +50,8 @@ return array(
         'returnLogoutUrl' => array('/user/login'),
     ),
 
+    'comment',
+
     //webshell
     'webshell' => array(
         'class' => 'ext.yiiext.modules.webshell.WebShellModule',
@@ -117,45 +119,11 @@ return array(
     'group',
 
      //-----------------------<for comments >-----------------------------------------------------------------
-    'comments' => array(
-        //you may override default config for all connecting models
-        'defaultModelConfig' => array(
-            //only registered users can post comments
-            'registeredOnly' => false,
-            'useCaptcha' => false,
-            //allow comment tree
-            'allowSubcommenting' => true,
-            //display comments after moderation
-            'premoderate' => false,
-            //action for postig comment
-            'postCommentAction' => 'comments/comment/postComment',
-            //super user condition(display comment list in admin view and automoderate comments)
-            'isSuperuser' => '1==1',//'Yii::app()->user->checkAccess("moderate")',
-            //order direction for comments
-            'orderComments' => 'DESC',
-        ),
-        //the models for commenting
-        'commentableModels' => array(
-            /*
-            //model with individual settings
-            'User' => array(
-                'registeredOnly' => true,
-                'useCaptcha' => false,
-                'allowSubcommenting' => true,
-            ),
-            //model with default settings
-            'Photo',
-            */
-        ),
-        //config for user models, which is used in application
-        'userConfig' => array(
-            'class' => 'User',
-            'nameProperty' => 'username',
-            'emailProperty' => 'email',
-        ),
-    ),
+
     //-----------------------<for comments />-----------------------------------------------------------------
 
     'voting',
+
+
 );
 
