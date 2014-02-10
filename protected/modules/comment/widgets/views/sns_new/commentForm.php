@@ -6,8 +6,6 @@ echo YiiUtil::getPathOfClass($model);
 <div class="col cell">
 
 
-
-
 <?php $form=$this->beginWidget('CActiveForm', array(
     'id'=>'comment-form',
     'action' => Yii::app()->createUrl('/comment/comment/add/'),
@@ -19,7 +17,9 @@ echo YiiUtil::getPathOfClass($model);
     ),
     'clientOptions' => array(
         'validateOnSubmit'=>true,
+        'afterValidate' => 'js:commentFormAfterValidate',
     ),
+
 )); ?>
 
 <div class="col">
@@ -213,125 +213,7 @@ echo YiiUtil::getPathOfClass($model);
 
 </div>
 
-<div class="col">
-    <div class="col width-1of4">
-        <div class="cell">
-            <?php echo $form->labelEx($model,'status'); ?>
-        </div>
-    </div>
-    <div class="col width-2of4">
-        <div class="cell">
-            <?php echo $form->textField($model,'status'); ?>
-        </div>
-    </div>
 
-    <div class="col width-fill">
-        <div class="cell">
-            <?php echo $form->error($model,'status'); ?>
-        </div>
-    </div>
-
-</div>
-
-<div class="col">
-    <div class="col width-1of4">
-        <div class="cell">
-            <?php echo $form->labelEx($model,'ip'); ?>
-        </div>
-    </div>
-    <div class="col width-2of4">
-        <div class="cell">
-            <?php echo $form->textField($model,'ip',array('size'=>20,'maxlength'=>20)); ?>
-        </div>
-    </div>
-
-    <div class="col width-fill">
-        <div class="cell">
-            <?php echo $form->error($model,'ip'); ?>
-        </div>
-    </div>
-
-</div>
-
-<div class="col">
-    <div class="col width-1of4">
-        <div class="cell">
-            <?php echo $form->labelEx($model,'level'); ?>
-        </div>
-    </div>
-    <div class="col width-2of4">
-        <div class="cell">
-            <?php echo $form->textField($model,'level'); ?>
-        </div>
-    </div>
-
-    <div class="col width-fill">
-        <div class="cell">
-            <?php echo $form->error($model,'level'); ?>
-        </div>
-    </div>
-
-</div>
-
-<div class="col">
-    <div class="col width-1of4">
-        <div class="cell">
-            <?php echo $form->labelEx($model,'root'); ?>
-        </div>
-    </div>
-    <div class="col width-2of4">
-        <div class="cell">
-            <?php echo $form->textField($model,'root'); ?>
-        </div>
-    </div>
-
-    <div class="col width-fill">
-        <div class="cell">
-            <?php echo $form->error($model,'root'); ?>
-        </div>
-    </div>
-
-</div>
-
-<div class="col">
-    <div class="col width-1of4">
-        <div class="cell">
-            <?php echo $form->labelEx($model,'lft'); ?>
-        </div>
-    </div>
-    <div class="col width-2of4">
-        <div class="cell">
-            <?php echo $form->textField($model,'lft'); ?>
-        </div>
-    </div>
-
-    <div class="col width-fill">
-        <div class="cell">
-            <?php echo $form->error($model,'lft'); ?>
-        </div>
-    </div>
-
-</div>
-
-<div class="col">
-    <div class="col width-1of4">
-        <div class="cell">
-            <?php echo $form->labelEx($model,'rgt'); ?>
-        </div>
-    </div>
-    <div class="col width-2of4">
-        <div class="cell">
-            <?php echo $form->textField($model,'rgt'); ?>
-        </div>
-    </div>
-
-    <div class="col width-fill">
-        <div class="cell">
-            <?php echo $form->error($model,'rgt'); ?>
-        </div>
-    </div>
-
-</div>
 <div class="col">
     <div class="col width-1of4">
     </div>
@@ -346,4 +228,55 @@ echo YiiUtil::getPathOfClass($model);
 </div>
 
 <?php  YsPageBox::endPanel(); ?>
+
+<script type="text/javascript">
+    /**
+     * CActiveForm js/ajax 验证后会调用这个方法
+     *
+     * 该方法中唯一注意点是要关闭掉modal对话框所以需要知道modalId
+     *
+     * 这个方法如果返回true 那么就会进行正常的表单提交
+     * 返回false后 一般进行手动ajax提交。
+     * @param form
+     * @param data
+     * @param hasError
+     * @returns {boolean}
+     */
+    function commentFormAfterValidate(form, data, hasError) {
+       // alert("触发验证！"+$(form).attr("action"));
+        if (!hasError) {
+            $.ajax({
+                "type": "POST",
+                "url": $(form).attr("action"),
+                "data": form.serialize(),
+                dataType: "json",
+                "success": function (resp) {
+                  //  alert(resp);
+                    if (resp.status == 'success') {
+                        /*
+                        setTimeout(function () {
+                            reloadItemsView("supplier-goods-items-view");
+                        }, 2000);
+                        // $.fn.yiiGridView.update('supplier-goods-items-view');
+                        */
+                        //probe the gridView or listView id
+                        var listViewClass = 'div.comment.list-view';
+                        /*
+                        用来刷新listView
+                        var listViewId
+                             = $(listViewClass).attr('id');
+                            // 添加到首部并滚动到那里去
+                        */
+                        $(listViewClass).find('.items').prepend(resp.commentContent);
+                        $("html,body").animate({scrollTop: $(listViewClass).find('.items').children(0).position().top },800);//800 ms is also ok !
+                        // 注意在yiiactiveform.js 中绑定的
+                        $(form).trigger('reset');
+                    }
+                }
+            });
+        }
+        return false;
+    }
+
+</script>
 

@@ -3,6 +3,17 @@
 
 class CommentModule extends  CWebModule
 {
+    /*
+        * delete comment action route
+        */
+    const DELETE_ACTION_ROUTE = '/comment/comment/delete';
+
+    /*
+     * approve comment action route
+     */
+    const APPROVE_ACTION_ROUTE = '/comment/comment/approve';
+
+
     public $notifier = 'application\modules\comment\components\Notifier';
     public $defaultCommentStatus;
     public $autoApprove = true;
