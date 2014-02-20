@@ -6,12 +6,13 @@
  */
 $this->widget('zii.widgets.CListView', array(
     'id'=>$this->id ,
-    'ajaxUrl'=>$this->ajaxUrl,
+   // 'ajaxUrl'=>$this->ajaxUrl,
     'htmlOptions'=>array(
       'class'=>'list-view comment',
     ),
     'dataProvider'=>$dataProvider,
     'itemView'=>'_view',
+    'viewData'=>array('userProfiles'=>$userProfiles),
     'template'=>'{pager}{items}{pager}',
 ));
 

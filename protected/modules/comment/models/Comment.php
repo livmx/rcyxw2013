@@ -40,13 +40,14 @@ class Comment extends BaseComment
             array('model, name, email, text, url', 'filter', 'filter' => 'trim'),
             array('model, name, email, text, url', 'filter', 'filter' => array($obj = new CHtmlPurifier(), 'purify')),
             array('model, model_id, name, email, text', 'required'),
-            array('status, user_id, model_id, parent_id', 'numerical', 'integerOnly' => true),
+            array('status, user_id, model_id, parent_id , model_owner_id', 'numerical', 'integerOnly' => true),
             array('name, email, url', 'length', 'max' => 150),
             array('model', 'length', 'max' => 100),
             array('ip', 'length', 'max' => 20),
             array('email', 'email'),
             array('url', 'url'),
             array('status', 'in', 'range' => array_keys($this->statusList)),
+            array('model_profile_data', 'length', 'max'=>400),
          //   array('verifyCode', 'YRequiredValidator', 'allowEmpty' => !$module->showCaptcha || !Yii::app()->user->getIsGuest()),
             array('verifyCode', 'captcha', 'allowEmpty' => !$module->showCaptcha || !Yii::app()->user->getIsGuest()),
             array('id, model, model_id, create_time, name, email, url, text, status, ip, parent_id', 'safe', 'on' => 'search'),
@@ -185,6 +186,10 @@ class Comment extends BaseComment
                 $this->newComment();
             }
            */
+            $cmtModule = Yii::app()->getModule('comment');
+            $cmtModule->attachBehaviors($cmtModule->behaviors());
+            $cmtModule->onCommentCreate(new CEvent($this));
+            // die(__METHOD__);
         }
 
         return parent::afterSave();
@@ -399,4 +404,33 @@ class Comment extends BaseComment
 
         return false;
     }
+
+
+    /*
+     * Set comment and all his childs as deleted
+     * @return boolean
+     */
+    public function setDeleted()
+    {
+        $result = $this->deleteNode();
+        if($result == true){
+            // trigger the delete event
+            $cmtModule = Yii::app()->getModule('comment');
+            $cmtModule->attachBehaviors($cmtModule->behaviors());
+            $cmtModule->onCommentsDeleted(new CEvent($this));
+        }
+        return $result ;
+    }
+
+    /*
+     * Sets comment as approved
+     * @return boolean
+     */
+    public function setApproved()
+    {
+        $this->status = self::STATUS_APPROVED;
+        return $this->update();
+
+    }
+
 }

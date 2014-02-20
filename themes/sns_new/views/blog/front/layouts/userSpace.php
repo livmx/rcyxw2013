@@ -69,6 +69,21 @@ endif;
                     </div>
                 </div>
 
+                <div class="cell">
+                    <?php
+                    // 最近评论中视图可以自定义哦！
+                    Yii::setPathOfAlias('blogLayouts',dirname(__FILE__));
+                    $this->widget(
+                        'application.modules.comment.widgets.LastCommentsWidget',
+                        array(
+                            'model' => 'Post',
+                            'modelOwnerId' => UserHelper::getSpaceOwnerId(),
+                            'view'=>'blogLayouts.comment.spaceLastComments',
+                        )
+                    );
+                    ?>
+                </div>
+
             </div>
         </div>
 

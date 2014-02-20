@@ -2,9 +2,33 @@
 
 class CommentFormWidget extends YsWidget
 {
-    public $model;
-    public $modelId;
-    public $redirectTo;
+    /**
+     * @var string|CActiveRecord
+     */
+    public $model ;
+    /**
+     * @var int
+     */
+    public $modelId ;
+    /**
+     * @var int
+     */
+    public $modelOwnerId ;
+
+    /**
+     * used to render entity profile
+     * if it is string ，better as json string
+     * @var array|string
+     */
+    public $modelProfileData = '';
+
+    /**
+     * @var string
+     */
+    public $redirectTo ;
+    /**
+     * @var string
+     */
     public $view = 'commentForm';
 
     /**
@@ -40,9 +64,12 @@ class CommentFormWidget extends YsWidget
         $model->setAttributes(array(
             'model'    => $this->model,
             'model_id' => $this->modelId,
+            'model_owner_id'=>$this->modelOwnerId,
+            'model_profile_data'=>$this->modelProfileData,
+
         ));
 
-        // 登录用户之间赋值email信息
+        // 登录用户直间赋值email信息
         $loginUser = user() ;
         if(!$loginUser->getIsGuest()){
             $model->email = $loginUser->email ;

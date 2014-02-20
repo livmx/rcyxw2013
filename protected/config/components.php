@@ -80,6 +80,9 @@ return array(
                 'enabled'=>YII_DEBUG,
                 'ipFilters' => array('*'),
             ),
+            array(
+                'class' => 'YsTestLogRoute',
+            ),
         ),
     ),
 

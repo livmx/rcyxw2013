@@ -1,5 +1,10 @@
 <?php
-class Comment extends CActiveRecord
+
+/**
+ * @deprecate
+ * Class BlogComment
+ */
+class BlogComment extends CActiveRecord
 {
 	/**
 	 * This is the model class for table "dlf_comment".

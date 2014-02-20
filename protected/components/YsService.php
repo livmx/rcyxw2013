@@ -5,7 +5,7 @@
  * Date: 12-11-24
  * Time: 下午9:28
  * To change this template use File | Settings | File Templates.
- * ----------------------------------------------------------------------
+ * -----------------------------------------------------ix-----------------
  * 关于json_rpc   请参考：http://json-rpc.org/wiki/implementations
  * 以及本项目文件夹：doc/misc/codeReference/zabbix_php_api_v1_0
  * ................................................................
@@ -15,6 +15,19 @@
  * fastRpc 也可以跨应用跨语言通讯 配合serviceProxy在多个大型项目中被采用
  * 请参考 [服务化的网站架构](http://www.slideshare.net/thinkinlamp/ss-6168750)
  * ----------------------------------------------------------------------
+ * 2014年：
+ * 远程rpc的实现 在module中的实现：
+ * 将仿形进行到底 每个模块也提供api/rpc 实现[moduleId]/api/rpc
+ * ...............................
+ * 还有一种实现通过Yii::app()->runController  实现内部调用 用jsonRpc实现外部调用
+ *
+ * 参考symfony相关概念：
+ * the format
+ * BUNDLE_NAME:CONTROLLER_NAME:ACTION_NAME. For instance, AcmeDemoBundle:Welcome:index maps to
+ *  the indexAction method from the Acme\DemoBundle\Controller\WelcomeController class
+ * 对外是逻辑名称 对内需要映射到物理名称上
+ * ................................
+ * YsService::instance()->call('<moduleId>','serviceName:methodName',array(....))
  */
 class YsService extends CApplicationComponent
 {
@@ -52,20 +65,13 @@ class YsService extends CApplicationComponent
     /**
      * @static
      * @param string $moduleId
-     * @param string|array $serviceMethodName
+     * @param string $serviceName
      * @param array $params
      * @return mixed|void
-     * -------------------------------------
-     * 可改进的地方 参数二如果是数组 那么认为第一个位置是服务名
-     * 暂未支持数组 以后有空再说！（或者按照某种格式来解析ServiceName::serviceMethod ?）
-     *
-     * 第二个是方法名，目前是按照单一服务来设计的
-     *早期的设计参考dolphin ，其中moduleService的方法全部出现在模块中
-     * -------------------------------------
      */
-    static public function call($moduleId = '', $serviceMethodName = '', $params = array())
+    static public function call($moduleId = '', $serviceName = '', $params = array())
     {
-         return self::instance()->callModuleService($moduleId,$serviceMethodName,$params);
+         return self::instance()->callModuleService($moduleId,$serviceName,$params);
     }
 
     public $mode = self::MODE_LOCAL;

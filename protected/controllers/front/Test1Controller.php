@@ -11,7 +11,19 @@ use ElephantIO\Client as ElephantIOClient;
  */
 class Test1Controller extends Controller
 {
+public function actionEFlatMenu(){
+    $this->render('eflatMenu');
+}
 
+
+
+    public function actionModuleService(){
+
+
+       // YsModuleService::instance()->call('user','test',array('param1'=>'y'));
+
+      print_r(  YsModuleService::instance()->call('user','CanDeleteAndEditComment',array('param1'=>'y','yes')) );
+    }
 
     public function actionTestComment(){
         // note : there is another Comment class under the application/models for latency usage !

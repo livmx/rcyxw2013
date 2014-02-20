@@ -30,88 +30,15 @@ echo YiiUtil::getPathOfClass($model);
 
 <?php echo $form->hiddenField($model, 'model'); ?>
 <?php echo $form->hiddenField($model, 'model_id'); ?>
+<?php echo $form->hiddenField($model, 'model_owner_id'); ?>
+<?php echo $form->hiddenField($model, 'model_profile_data'); ?>
 <?php echo $form->hiddenField($model, 'parent_id'); ?>
+<?php echo $form->hiddenField($model, 'user_id'); ?>
 <?php echo CHtml::hiddenField('redirectTo', $redirectTo); ?>
 
-<div class="col">
-    <div class="col width-1of4">
-        <div class="cell">
-            <?php echo $form->labelEx($model,'parent_id'); ?>
-        </div>
-    </div>
-    <div class="col width-2of4">
-        <div class="cell">
-            <?php echo $form->textField($model,'parent_id'); ?>
-        </div>
-    </div>
 
-    <div class="col width-fill">
-        <div class="cell">
-            <?php echo $form->error($model,'parent_id'); ?>
-        </div>
-    </div>
 
-</div>
 
-<div class="col">
-    <div class="col width-1of4">
-        <div class="cell">
-            <?php echo $form->labelEx($model,'user_id'); ?>
-        </div>
-    </div>
-    <div class="col width-2of4">
-        <div class="cell">
-            <?php echo $form->textField($model,'user_id'); ?>
-        </div>
-    </div>
-
-    <div class="col width-fill">
-        <div class="cell">
-            <?php echo $form->error($model,'user_id'); ?>
-        </div>
-    </div>
-
-</div>
-
-<div class="col">
-    <div class="col width-1of4">
-        <div class="cell">
-            <?php echo $form->labelEx($model,'model'); ?>
-        </div>
-    </div>
-    <div class="col width-2of4">
-        <div class="cell">
-            <?php echo $form->textField($model,'model',array('size'=>60,'maxlength'=>100)); ?>
-        </div>
-    </div>
-
-    <div class="col width-fill">
-        <div class="cell">
-            <?php echo $form->error($model,'model'); ?>
-        </div>
-    </div>
-
-</div>
-
-<div class="col">
-    <div class="col width-1of4">
-        <div class="cell">
-            <?php echo $form->labelEx($model,'model_id'); ?>
-        </div>
-    </div>
-    <div class="col width-2of4">
-        <div class="cell">
-            <?php echo $form->textField($model,'model_id'); ?>
-        </div>
-    </div>
-
-    <div class="col width-fill">
-        <div class="cell">
-            <?php echo $form->error($model,'model_id'); ?>
-        </div>
-    </div>
-
-</div>
 
 <div class="col">
     <div class="col width-1of4">
@@ -193,6 +120,19 @@ echo YiiUtil::getPathOfClass($model);
 
 </div>
 
+    <?php
+    $this->widget('ext.smileys.SmileysWidget',
+        array(
+            'group' => 'qq', // the group of smileys to be shown
+            'cssFile' => 'smileys.css', // the file containing the CSS
+            'scriptFile' => 'smileys.js', // javascript code for inserting the smileys into textareas
+            'containerCssClass' => 'smileys', // the CSS class that wraps all smileys
+            'wrapperCssClass' => 'smiley', // the CSS class that wrapps a single smiley
+            'textareaId' => CHtml::activeId($model,'text'), // the ID of the textarea where we will put the smileys
+            'perRow' => 0, // If this value is greather than 0, after $perRow smileys, a line break will be inserted.
+            'forcePublish' => false, // set to true for one time, after you've added a new smiley group so that the group gets published to assets directory
+        ));
+    ?>
 <div class="col">
     <div class="col width-1of4">
         <div class="cell">

@@ -1,5 +1,5 @@
 <?php
-Yii::import('blog.models.Comment');
+// Yii::import('blog.models.Comment');
 /**
  * This is the model class for table "dlf_post".
  *
@@ -94,8 +94,8 @@ class Post extends CActiveRecord
         return array(
             'author' => array(self::BELONGS_TO, 'User', 'author_id'),
             'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
-            'comments' => array(self::HAS_MANY, 'Comment', 'post_id', 'condition' => 'comments.status=' . Comment::STATUS_APPROVED, 'order' => 'comments.created DESC'),
-            'commentCount' => array(self::STAT, 'Comment', 'post_id', 'condition' => 'status=' . Comment::STATUS_APPROVED),
+          //  'comments' => array(self::HAS_MANY, 'Comment', 'post_id', 'condition' => 'comments.status=' . Comment::STATUS_APPROVED, 'order' => 'comments.created DESC'),
+          //  'commentCount' => array(self::STAT, 'Comment', 'post_id', 'condition' => 'status=' . Comment::STATUS_APPROVED),
 
             'sysCates' => array(self::MANY_MANY, 'BlogSysCategory', 'blog_sys_category2post(post_id,sys_cate_id)'),
 
@@ -322,7 +322,7 @@ class Post extends CActiveRecord
     protected function afterDelete()
     {
         parent::afterDelete();
-        Comment::model()->deleteAll('post_id=' . $this->id);
+    //    Comment::model()->deleteAll('post_id=' . $this->id);
         Tag::model()->updateFrequency($this->tags, '');
         Category::model()->updateCounters(array('mbr_count' => -1), 'id=:cate', array(':cate' => $this->category_id));
     }

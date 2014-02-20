@@ -90,7 +90,7 @@ class Status extends BaseStatus
     static public function listFriendsStatuses($user, $sqlDataProviderConfig = array())
     {
 
-        $friendsIds = UserHelper::getFriendIds($user);
+        $friendsIdsCondition = UserHelper::getFriendIdsCondition($user);
 
         /*
         if(empty($friendsIds)){
@@ -128,6 +128,7 @@ class Status extends BaseStatus
             ->leftJoin('status_video v', 's.id = v.id')
             ->leftJoin('status_link l', 's.id = l.id');
 
+        /*
         if (empty($friendsIds)) {
             $where = '1=2'; // 构造一个假条件
         } else {
@@ -135,8 +136,13 @@ class Status extends BaseStatus
             $where = " t.id = s.type
             AND u.id IN ({$friendsIds}) ";
         }
+        */
+        $where = " t.id = s.type
+            AND u.id IN ({$friendsIdsCondition}) ";
+
         $cmd->where($where);
         $sql = $cmd->text;
+       // die($sql);
 
         $config = array();
         $config['totalItemCount'] = YiiUtil::countBySql($sql);

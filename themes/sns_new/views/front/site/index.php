@@ -16,7 +16,7 @@
         <div class="col width-11of16">
             <?php     $this->widget('photo.widgets.pagebox.photoPageBox'); ?>
         </div>
-        <div class="sizefill">
+        <div class="width-fill">
             <?php     $this->widget('news.widgets.pageblock.NewsPageBox'); ?>
         </div>
     </div>
@@ -27,7 +27,7 @@
         <div class="col width-11of16">
             <?php     $this->widget('user.widgets.4cascadeFr.UserOnlineBox'); ?>
         </div>
-        <div class="sizefill">
+        <div class="">
             <?php     $this->widget('news.widgets.pageblock.NewsPageBox'); ?>
         </div>
     </div>

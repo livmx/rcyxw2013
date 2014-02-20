@@ -56,10 +56,10 @@ class PostController extends BaseBlogController
         UserHelper::setSpaceOwnerId($post->author_id);
         UserHelper::setSpaceOwnerModel($post->author);
 
-        $comment=$this->newComment($post);
+        //    $comment=$this->newComment($post);
 		$this->render('view',array(
 			'model'=>$post,
-			'comment'=>$comment,
+		 //	'comment'=>$comment,
 		));
 	}
 

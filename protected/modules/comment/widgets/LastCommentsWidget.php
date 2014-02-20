@@ -1,5 +1,5 @@
 <?php
-
+Yii::app()->getModule('comment');
 
 class LastCommentsWidget extends YsWidget
 {
@@ -7,7 +7,16 @@ class LastCommentsWidget extends YsWidget
     public $commentStatus;
     public $limit = 10;
     public $onlyWithAuthor = true;
-    public $view = 'lastcomments';
+    /**
+     * you can assign it to another value
+     * @var string
+     */
+    public $view = 'lastComments';
+    /**
+     * to whom the model belong to
+     * @var int
+     */
+    public $modelOwnerId  ;
 
     public function init()
     {
@@ -21,7 +30,8 @@ class LastCommentsWidget extends YsWidget
     public function run()
     {
         $criteria = new CDbCriteria(array(
-            'condition' => 'status = :status AND id<>root',
+           // 'condition' => 'status = :status AND id<>root',
+            'condition' => 'status = :status ',
             'params' => array(':status' => $this->commentStatus),
             'limit' => $this->limit,
             'order' => 'id DESC',
@@ -34,6 +44,11 @@ class LastCommentsWidget extends YsWidget
 
         if ($this->onlyWithAuthor) {
             $criteria->addCondition('user_id is not null');
+        }
+
+        if($this->modelOwnerId){
+            $criteria->addCondition('model_owner_id = :model_owner_id');
+            $criteria->params[':model_owner_id'] = $this->modelOwnerId;
         }
 
         $comments = Comment::model()->findAll($criteria);

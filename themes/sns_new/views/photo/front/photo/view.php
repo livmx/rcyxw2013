@@ -116,14 +116,7 @@ cs()->registerCssFile(JGalleriffic::getAssetsUrl() . '/css/galleriffic-yiispace.
     </div>
     <!--            here is  comment list and comment form  start -->
     <div class="span9" id="commentContainer">
-        <?php
-        $this->widget('comments.widgets.ECommentsListWidget', array(
-            'model' => $model,
-            'dialogOptions' => array(
-                'width' => '500',
-            )
-        ));
-        ?>
+        <?php $this->renderPartial('_commentsAndForm',array('model'=>$model)); ?>
     </div>
     <!--            here is  comment list and comment form end -->
 </div>

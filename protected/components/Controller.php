@@ -283,9 +283,11 @@ class Controller extends CController
      *    data  : "...."
      * }
      * ----------------------------------------
+     * @param bool $exit
      */
-    public function ajaxSuccess($data = array())
+    public function ajaxSuccess($data = array(),$exit=true)
     {
+        Yii::import('ext.NJSON');
         $ajaxReturn = array();
         if (is_string($data)) {
             $ajaxReturn['data'] = $data;
@@ -294,29 +296,38 @@ class Controller extends CController
             if (!isset($data['status'])) {
                 $data['status'] = 'success';
             }
-            $ajaxReturn = &$data ;
+            $ajaxReturn = & $data;
         }
-        echo CJSON::encode($ajaxReturn);
+        echo NJSON::encode($ajaxReturn);
+        if($exit == true){
+            Yii::app()->end();
+        }
     }
 
     /**
      * @param array|string $data
+     * @param bool $exit
      */
-    public function ajaxFailure($data)
+    public function ajaxFailure($data,$exit=true)
     {
+        Yii::import('ext.NJSON');
         $ajaxReturn = array();
         if (is_string($data)) {
             $ajaxReturn['data'] = $data;
+            $ajaxReturn['msg'] = $data;
             $ajaxReturn['status'] = 'failure';
         } elseif (is_array($data)) {
             if (!isset($data['status'])) {
                 $data['status'] = 'failure';
             }
-            $ajaxReturn = &$data ;
+            $ajaxReturn = & $data;
         }
-        echo CJSON::encode($ajaxReturn);
-
+        echo NJSON::encode($ajaxReturn);
+        if($exit == true){
+            Yii::app()->end();
+        }
     }
+
     //----------<define controller action event>---------------------------------------------------
     public function onControllerAction($event)
     {

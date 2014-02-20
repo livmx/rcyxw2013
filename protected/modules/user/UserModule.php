@@ -295,6 +295,8 @@ class UserModule extends CWebModule implements IUrlRewriteModule
 
          'user/<action:\w+>'=>'user/user/<action>',
          'user/<action:\w+>/*'=>'user/user/<action>',
+
+           'user/api/*'=>'user/api/<action>',
        );
     }
 
@@ -319,4 +321,32 @@ class UserModule extends CWebModule implements IUrlRewriteModule
         $this->_assetsUrl=$value;
     }
 //------------------------------------------------------------------------\\
+
+    //.......................................................................\\
+    // 模块间通信数据的格式 尽量用php基本类型 不要用对象传递 这样在变为远程调用时 可以无缝迁移！
+    /**
+     * ajax 切换评论列表时需要计算某个实体是否有删除和编辑权
+     * @param $params
+     * @return mixed
+     */
+    public function serviceCanDeleteAndEditComment($params){
+        // return $params ;
+        return false ;
+    }
+
+    /**
+     * 通过用户ids 获取用户的简单profiles 概要信息列表 这个后期可以用
+     * 缓存提高效率 先要把每个uid对应的简单信息缓存起来 或者用mongodb等手段也行
+     * @param array $userIds
+     * @return array 这里最好是php常规类型 但先用ar的数组凑合吧
+     */
+    public function serviceGetSimpleProfilesByIds($userIds=array()){
+        $userIds = array_unique($userIds);
+        $criteria = new CDbCriteria( );
+        $criteria->index = 'id';
+        $criteria->addInCondition('id',$userIds);
+        $userList = User::model()->findAll($criteria) ;
+        return $userList ;
+    }
+    //.......................................................................//
 }

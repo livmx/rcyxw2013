@@ -98,4 +98,18 @@ class PhotoModule extends CWebModule implements IUrlRewriteModule
             'album/<action:\w+>/*'=>'photo/photoAlbum/<action>',
         );
     }
+
+    //.......................................................................\\
+    // 模块间通信数据的格式 尽量用php基本类型 不要用对象传递 这样在变为远程调用时 可以无缝迁移！
+    /**
+     * ajax 切换评论列表时需要计算某个实体是否有删除和编辑权
+     * @param $params
+     * @return mixed
+     */
+    public function serviceCanDeleteAndEditComment($params){
+        // return $params ;
+        return false ;
+    }
+
+    //.......................................................................//
 }

@@ -259,6 +259,30 @@ U_FACE;
     }
 
     /**
+     * 可以按照用户的活跃度（最后访问时间排序）只取前1000、500个好友哦！
+     *
+     * return the friend ids condition
+     * can be used as such :  id IN ()
+     * @param int $user_a
+     * @param int $approved
+     * @return string
+     */
+    public static function getFriendIdsCondition($user_a = 0, $approved = null)
+    {
+        $sql = "SELECT r.user_b
+                FROM
+                      relationship r
+                WHERE
+                  ";
+        $sql .= " r.user_a={$user_a} ";
+        if($approved !== null){
+            $sql .= " AND r.accepted = {$approved}  ";
+        }
+      return $sql ;
+    }
+
+
+    /**
      * check if  userB is friend of userA
      * @static
      * @param int $userA

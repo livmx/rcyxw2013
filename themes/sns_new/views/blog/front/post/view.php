@@ -63,7 +63,7 @@ $this->pageTitle=$model->title;
                                 <?php echo implode(', ', $data->tagLinks); ?>
                                 <br/>
                                 <?php echo CHtml::link('Permalink', $data->url); ?> |
-                                <?php echo CHtml::link("Comments ({$data->commentCount})",$data->url.'#comments'); ?> |
+                                <?php // echo CHtml::link("Comments ({$data->commentCount})",$data->url.'#comments'); ?> |
                                 Last updated on <?php echo date('F j, Y',$data->updated); ?>
                             </div>
                         </div>
@@ -89,31 +89,7 @@ $this->pageTitle=$model->title;
                         </div>
 
 
-                        <div id="comments" class="cell ">
-                            <?php if($model->commentCount>=1): ?>
-                                <h3>
-                                    <?php echo $model->commentCount>1 ? $model->commentCount . ' comments' : 'One comment'; ?>
-                                </h3>
-
-                                <?php $this->renderPartial('_comments',array(
-                                    'post'=>$model,
-                                    'comments'=>$model->comments,
-                                )); ?>
-                            <?php endif; ?>
-
-                            <h3>Leave a Comment</h3>
-
-                            <?php if(Yii::app()->user->hasFlash('commentSubmitted')): ?>
-                                <div class="flash-success">
-                                    <?php echo Yii::app()->user->getFlash('commentSubmitted'); ?>
-                                </div>
-                            <?php else: ?>
-                                <?php $this->renderPartial('/comment/_form',array(
-                                    'model'=>$comment,
-                                )); ?>
-                            <?php endif; ?>
-
-                        </div><!-- comments -->
+                     <?php $this->renderPartial('_commentsAndForm',array('model'=>$model)); ?>
 
                     </div>
                     <?php YsPageBox::endPanel(); ?>
