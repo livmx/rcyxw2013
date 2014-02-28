@@ -76,3 +76,6 @@ assets/
 ## composer 支持
 composer.phar
 composer.lock
+
+# 此目录下的用composer安装
+/vendor

@@ -1,9 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: yiqing
- * Date: 14-2-18
- * Time: 下午10:54
+ *
+ * 根据controller action id 路由日志到不同的地方：
+ * 在CWebApplication::beforeControllerAction 中用Yii::app()->params 记录控制器跟action id
+ *
+ * 然后再在这里的processLog中实现路由 根据上面保存的东西 来分流
+ *
+ * Log本身是贯穿到应该的各个组件的 有可能在控制器运行域内 也可能不在 所以要在特定地方来收集
+ *
  */
 
 class YsTestLogRoute  extends CLogRoute{
@@ -58,7 +62,7 @@ class YsTestLogRoute  extends CLogRoute{
                 'action'=>Yii::app()->controller->action->id ,
             ));
         }
-        */
+
          print_r(
            array(
                'controller'=>$this->controllerId,
@@ -66,5 +70,6 @@ class YsTestLogRoute  extends CLogRoute{
                'notInControllerActionTimes'=>$this->notInControllerActionTimes,
            )
          );
+        */
     }
 }

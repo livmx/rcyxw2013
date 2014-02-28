@@ -247,6 +247,8 @@ CODE;
      * @return mixed
      * 模拟mysql的同名方法实现 php中的inet_pton() 好像有时候返回奇怪字符
      * http://stackoverflow.com/questions/2754340/inet-aton-and-inet-ntoa-in-php
+     *
+     * http://code.tutsplus.com/tutorials/top-20-mysql-best-practices--net-7855
      */
     public static function inet_aton($ip)
     {

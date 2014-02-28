@@ -27,8 +27,11 @@ class SiteController extends Controller
             'page' => array(
                 'class' => 'CViewAction',
             ),
-            'genApp' => array(// 'class'=> 'LAutoGenAppAction',
+            /*
+            'genApp' => array(
+               'class'=> 'LAutoGenAppAction',
             ),
+            */
         );
     }
 
@@ -191,4 +194,27 @@ class SiteController extends Controller
             file_put_contents($installedFileName, 'remove if you need to run install.php again');
     }
 
+
+    //----------------------------------------------------------------\\
+    /**
+     * 确保ElasticSearch中的Index存在：
+     */
+    public function actionEnsureEsIndex(){
+        Yii::setPathOfAlias('Elastica',Yii::getPathOfAlias('application.vendors.Elastica'));
+
+        $client = new Elastica\Client();
+        $indexName = 'yii_space';
+        $index = $client->getIndex($indexName);
+        if(! $index->exists()){
+            $index->create(array(), true);
+            // Refresh index
+            $index->refresh();
+        }
+
+        if($index->exists()){
+            echo 'index [',$indexName,'] success created!';
+        }
+
+    }
+    //----------------------------------------------------------------//
 }

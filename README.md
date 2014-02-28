@@ -23,6 +23,11 @@ references:
 - thinksaas
 
 
+关于ElasticSearch
+-------------------
+安装请搜索相关文档
+后台管理可以使用 (elasticsearch-HQ)[https://github.com/royrusso/elasticsearch-HQ]
+
 ******************************************************************
 
   希望加入的朋友 请进群：YiiSpace（119500989） 注意是参与群 不是讨论群 因为群人数有限
