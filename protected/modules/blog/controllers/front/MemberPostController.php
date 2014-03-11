@@ -56,11 +56,11 @@ class MemberPostController extends BaseBlogController
         UserHelper::setSpaceOwnerId($post->author_id);
         UserHelper::setSpaceOwnerModel($post->author);
 
-        $comment=$this->newComment($post);
+        // $comment=$this->newComment($post);
 
 		$this->render('view',array(
 			'model'=>$post,
-			'comment'=>$comment,
+		   //	'comment'=>$comment,
 		));
 	}
 
@@ -154,32 +154,5 @@ class MemberPostController extends BaseBlogController
 		}
 	}
 	
-	/**
-	 * Creates a new comment.
-	 * This method attempts to create a new comment based on the user input.
-	 * If the comment is successfully created, the browser will be redirected
-	 * to show the created comment.
-	 * @param Post the post that the new comment belongs to
-	 * @return Comment the comment instance
-	 */
-	protected function newComment($post)
-	{
-		$comment=new Comment;
-		if(isset($_POST['ajax']) && $_POST['ajax']==='comment-form')
-		{
-			echo CActiveForm::validate($comment);
-			Yii::app()->end();
-		}
-		if(isset($_POST['Comment']))
-		{
-			$comment->attributes=$_POST['Comment'];
-			if($post->addComment($comment))
-			{
-				if($comment->status==Comment::STATUS_PENDING)
-					Yii::app()->user->setFlash('commentSubmitted','Thank you for your comment. Your comment will be posted once it is approved.');
-				$this->refresh();
-			}
-		}
-		return $comment;
-	}
+
 }

@@ -11,10 +11,14 @@
         'id'=>'<?php echo $this->class2id($this->modelClass); ?>-items-view', // same as list view
          'summaryCssClass'=>'pull-right',
         'pager'=> array('class'=>'my.widgets.TbMixPager'),
-        'template' =>  Yii::app()->request->getIsAjaxRequest()? "{summary}{pager}\n{items}\n{pager}\n" : "",
+        //  使用下面的模板来做ajax延迟加载
+        //'template' =>  Yii::app()->request->getIsAjaxRequest()? "{summary}{pager}\n{items}\n{pager}\n" : "",
+        'template' =>   "{summary}{pager}\n{items}\n{pager}\n" ,
          'afterAjaxUpdate'=>'js:function(){ parent.risizeIframe();}',
         //  'dataProvider'=>$dataProvider, // do not use $model->search() if you want use pageSize widget
-        'dataProvider'=>Yii::app()->request->getIsAjaxRequest()? $dataProvider : new CArrayDataProvider(array()) , // 使用假数据提供者
+        // 使用下面的数据提供者配置做ajax延迟加载！
+        //'dataProvider'=>Yii::app()->request->getIsAjaxRequest()? $dataProvider : new CArrayDataProvider(array()) , // 使用假数据提供者
+        'dataProvider'=>  $dataProvider  ,
         'filter'=>$model,
         'columns'=>array(
         array(
@@ -41,10 +45,12 @@ if ($count >= 7)
 ?>
 <?php echo "<?php "; ?> if(!Yii::app()->getRequest()->getIsAjaxRequest()): ?>
 <script type="text/javascript">
+   /*
     jQuery(function(){
         setTimeout(function(){
             $.fn.yiiGridView.update('<?php echo $this->class2id($this->modelClass); ?>-items-view');
         },1500);
     });
+    */
 </script>
 <?php echo "<?php "; ?> endif; ?>

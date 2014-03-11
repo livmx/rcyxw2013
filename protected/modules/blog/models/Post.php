@@ -104,6 +104,12 @@ class Post extends CActiveRecord
                 'condition' => 'object_type = :object_type ',
                 'params' => array(':object_type' =>'blog')
             ),
+
+            'seo'=>array(
+                self::HAS_ONE ,'Seo','seoble_id',
+                'on' => 'seo.seoble_type = :seoble_type ',
+                'params' => array(':seoble_type' =>get_class($this))
+            )
         );
     }
 
@@ -193,6 +199,9 @@ class Post extends CActiveRecord
     }
 
     /**
+     * 这个功能最好移到助手类去 不然依赖倒置了
+     * 模型层不要依赖控制器层！
+     *
      * @param $id
      * @param $title
      * @return string

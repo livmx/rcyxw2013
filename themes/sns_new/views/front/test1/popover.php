@@ -43,6 +43,9 @@ alert("hsdhfh");
         border-top-color: #000;
     }
 </style>
+参考这里
+
+http://apps.eky.hk/css-triangle-generator/
 
 <h3>牛逼的三角功能！</h3>
 <div class="triangle-up"></div>

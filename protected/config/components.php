@@ -135,6 +135,8 @@ return array(
 
     //............{extension from yii repo }................................................................
 
+
+
     'settings'=>array(
         'class'                 => 'ext.CmsSettings',
         'cacheComponentId'  => 'cache',

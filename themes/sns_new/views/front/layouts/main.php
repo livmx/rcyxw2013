@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8">
+
+
 
     <?php  $this->widget('my.widgets.CascadeFr.CascadeFr'); ?>
     <?php PublicAssets::registerCssFile('css/site.css'); ?>
@@ -46,7 +49,22 @@
          });
          */
     </script>
-
+            <title><?php echo $this->getPageTitle(); ?></title>
+    <?php
+    /*
+     * 蛋疼的竟然冲突！
+     *
+    Yii::app()->getController()->widget('ext.seo.widgets.SeoHead',
+        array(
+            'httpEquivs'=>array(
+                'Content-Type'=>'text/html; charset=utf-8',
+                'Content-Language'=> Yii::app()->getLanguage(),
+            ),
+            'defaultDescription'=>'YiiSpace is  sns project and   opensource powerd by Yii framework .',
+            'defaultKeywords'=>'YiiSpace ,yiqing-95 , yiqing ',
+        ));
+    */
+    ?>
     <?php
     // 禁用yii自带的jquery
     $cs=Yii::app()->clientScript;
@@ -57,34 +75,14 @@
     );
 
     ?>
-    <title>Cascade Framework</title>
 
-
-    <meta name="description" content="Professional Frontend framework that makes building websites easier than ever.">
+    <meta name="description" content="Professional Frontend framework that makes building websites easier than ever."/>
     <!--    <link rel="shortcut icon" href="../vendor/assets/img/favicon.ico" type="image/x-icon" />-->
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width" />
 
-    <style type="text/css">
-
-
-    </style>
-    <!--    for 雅安地震-->
-    <style type="text/css">
-        /*
-        html {
-            filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
-            -webkit-filter: grayscale(100%);
-            filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
-        }
-        /*
-           img {
-               _filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=0);
-               -webkit-filter: grayscale(100%);
-               filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
-        }*/
-    </style>
-    '
 </head>
+
+
 <body class="narrow">
 <div class="site-center">
     <div class="col width-fill background-orange">
@@ -146,7 +144,7 @@
         </div>
     </div>
 </div>
-<div class="site-nav col width-fill background-green">
+<div class="site-nav col width-fill background-blue">
     <div class="" style="margin-left: 80px">
         <ul class="nav">
             <li class="">
@@ -167,6 +165,8 @@
     </div>
 
 </div>
+
+
 <div class="site-center">
     <?php echo $content; ?>
 </div>

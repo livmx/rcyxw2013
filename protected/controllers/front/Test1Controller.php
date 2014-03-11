@@ -11,6 +11,129 @@ use ElephantIO\Client as ElephantIOClient;
  */
 class Test1Controller extends Controller
 {
+
+    /**
+     * @Desc('测试发送额外的post数据！(wiki)[http://www.yiiframework.com/wiki/395/additional-form-data-with-xupload/]')
+     *
+     * 虽然继承自CJuiWidget 但可以禁用其注册jquery.ui 相关的js css！
+     * 通过CJuiWidget的属性： scriptFile cssFile为false 即可 这样可以自定义模板的样式！
+     *
+     * 以前总是纠结模型问题 其实多个模型看成一个就行了 一个分裂为多个 多个可合为一个
+     * 一个控制器是可以渲染多个model的 同时在处理时也可以处理多个model的 这样最后在处理
+     * 文件上传模型的验证 和提交就好了！ 上传模型可以看做是目标模型的分裂部分 这样上传
+     * 处理完成后再把值合并回来就行！
+     */
+    public function actionXUpload2(){
+        Yii::setPathOfAlias('xupload',Yii::getPathOfAlias('ext.xupload'));
+
+
+        Yii::import("xupload.models.XUploadForm");
+        $model = new XUploadForm;
+
+        // 其实获取一个目录别名即可 另一个可以跟第一个共用一个别名！
+        $templateDownload = $this->getViewFile('xupload/tmpl-download');
+        $downloadTpl = Yii::setPathOfAlias('downloadDir',dirname($templateDownload));
+
+        $templateUpload =  $this->getViewFile('xupload/tmpl-upload');
+        $uploadTpl = Yii::setPathOfAlias('uploadDir',dirname($templateUpload));
+
+         /*  var_dump(array(
+               $templateDownload,
+               $templateUpload,
+           )); die(__METHOD__);
+            */
+
+        $this -> render('xupload/upload2', array(
+            'model' => $model,
+        ));
+    }
+
+    public   function actionUploadAdditional(){
+    header( 'Vary: Accept' );
+    if( isset( $_SERVER['HTTP_ACCEPT'] ) && (strpos( $_SERVER['HTTP_ACCEPT'], 'application/json' ) !== false) ) {
+        header( 'Content-type: application/json' );
+    } else {
+        header( 'Content-type: text/plain' );
+    }
+
+    if( isset( $_GET["_method"] ) ) {
+        if( $_GET["_method"] == "delete" ) {
+            $success = is_file( $_GET["file"] ) && $_GET["file"][0] !== '.' && unlink( $_GET["file"] );
+            echo json_encode( $success );
+        }
+    } else {
+        $this->init( );
+        Yii::setPathOfAlias('xupload',Yii::getPathOfAlias('ext.xupload'));
+        Yii::import("xupload.models.XUploadForm");
+        $model = new XUploadForm;
+
+       //  $model = new Image;//Here we instantiate our model
+
+        //We get the uploaded instance
+        $model->file = CUploadedFile::getInstance( $model, 'file' );
+        if( $model->file !== null ) {
+            $model->mime_type = $model->file->getType( );
+            $model->size = $model->file->getSize( );
+            $model->name = $model->file->getName( );
+            //Initialize the ddditional Fields, note that we retrieve the
+            //fields as if they were in a normal $_POST array
+
+          // 这里是额外的信息！
+          //  $model->title = Yii::app()->request->getPost('title', '');
+          //  $model->description  = Yii::app()->request->getPost('description', '');
+
+            if( $model->validate( ) ) {
+                $path = Yii::app() -> getBasePath() . "/../images/uploads";
+                $publicPath = Yii::app()->getBaseUrl()."/images/uploads";
+                if( !is_dir( $path ) ) {
+                    mkdir( $path, 0777, true );
+                    chmod ( $path , 0777 );
+                }
+                $model->file->saveAs( $path.$model->name );
+                chmod( $path.$model->name, 0777 );
+
+                //Now we return our json
+                echo json_encode( array( array(
+                    "name" => $model->name,
+                    "type" => $model->mime_type,
+                    "size" => $model->size,
+                    //Add the title
+                  //  "title" => $model->title,
+                    //And the description
+                 //   "description" => $model->description,
+
+                    "url" => $publicPath.$model->name,
+                    "thumbnail_url" => $publicPath.$model->name,
+                    "delete_url" => $this->createUrl( $this->action->id, array(
+                            "_method" => "delete",
+                            "file" => $path.$model->name
+                        ) ),
+                    "delete_type" => "POST"
+                ) ) );
+            } else {
+                echo json_encode( array( array( "error" => $model->getErrors( 'file' ), ) ) );
+                Yii::log( "XUploadAction: ".CVarDumper::dumpAsString( $model->getErrors( ) ), CLogger::LEVEL_ERROR, "xupload.actions.XUploadAction" );
+            }
+        } else {
+            throw new CHttpException( 500, "Could not upload file" );
+        }
+
+    }
+}
+
+    public function actionXUpload(){
+        Yii::setPathOfAlias('xupload',Yii::getPathOfAlias('ext.xupload'));
+
+
+        Yii::import("xupload.models.XUploadForm");
+        $model = new XUploadForm;
+        $this -> render('xupload/upload', array('model' => $model, ));
+    }
+
+    public function actionFloatMenu(){
+        $this->render('floatMenu');
+    }
+
 public function actionEFlatMenu(){
     $this->render('eflatMenu');
 }

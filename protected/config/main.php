@@ -3,7 +3,7 @@ defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => '芮城印象网',
+    'name' => 'Yii-Space',
     'language' => 'zh_cn',
     'charset' => "UTF-8",
 

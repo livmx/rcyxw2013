@@ -51,12 +51,16 @@ class MyPostController extends BaseBlogController
 	 */
 	public function actionView($id)
 	{
-		$post=$this->loadModel($id);
-		$comment=$this->newComment($post);
+		$post = $this->loadModel($id,'seo');
+
+
+        $seoModel = $post->seo ;
+        $this->registerSeo($seoModel);
+
 
 		$this->render('view',array(
 			'model'=>$post,
-			'comment'=>$comment,
+
 		));
 	}
 
@@ -129,8 +133,14 @@ class MyPostController extends BaseBlogController
                 $model->sysCates  = $model->sysCategories ;
             }
 
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->save()){
+                //-----------------------------------------------------------\\
+                Yii::import('my.seo.SeoSaver');
+                // 额外的SEO数据存储！ 如果用behavior 来做监听afterSave方法即可
+                SeoSaver::save();
+                //-----------------------------------------------------------//
+                $this->redirect(array('view','id'=>$model->id));
+            }
 		}
 
 		$this->render('update',array(
@@ -256,33 +266,5 @@ class MyPostController extends BaseBlogController
 			Yii::app()->end();
 		}
 	}
-	
-	/**
-	 * Creates a new comment.
-	 * This method attempts to create a new comment based on the user input.
-	 * If the comment is successfully created, the browser will be redirected
-	 * to show the created comment.
-	 * @param Post the post that the new comment belongs to
-	 * @return Comment the comment instance
-	 */
-	protected function newComment($post)
-	{
-		$comment=new Comment;
-		if(isset($_POST['ajax']) && $_POST['ajax']==='comment-form')
-		{
-			echo CActiveForm::validate($comment);
-			Yii::app()->end();
-		}
-		if(isset($_POST['Comment']))
-		{
-			$comment->attributes=$_POST['Comment'];
-			if($post->addComment($comment))
-			{
-				if($comment->status==Comment::STATUS_PENDING)
-					Yii::app()->user->setFlash('commentSubmitted','Thank you for your comment. Your comment will be posted once it is approved.');
-				$this->refresh();
-			}
-		}
-		return $comment;
-	}
+
 }

@@ -99,15 +99,15 @@
 
 
 .logo {
-    background:url('../images/rcyx_logo.png');
-    height: 44px;
-    width: 438px;
+    background:url('../images/yii-space.png');
+    height: 100px;
+    width: 95px;
     text-indent: -500px;
     display: inline-block;
 }
 
 .logo:hover {
-    background:url('../images/rcyx_logo.png');
+    background:url('../images/yii-space.png');
 }
 
 .powered-by {

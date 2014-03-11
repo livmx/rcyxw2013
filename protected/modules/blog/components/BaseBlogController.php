@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Controller is the customized base controller class.
  * All controller classes for this application should extend from this base class.
@@ -32,7 +33,7 @@ class BaseBlogController extends Controller
         $this->settings = json_decode($settins_json->attributes['option_value']);
 
         //初始化网站名称
-       // Yii::app()->name = $this->settings->site_name;
+        // Yii::app()->name = $this->settings->site_name;
 
 
     }
@@ -50,5 +51,7 @@ class BaseBlogController extends Controller
         }
 
     }
+
+
 
 }

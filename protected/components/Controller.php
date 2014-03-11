@@ -34,6 +34,7 @@ class Controller extends CController
             'eventBridge' => array(
                 'class'  => 'ext.static-events.EventBridgeBehavior',
             ),
+            'seo' => array('class' => 'my.seo.SeoControllerBehavior'),
         );
     }
 

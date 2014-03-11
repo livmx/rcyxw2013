@@ -2,7 +2,7 @@
 $this->breadcrumbs=array(
 	$model->title,
 );
-$this->pageTitle=$model->title;
+// $this->pageTitle=$model->title;
 ?>
 <?php Layout::beginBlock('top') ?>
 <?php YsPageBox::beginPanel() ;?>

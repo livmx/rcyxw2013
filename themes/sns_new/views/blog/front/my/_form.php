@@ -213,6 +213,13 @@ CB;
 
 </div>
 
+<?php  $this->widget('my.seo.SeoFormWidget',array(
+    'seobleType'=>get_class($model),
+    'seobleId'=>$model->primaryKey ,
+    'parentForm'=>$form ,
+    'isNew'=>$model->getIsNewRecord(),
+)); ?>
+
 <div class="col">
     <div class="col width-1of5">
     </div>
@@ -222,7 +229,12 @@ CB;
         </div>
     </div>
 </div>
+
+
+
 <?php $this->endWidget(); ?>
+
+
 
 </div>
 </div>
